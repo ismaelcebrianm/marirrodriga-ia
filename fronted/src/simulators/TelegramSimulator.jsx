@@ -56,9 +56,13 @@ export default function TelegramSimulator() {
         const parts = Array.isArray(data.parts) && data.parts.length > 0
           ? data.parts
           : [data.reply || '…']
+        // Show each part sequentially with typing indicator between them (ISMABOT pattern)
         setTyping(false)
-        for (let i = 0; i < parts.length; i++) {
-          if (i > 0) await new Promise(r => setTimeout(r, 600))
+        setMessages(prev => [...prev, { role: 'bot', text: parts[0], time: nowTime() }])
+        for (let i = 1; i < parts.length; i++) {
+          setTyping(true)
+          await new Promise(r => setTimeout(r, 1200))
+          setTyping(false)
           setMessages(prev => [...prev, { role: 'bot', text: parts[i], time: nowTime() }])
         }
       } catch {
