@@ -1,8 +1,17 @@
 import { useState } from 'react'
+import { Bot, Mail, ArrowRight, Star, Brain, Mic, FileText, MessageSquare } from 'lucide-react'
 
 const BOT_URL        = 'https://t.me/marirrodrigaIA_bot'
 const VOICE_URL      = '#'
 const WEBHOOK_URL    = import.meta.env.VITE_N8N_WEBHOOK_URL
+const PERSONAL_EMAIL = 'ismaelcebrian14@gmail.com'
+
+const ISMABOT_FEATURES = [
+  { icon: Brain,         label: 'Memoria de chat' },
+  { icon: Mic,           label: 'Texto, imagen y audio' },
+  { icon: MessageSquare, label: 'Conversación sin prisa' },
+  { icon: FileText,      label: 'Informes personalizados' },
+]
 
 export default function ContactPage() {
   const [form,      setForm]      = useState({ nombre: '', email: '', mensaje: '' })
@@ -47,22 +56,53 @@ export default function ContactPage() {
 
       <div className="contact-body">
 
-        {/* OPCIONES DIRECTAS */}
-        <div className="contact-options">
-          <a className="contact-opt contact-opt--primary" href={BOT_URL} target="_blank" rel="noopener noreferrer">
-            <div className="contact-opt__icon">💬</div>
+        {/* ISMABOT — tarjeta destacada */}
+        <div className="contact-ismabot">
+          <div className="contact-ismabot__badge"><Star size={10} /> Recomendado</div>
+          <div className="contact-ismabot__top">
+            <div className="contact-ismabot__icon"><Bot size={22} /></div>
             <div>
-              <div className="contact-opt__title">Hablar por chat</div>
-              <div className="contact-opt__sub">El agente te responde ahora mismo en Telegram. Explícale lo que necesitas y él te guía.</div>
+              <div className="contact-ismabot__name">ISMABOT</div>
+              <p className="contact-ismabot__desc">
+                Agente de IA que te guía sin compromiso para entender qué podrías automatizar
+                en tu negocio. Tiene memoria, acepta texto, imagen y audio, y puede generarte
+                un informe personalizado con lo que hablemos.
+              </p>
+            </div>
+          </div>
+          <div className="contact-ismabot__features">
+            {ISMABOT_FEATURES.map(({ icon: Icon, label }) => (
+              <div key={label} className="contact-ismabot__feat">
+                <Icon size={12} /> {label}
+              </div>
+            ))}
+          </div>
+          <a
+            className="contact-ismabot__cta"
+            href={BOT_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Hablar con ISMABOT en Telegram <ArrowRight size={14} />
+          </a>
+        </div>
+
+        {/* OTRAS OPCIONES */}
+        <div className="contact-options" style={{ marginTop: '16px' }}>
+          <a className="contact-opt contact-opt--secondary" href={VOICE_URL} target="_blank" rel="noopener noreferrer">
+            <div className="contact-opt__icon">🎙️</div>
+            <div>
+              <div className="contact-opt__title">Llamada con el agente de voz</div>
+              <div className="contact-opt__sub">¿Prefieres hablar? El agente de voz te atiende, responde y agenda una reunión si lo necesitas.</div>
             </div>
             <span className="contact-opt__arrow">→</span>
           </a>
 
-          <a className="contact-opt contact-opt--secondary" href={VOICE_URL} target="_blank" rel="noopener noreferrer">
-            <div className="contact-opt__icon">🎙️</div>
+          <a className="contact-opt contact-opt--secondary" href={`mailto:${PERSONAL_EMAIL}`}>
+            <div className="contact-opt__icon"><Mail size={22} /></div>
             <div>
-              <div className="contact-opt__title">Llamada con el agente</div>
-              <div className="contact-opt__sub">Prefires hablar? El agente de voz te atiende, responde tus preguntas y agenda una reunión si lo necesitas.</div>
+              <div className="contact-opt__title">Email directo</div>
+              <div className="contact-opt__sub">{PERSONAL_EMAIL} — te respondemos en menos de 24h.</div>
             </div>
             <span className="contact-opt__arrow">→</span>
           </a>
@@ -119,11 +159,9 @@ export default function ContactPage() {
           <div className="contact-success">
             <span className="contact-success__icon">✅</span>
             <h3>¡Recibido, {form.nombre}!</h3>
-            <p>Te escribimos a <strong>{form.email}</strong> en menos de 24h. Si prefieres respuesta inmediata, el agente está disponible ahora.</p>
-            <a className="contact-opt contact-opt--primary" href={BOT_URL} target="_blank" rel="noopener noreferrer">
-              <div className="contact-opt__icon">💬</div>
-              <div><div className="contact-opt__title">Hablar ahora con el agente</div></div>
-              <span className="contact-opt__arrow">→</span>
+            <p>Te escribimos a <strong>{form.email}</strong> en menos de 24h. Si prefieres respuesta inmediata, ISMABOT está disponible ahora.</p>
+            <a className="contact-ismabot__cta" href={BOT_URL} target="_blank" rel="noopener noreferrer" style={{ marginTop: '16px' }}>
+              Hablar con ISMABOT en Telegram <ArrowRight size={14} />
             </a>
           </div>
         )}

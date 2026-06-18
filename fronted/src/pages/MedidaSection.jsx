@@ -1,8 +1,15 @@
 import { useState } from 'react'
-import { Bot, Star, Mail, ArrowRight, Check } from 'lucide-react'
+import { Bot, Star, Mail, ArrowRight, Check, Mic, Image, Brain, FileText, MessageSquare } from 'lucide-react'
 
 const N8N_CUSTOM  = import.meta.env.VITE_N8N_WEBHOOK_URL || ''
 const CHATBOT_URL = 'https://t.me/marirrodrigaIA_bot'
+
+const FEATURES = [
+  { icon: Brain,       label: 'Memoria de chat',          desc: 'Recuerda todo lo que le has contado, sesión a sesión.' },
+  { icon: Mic,         label: 'Texto, imagen y audio',     desc: 'Escríbele, mándale una foto o envía un audio de voz.' },
+  { icon: MessageSquare, label: 'Conversación sin prisa',  desc: 'Vuelve cuando quieras. La conversación sigue donde la dejaste.' },
+  { icon: FileText,    label: 'Informes personalizados',   desc: 'Te genera un plan o propuesta adaptada a tu negocio concreto.' },
+]
 
 export default function MedidaSection() {
   const [idea,    setIdea]    = useState('')
@@ -27,90 +34,102 @@ export default function MedidaSection() {
   }
 
   return (
-    <>
-      {/* Cabecera de sección */}
+    <div className="medida-section">
+
+      {/* HERO */}
       <div className="medida-hero">
-        <div className="slbl">¿Tienes en mente un proceso muy tuyo?</div>
-        <h1>Lo automatizamos<br /><em>a medida.</em></h1>
+        <div className="medida-hero__badge">
+          <Star size={11} /> Nuestro activo principal
+        </div>
+        <h1>ISMABOT.<br /><em>Tu guía sin compromiso.</em></h1>
         <p>
-          La verdadera magia no está en una sola herramienta — está en encadenarlas.
-          Si tu negocio tiene un proceso especial, lo construimos a tu medida.
+          Un agente de IA diseñado para una sola cosa: ayudarte a entender qué podrías
+          automatizar en tu negocio, sin jerga técnica ni presión comercial.
+          Habla con él cuando quieras, tan despacio como necesites.
         </p>
       </div>
 
-      {/* Contenido */}
+      {/* CUERPO */}
       <div className="medida-body">
-        <div className="project-card" id="proyecto-medida">
-          <div className="project-card__glow" />
 
-          <div className="project-card__header">
-            <p className="project-card__subtitle">
-              Diseñamos flujos que resuelven tareas de principio a fin: desde que llega el primer
-              contacto hasta que el trabajo queda registrado, facturado y confirmado, sin que
-              tú toques nada.
-            </p>
+        {/* TARJETA ISMABOT */}
+        <div className="ismabot-card">
+          <div className="ismabot-card__glow" />
+
+          <div className="ismabot-card__top">
+            <div className="ismabot-card__icon">
+              <Bot size={28} />
+            </div>
+            <div>
+              <div className="ismabot-card__label">Agente de inteligencia artificial</div>
+              <h2 className="ismabot-card__name">ISMABOT</h2>
+              <p className="ismabot-card__mission">
+                Su misión es escucharte, hacerte las preguntas correctas y ayudarte a
+                visualizar cómo quedaría tu negocio con automatización — sin compromiso,
+                sin necesidad de saber de tecnología. Al final puedes pedirle un
+                informe o plan personalizado con lo que hemos hablado.
+              </p>
+            </div>
           </div>
 
-          <div className="project-card__options">
-
-            {/* CHATBOT — RECOMENDADO */}
-            <div className="project-option project-option--featured">
-              <div className="project-option__badge">
-                <Star size={10} /> Recomendado
+          <div className="ismabot-features">
+            {FEATURES.map(({ icon: Icon, label, desc }) => (
+              <div key={label} className="ismabot-feature">
+                <div className="ismabot-feature__icon"><Icon size={16} /></div>
+                <div>
+                  <div className="ismabot-feature__label">{label}</div>
+                  <div className="ismabot-feature__desc">{desc}</div>
+                </div>
               </div>
-              <div className="project-option__icon"><Bot size={22} /></div>
-              <h3 className="project-option__title">Habla con nuestro agente</h3>
-              <p className="project-option__desc">
-                Te guía paso a paso para entender qué necesitas y cómo lograrlo.
-                Puedes comunicarte por <strong>audio o por chat</strong> — como prefieras.
-                Retoma la conversación a lo largo de días mientras piensas qué más te gustaría
-                automatizar. El agente analiza tu caso y te propone
-                <strong> soluciones reales</strong>, no respuestas genéricas.
-              </p>
-              <a
-                className="project-option__cta project-option__cta--primary"
-                href={CHATBOT_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Abrir el agente <ArrowRight size={15} />
-              </a>
-            </div>
-
-            {/* FORMULARIO */}
-            <div className="project-option">
-              <div className="project-option__icon project-option__icon--secondary"><Mail size={22} /></div>
-              <h3 className="project-option__title">O déjanos tu contacto</h3>
-              <p className="project-option__desc project-option__desc--short">
-                Cuéntanos tu idea brevemente y te respondemos con un análisis de viabilidad en menos de 24 horas.
-              </p>
-              <form className="project-form" onSubmit={submit}>
-                <div className="form-group-custom">
-                  <label>Tu proyecto o idea:</label>
-                  <textarea
-                    required rows={3}
-                    placeholder="Ej: Cuando un cliente firma un contrato, quiero que se cree una carpeta en Drive y se le envíe un email de bienvenida automáticamente..."
-                    value={idea}
-                    onChange={e => setIdea(e.target.value)}
-                  />
-                </div>
-                <div className="form-group-custom">
-                  <label>Email o WhatsApp:</label>
-                  <input
-                    type="text" required
-                    placeholder="+34 600 000 000 · tu@email.com"
-                    value={contact}
-                    onChange={e => setContact(e.target.value)}
-                  />
-                </div>
-                <button type="submit" className="project-option__cta project-option__cta--secondary">
-                  Enviar <ArrowRight size={14} />
-                </button>
-              </form>
-            </div>
-
+            ))}
           </div>
+
+          <a
+            className="ismabot-cta"
+            href={CHATBOT_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Hablar con ISMABOT en Telegram <ArrowRight size={16} />
+          </a>
         </div>
+
+        {/* FORMULARIO — contacto alternativo */}
+        <div className="medida-alt">
+          <div className="medida-alt__header">
+            <div className="project-option__icon project-option__icon--secondary"><Mail size={20} /></div>
+            <div>
+              <h3 className="project-option__title">¿Prefieres que te contactemos nosotros?</h3>
+              <p className="project-option__desc project-option__desc--short">
+                Cuéntanos tu idea y te respondemos con un análisis en menos de 24 horas.
+              </p>
+            </div>
+          </div>
+          <form className="project-form" onSubmit={submit}>
+            <div className="form-group-custom">
+              <label>Tu proyecto o idea:</label>
+              <textarea
+                required rows={3}
+                placeholder="Ej: Cuando un cliente firma un contrato, quiero que se cree una carpeta en Drive y se le envíe un email de bienvenida automáticamente..."
+                value={idea}
+                onChange={e => setIdea(e.target.value)}
+              />
+            </div>
+            <div className="form-group-custom">
+              <label>Email o WhatsApp:</label>
+              <input
+                type="text" required
+                placeholder="+34 600 000 000 · tu@email.com"
+                value={contact}
+                onChange={e => setContact(e.target.value)}
+              />
+            </div>
+            <button type="submit" className="project-option__cta project-option__cta--secondary">
+              Enviar <ArrowRight size={14} />
+            </button>
+          </form>
+        </div>
+
       </div>
 
       {modal && (
@@ -123,6 +142,6 @@ export default function MedidaSection() {
           </div>
         </div>
       )}
-    </>
+    </div>
   )
 }
