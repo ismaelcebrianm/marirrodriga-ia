@@ -32,7 +32,7 @@ function nowTime() {
 
 export default function TelegramSimulator() {
   const [messages, setMessages] = useState([
-    { role: 'bot', text: '¡Hola! 👋 Soy el agente de demos de Marirrodriga IA. Puedo consultar disponibilidad, agendar una reunión de 45 min contigo o cancelar una cita existente. ¿Qué necesitas?', time: nowTime() }
+    { role: 'bot', text: '¡Hola! Soy Mari Robot, tu agente de demostración en Marirrodriga I.A. Ponme a prueba pidiendo, consultando o cancelando una cita en mi agenda. Tranquilo, esto es solo un test y la reserva se borrará automáticamente al terminar nuestro chat.', time: nowTime() }
   ])
   const [input, setInput]   = useState('')
   const [typing, setTyping] = useState(false)
