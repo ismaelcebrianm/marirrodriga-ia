@@ -168,20 +168,7 @@ function FlowExpansion({ title, core, steps, savings, proof, onNavigate }) {
 
       {savings && (
         <div className="flow-savings">
-          {savings.hours && (
-            <div className="savings-row">
-              <div className="savings-block">
-                <Clock size={14} className="savings-icon" />
-                <span className="savings-num">{savings.hours}</span>
-                <span className="savings-unit">{savings.unit}</span>
-                {savings.cost && (
-                  <span className="savings-cost">({savings.cost} en coste salarial estimado*)</span>
-                )}
-              </div>
-            </div>
-          )}
           <p className="savings-desc">{savings.label}</p>
-          {savings.note && <p className="savings-note">{savings.note}</p>}
         </div>
       )}
 
@@ -214,9 +201,7 @@ const EXPANSIONS = [
       { icon: '📋', label: 'Prepara el informe mensual de citas y facturación' },
     ],
     savings: {
-      hours: '2h', unit: '/día', cost: '~315€/mes',
-      label: 'Un recepcionista cuesta 315€/mes solo en salario. El agente trabaja también a las 3 de la mañana, en fiestas y fines de semana — cuando ningún empleado estaría cogiendo el teléfono.',
-      note: '* Calculado sobre SMI 2025 (1.150€/mes bruto). Coste real del agente: significativamente inferior.'
+      label: 'Atiende, agenda y hace seguimiento a cualquier hora — también a las 3 de la mañana, en festivos y fines de semana, cuando ningún empleado estaría cogiendo el teléfono.',
     }
   },
   {
@@ -230,9 +215,7 @@ const EXPANSIONS = [
       { icon: '📆', label: 'Informe mensual listo para la gestoría en un clic' },
     ],
     savings: {
-      hours: '15-20h', unit: '/mes', cost: '~110-145€/mes',
       label: 'Facturar, cuadrar la contabilidad y preparar documentación para gestoría consume entre 15 y 20 horas al mes en la mayoría de negocios. El agente lo hace solo — y cumple con Verifactu de serie.',
-      note: '* Calculado sobre SMI 2025 (1.150€/mes bruto). Coste real del agente: significativamente inferior.'
     }
   },
   {
@@ -245,9 +228,7 @@ const EXPANSIONS = [
       { icon: '📊', label: 'Informe semanal de actividad de bandeja de entrada' },
     ],
     savings: {
-      hours: '2h', unit: '/día', cost: '~315€/mes',
-      label: 'Clasificar correos, extraer datos de facturas y archivar documentos: tareas que bloquean 2 horas diarias de trabajo real. El agente las procesa en tiempo real, sin acumulación.',
-      note: '* Calculado sobre SMI 2025 (1.150€/mes bruto). Coste real del agente: significativamente inferior.'
+      label: 'Clasificar correos, extraer datos de facturas y archivar documentos: tareas que bloquean horas de trabajo real cada día. El agente las procesa en tiempo real, sin acumulación.',
     }
   },
   {
@@ -260,7 +241,6 @@ const EXPANSIONS = [
       { icon: '📈', label: 'Reporte semanal de conversión y pipeline' },
     ],
     savings: {
-      hours: null, unit: null, cost: null,
       label: 'Un comercial tarda semanas en localizar, investigar y cualificar 50 leads. Un agente lo hace en minutos cruzando múltiples fuentes de datos: LinkedIn, Google Maps, noticias de empresa, registros mercantiles. Tu equipo solo habla con quien ya está listo para comprar.',
     }
   },
