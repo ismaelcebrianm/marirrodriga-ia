@@ -1452,6 +1452,27 @@ footer               { background: var(--bg-secondary); border-top: 1px solid va
 .btn-view-pdf:hover { background: var(--brand-hover); box-shadow: var(--shadow-brand); }
 .btn-view-pdf svg { width: 15px; height: 15px; }
 
+/* Iframe inline de factura */
+.invoice-frame {
+  width: 100%; height: 420px; border: none;
+  border-radius: 8px; background: #fff;
+  box-shadow: 0 2px 12px rgba(0,0,0,.08);
+}
+@media (max-width: 768px) {
+  .invoice-frame { height: 340px; }
+}
+
+.invoice-reset-btn {
+  display: flex; align-items: center; gap: 6px;
+  background: none; border: 1px solid var(--border);
+  padding: 6px 14px; border-radius: var(--radius-sm);
+  font-size: 12px; color: var(--text-4); cursor: pointer;
+  font-family: var(--font-body); transition: var(--transition);
+  margin-top: 4px; align-self: flex-start;
+}
+.invoice-reset-btn:hover { background: var(--bg-input); }
+.invoice-reset-btn svg { width: 13px; height: 13px; }
+
 /* ─── DOCUMENT / EMAIL SIMULATOR ────────────────────────────── */
 .doc-sim {
   display: flex; flex-direction: column; gap: 10px;

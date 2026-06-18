@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Sparkles, Eye } from 'lucide-react'
+import { Sparkles, RotateCcw } from 'lucide-react'
 
 const N8N_FACTURA = import.meta.env.VITE_N8N_FACTURA || ''
 
@@ -37,7 +37,7 @@ function buildLocalInvoiceHtml(inputText) {
   else if (/web|landing/i.test(inputText))  concept = 'Desarrollo web'
 
   return `<html><head><style>
-    body{font-family:Arial,sans-serif;color:#1E1B4B;margin:40px;background:#fff}
+    body{font-family:Arial,sans-serif;color:#1E1B4B;margin:32px;background:#fff}
     .header{display:flex;justify-content:space-between;border-bottom:2px solid #6D28D9;padding-bottom:20px;margin-bottom:30px}
     .brand{font-size:22px;font-weight:bold;color:#6D28D9}
     .invoice-title{font-size:26px;font-weight:bold;text-align:right}
@@ -83,9 +83,10 @@ function buildLocalInvoiceHtml(inputText) {
 }
 
 export default function InvoiceSimulator() {
-  const [text,    setText]    = useState('')
-  const [status,  setStatus]  = useState('idle')
-  const [summary, setSummary] = useState('')
+  const [text,       setText]       = useState('')
+  const [status,     setStatus]     = useState('idle')
+  const [invoiceHtml, setInvoiceHtml] = useState('')
+  const [pdfUrl,     setPdfUrl]     = useState('')
 
   async function generate() {
     const inputText = text.trim() || EXAMPLES[0].text
@@ -96,18 +97,14 @@ export default function InvoiceSimulator() {
       try {
         const res  = await fetch(N8N_FACTURA, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ inputText }) })
         const data = await res.json()
-        const total  = parseFloat(data.total || 0).toFixed(2)
-        const num    = data.numeroFactura || '#2026-N8N'
-        const client = data.cliente || 'Cliente'
-        setSummary(`Factura <strong>${num}</strong> para <strong>${client}</strong> por <strong>${total} €</strong> generada con éxito.`)
+
         if (data.pdfBase64) {
           const bytes = atob(data.pdfBase64)
           const arr   = new Uint8Array(bytes.length)
           for (let i = 0; i < bytes.length; i++) arr[i] = bytes.charCodeAt(i)
-          const url = URL.createObjectURL(new Blob([arr], { type: 'application/pdf' }))
-          window.open(url, '_blank')
+          setPdfUrl(URL.createObjectURL(new Blob([arr], { type: 'application/pdf' })))
         } else if (data.pdfUrl) {
-          window.open(data.pdfUrl, '_blank')
+          setPdfUrl(data.pdfUrl)
         }
         setStatus('success')
       } catch {
@@ -116,31 +113,36 @@ export default function InvoiceSimulator() {
       return
     }
 
+    // Modo local: renderiza inline sin window.open
     setTimeout(() => {
-      const html = buildLocalInvoiceHtml(inputText)
-      const w    = window.open('', '_blank')
-      if (w) { w.document.write(html); w.document.close() }
-      setSummary('Factura generada a partir de tu descripción. Se ha abierto en nueva pestaña.')
+      setInvoiceHtml(buildLocalInvoiceHtml(inputText))
       setStatus('success')
     }, 1800)
+  }
+
+  function reset() {
+    setStatus('idle')
+    setText('')
+    setInvoiceHtml('')
+    setPdfUrl('')
   }
 
   if (status === 'success') {
     return (
       <div className="invoice-sim">
-        <div className="invoice-result">
-          <div className="invoice-success">
-            <div className="invoice-success-icon">✅</div>
-            <h4>¡Factura PDF generada!</h4>
-            <p dangerouslySetInnerHTML={{ __html: summary }} />
-            <a href="#" className="btn-view-pdf" onClick={e => { e.preventDefault(); generate() }}>
-              <Eye size={15} /> Ver factura
-            </a>
-            <button className="btn-back" onClick={() => { setStatus('idle'); setText('') }}>
-              ← Nueva factura
-            </button>
-          </div>
-        </div>
+        {/* PDF externo (flujo n8n real) */}
+        {pdfUrl && (
+          <iframe src={pdfUrl} className="invoice-frame" title="Factura PDF" />
+        )}
+
+        {/* HTML local — renderizado inline */}
+        {invoiceHtml && (
+          <iframe srcDoc={invoiceHtml} className="invoice-frame" title="Factura generada" />
+        )}
+
+        <button className="invoice-reset-btn" onClick={reset}>
+          <RotateCcw size={13} /> Nueva factura
+        </button>
       </div>
     )
   }
