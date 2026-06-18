@@ -569,9 +569,6 @@ export default function ServicesPage({ onNavigate }) {
         </div>
       </main>
 
-      <div className="container" style={{ paddingBottom: '80px' }}>
-        <GiantContactCard />
-      </div>
     </>
   )
 }
