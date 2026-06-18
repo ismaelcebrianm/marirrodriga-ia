@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react'
 import LogoIcon from './LogoIcon'
 
 const LINKS = [
-  { id: 'inicio',     label: 'Inicio' },
-  { id: 'taller',     label: 'El Taller' },
-  { id: 'reto-diario', label: 'Actualidad IA', badge: 'Nuevo' },
-  { id: 'contacto',   label: 'Contacto' },
+  { id: 'inicio',      label: 'Inicio' },
+  { id: 'taller',      label: 'El Taller',    badge: '★', badgeCls: 'nav-star__badge' },
+  { id: 'reto-diario', label: 'Actualidad IA', badge: 'Nuevo', badgeCls: 'nav-reto__badge' },
+  { id: 'contacto',    label: 'Contacto' },
 ]
 
 export default function Nav({ onScrollTo }) {
@@ -34,8 +34,10 @@ export default function Nav({ onScrollTo }) {
         <div className="nl">
           {LINKS.map(l => (
             <a key={l.id} onClick={() => go(l.id)}>
-              {l.label}
-              {l.badge && <span className="nav-reto__badge">{l.badge}</span>}
+              <span className="nav-label-wrap">
+                {l.label}
+                {l.badge && <span className={l.badgeCls}>{l.badge}</span>}
+              </span>
             </a>
           ))}
         </div>
@@ -58,8 +60,10 @@ export default function Nav({ onScrollTo }) {
         <nav className="mob-menu__nav">
           {LINKS.map(l => (
             <a key={l.id} className="mob-menu__link" onClick={() => go(l.id)}>
-              {l.label}
-              {l.badge && <span className="nav-reto__badge">{l.badge}</span>}
+              <span className="nav-label-wrap">
+                {l.label}
+                {l.badge && <span className={l.badgeCls}>{l.badge}</span>}
+              </span>
             </a>
           ))}
           <button className="mob-menu__cta" onClick={() => go('taller')}>

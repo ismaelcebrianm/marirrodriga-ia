@@ -79,24 +79,16 @@ export default function HomePage({ onScrollTo }) {
 
           {/* DERECHA: menú de secciones */}
           <nav className="hero-sidenav" aria-label="Secciones de la página">
-            <button className="hero-sidenav__item" onClick={() => onScrollTo('medida')}>
+            <button className="hero-sidenav__item hero-sidenav__item--taller" onClick={() => onScrollTo('taller')}>
               <span className="hero-sidenav__num">01</span>
               <div className="hero-sidenav__text">
-                <span className="hero-sidenav__title">A medida</span>
-                <span className="hero-sidenav__desc">Automatizaciones diseñadas para tu proceso concreto</span>
-              </div>
-              <ArrowRight size={14} className="hero-sidenav__arrow" />
-            </button>
-            <button className="hero-sidenav__item" onClick={() => onScrollTo('taller')}>
-              <span className="hero-sidenav__num">02</span>
-              <div className="hero-sidenav__text">
                 <span className="hero-sidenav__title">El Taller</span>
-                <span className="hero-sidenav__desc">Simuladores de IA en tiempo real, sin registro ni compromiso</span>
+                <span className="hero-sidenav__desc">Simuladores de IA en tiempo real + ISMABOT, tu guía personalizada</span>
               </div>
               <ArrowRight size={14} className="hero-sidenav__arrow" />
             </button>
             <button className="hero-sidenav__item" onClick={() => onScrollTo('reto-diario')}>
-              <span className="hero-sidenav__num">03</span>
+              <span className="hero-sidenav__num">02</span>
               <div className="hero-sidenav__text">
                 <span className="hero-sidenav__title">Actualidad IA</span>
                 <span className="hero-sidenav__desc">Noticias de IA aplicadas a tu negocio, actualizadas cada día</span>
@@ -104,7 +96,7 @@ export default function HomePage({ onScrollTo }) {
               <ArrowRight size={14} className="hero-sidenav__arrow" />
             </button>
             <button className="hero-sidenav__item" onClick={() => onScrollTo('contacto')}>
-              <span className="hero-sidenav__num">04</span>
+              <span className="hero-sidenav__num">03</span>
               <div className="hero-sidenav__text">
                 <span className="hero-sidenav__title">Contacto</span>
                 <span className="hero-sidenav__desc">Cuéntanos tu caso, te respondemos hoy mismo</span>

@@ -304,6 +304,16 @@ nav {
 .hero-sidenav__item:hover .hero-sidenav__num {
   opacity: .8;
 }
+.hero-sidenav__item--taller {
+  background: #FFFBEB; border-color: #FCD34D;
+}
+.hero-sidenav__item--taller:hover {
+  background: #FEF3C7; border-color: #F59E0B;
+  box-shadow: 0 4px 16px rgba(217,119,6,.15);
+}
+.hero-sidenav__item--taller .hero-sidenav__num { color: #D97706; }
+.hero-sidenav__item--taller .hero-sidenav__arrow { color: #D97706; }
+.hero-sidenav__item--taller:hover .hero-sidenav__arrow { color: #92400E; }
 
 @media (max-width: 768px) {
   .hero-inner          { grid-template-columns: 1fr; }
@@ -855,7 +865,7 @@ footer               { background: var(--bg-secondary); border-top: 1px solid va
 .gift-subtitle       { font-size: 15px; color: var(--text-3); max-width: 480px; margin: 0 auto; line-height: 1.8; }
 .gift-layout         { display: grid; grid-template-columns: 1fr 1.4fr; gap: 32px; align-items: start; }
 .gift-card {
-  background: var(--bg-secondary); border: 1px solid var(--border);
+  background: var(--bg-secondary); border: 1.5px solid #FCD34D;
   border-radius: 16px; padding: 28px 24px;
   display: flex; flex-direction: column; gap: 20px;
 }
@@ -2379,18 +2389,22 @@ footer               { background: var(--bg-secondary); border-top: 1px solid va
   align-items: center;
   gap: 6px;
 }
+.nav-label-wrap { position: relative; display: inline-block; }
 .nav-reto__badge {
-  background: var(--brand);
-  color: #fff;
-  font-size: 9px;
-  font-weight: 700;
-  font-family: var(--font-heading);
-  letter-spacing: .05em;
-  text-transform: uppercase;
-  padding: 2px 6px;
-  border-radius: 8px;
-  line-height: 1.4;
+  position: absolute; top: -8px; left: calc(100% + 3px);
+  background: var(--brand); color: #fff;
+  font-size: 7.5px; font-weight: 700;
+  font-family: var(--font-heading); letter-spacing: .05em;
+  text-transform: uppercase; white-space: nowrap;
+  padding: 2px 5px; border-radius: 6px; line-height: 1.4;
   animation: pulse 2.5s ease-in-out infinite;
+}
+.nav-star__badge {
+  position: absolute; top: -8px; left: calc(100% + 3px);
+  background: #F59E0B; color: #fff;
+  font-size: 8px; font-weight: 700;
+  font-family: var(--font-heading); white-space: nowrap;
+  padding: 2px 5px; border-radius: 6px; line-height: 1.4;
 }
 
 @media (max-width: 768px) {
