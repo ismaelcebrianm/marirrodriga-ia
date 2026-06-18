@@ -1,17 +1,16 @@
 import { useState } from 'react'
 import {
   ChevronDown, Mic, MessageSquare, Phone, Send, Rocket,
-  PlayCircle, Check, ArrowRight, Mail, FileText,
-  FolderKey, Database, Bell, Bot, Star
+  Check, ArrowRight, Mail, FileText, FolderKey, Database,
+  Bell, Bot, Star, Globe, Rss, Clock, TrendingUp, Zap
 } from 'lucide-react'
-import StoryboardPlayer  from '../simulators/StoryboardPlayer'
 import VoiceSimulator    from '../simulators/VoiceSimulator'
 import TelegramSimulator from '../simulators/TelegramSimulator'
 import InvoiceSimulator  from '../simulators/InvoiceSimulator'
 import DocumentSimulator from '../simulators/DocumentSimulator'
 import LeadSimulator     from '../simulators/LeadSimulator'
 
-/* ─── ILLUSTRATION COMPONENTS ───────────────────────────────── */
+/* ─── ILLUSTRATIONS ──────────────────────────────────────────── */
 
 function IllustrationS1() {
   return (
@@ -100,54 +99,204 @@ function IllustrationS4() {
   )
 }
 
-/* ─── STORYBOARD DATA ────────────────────────────────────────── */
+function IllustrationS5() {
+  return (
+    <div className="illustration-s5">
+      <div className="browser-mockup">
+        <div className="browser-bar">
+          <div className="browser-dots">
+            <span /><span /><span />
+          </div>
+          <div className="browser-url">marirrodriga.ia</div>
+        </div>
+        <div className="browser-content">
+          <div className="site-preview-hero" />
+          <div className="site-preview-grid">
+            <div className="site-preview-block" />
+            <div className="site-preview-block" />
+            <div className="site-preview-block" />
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
 
-const STORYBOARDS = [
+function IllustrationS6() {
+  return (
+    <div className="illustration-s6">
+      <div className="content-flow-wrap">
+        <div className="content-source"><Rss size={13} /> Noticias IA</div>
+        <div className="content-arrow">↓</div>
+        <div className="content-brain">
+          <Zap size={16} />
+          <span>IA</span>
+        </div>
+        <div className="content-arrow">↓</div>
+        <div className="content-channels">
+          <div className="content-ch"><Globe size={11} /> Blog</div>
+          <div className="content-ch"><Send size={11} /> RRSS</div>
+          <div className="content-ch"><Mail size={11} /> News</div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+/* ─── FLOW EXPANSION ─────────────────────────────────────────── */
+
+function FlowExpansion({ title, core, steps, savings, proof, onNavigate }) {
+  return (
+    <div className="flow-expansion">
+      <h4 className="flow-exp-title">{title || '¿Y si lo llevamos más lejos?'}</h4>
+
+      <div className="flow-exp-chain">
+        <div className="flow-node flow-node--core">
+          <span className="flow-node-dot" />
+          {core}
+        </div>
+        {steps.map((step, i) => (
+          <div key={i} className="flow-step">
+            <div className="flow-connector" />
+            <div className="flow-node">
+              <span className="flow-node-icon">{step.icon}</span>
+              <span>{step.label}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {savings && (
+        <div className="flow-savings">
+          <div className="savings-row">
+            <div className="savings-block">
+              <Clock size={14} className="savings-icon" />
+              <span className="savings-num">{savings.hours}</span>
+              <span className="savings-unit">{savings.unit}</span>
+            </div>
+            {savings.value && (
+              <div className="savings-block">
+                <TrendingUp size={14} className="savings-icon" />
+                <span className="savings-num">~{savings.value}€</span>
+                <span className="savings-unit">/{savings.per}</span>
+              </div>
+            )}
+          </div>
+          <p className="savings-desc">{savings.label}</p>
+        </div>
+      )}
+
+      {proof && (
+        <div className="flow-proof">
+          <p className="proof-label">La prueba en vivo:</p>
+          <div className="proof-links">
+            {proof.map((p, i) =>
+              p.onClick
+                ? <button key={i} className="proof-link" onClick={() => p.onClick(onNavigate)}>{p.label} →</button>
+                : <a key={i} className="proof-link" href={p.href} target="_blank" rel="noopener noreferrer">{p.label} →</a>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+
+/* ─── EXPANSION DATA ─────────────────────────────────────────── */
+
+const EXPANSIONS = [
   {
-    videoTitle: 'Mari Robot explica: Mitos y herramientas del Agente',
-    duration: 15,
-    slides: [
-      { scene: 'Escena 1/3: Mitos del Bot', script: '"¡Hola! Soy Mari Robot. Olvídate del bot típico que solo dice \'No te entiendo\'. Nuestros agentes tienen <strong>Tools</strong>. Pueden actuar por sí mismos."' },
-      { scene: 'Escena 2/3: Herramientas conectadas', script: '"Por ejemplo, si un cliente pide cita, el bot consulta el calendario en tiempo real, reserva el hueco y lo guarda en tu CRM de inmediato."' },
-      { scene: 'Escena 3/3: Prompt maestro', script: '"Configuramos un prompt de personalidad. Un restaurante lo usará para reservas con humor, y un abogado para filtrar consultas serias automáticamente."' },
+    core: 'Atiende consultas y agenda citas 24/7',
+    steps: [
+      { icon: '🔔', label: 'Recuerda la cita al cliente 1 hora antes' },
+      { icon: '⭐', label: 'Solicita reseña en Google Business tras el servicio' },
+      { icon: '🧾', label: 'Genera la factura del servicio automáticamente' },
+      { icon: '📊', label: 'Actualiza historial del cliente en tu CRM' },
+      { icon: '📋', label: 'Prepara el informe mensual de citas y facturación' },
     ],
-    scriptFooter: 'Conexión CRM, Herramientas en tiempo real, Personalidad del prompt.',
+    savings: {
+      hours: '4h', unit: '/semana', value: 320, per: 'mes',
+      label: 'ahorradas en atención, agenda y seguimiento manual'
+    }
   },
   {
-    videoTitle: 'Mari Robot explica: Facturas con n8n y Verifactu',
-    duration: 12,
-    slides: [
-      { scene: 'Escena 1/3: El día a día', script: '"Imagina que acabas de salir de hacer un trabajo. En vez de esperar a llegar a la oficina, abres Telegram desde el móvil..."' },
-      { scene: 'Escena 2/3: Envío por Telegram', script: '"Envías un mensaje rápido: \'Reparación de fontanería a Juan, 150 euros\'. Nuestro flujo en n8n procesa el texto en segundos."' },
-      { scene: 'Escena 3/3: Cálculo y conectividad', script: '"El sistema calcula impuestos, autogenera el PDF y, opcionalmente, lo envía a tu software contable cumpliendo con <strong>Verifactu</strong>."' },
+    core: 'Mensaje de texto → Factura PDF lista al instante',
+    steps: [
+      { icon: '✅', label: 'Validación y envío por Verifactu (obligatorio desde 2025)' },
+      { icon: '📧', label: 'Envío automático al cliente por email' },
+      { icon: '⏰', label: 'Recordatorio de pago si no abona en 15 días' },
+      { icon: '📑', label: 'Registro contable automático en Google Sheets' },
+      { icon: '📂', label: 'Carpeta Drive organizada con tus facturas y justificantes' },
+      { icon: '📆', label: 'Informe mensual listo para la gestoría en un clic' },
     ],
-    scriptFooter: 'Workflow n8n, Generación de PDFs, Normativa Verifactu.',
+    savings: {
+      hours: '5h', unit: '/mes', value: 100, per: 'mes',
+      label: 'ahorradas en facturación, contabilidad y seguimiento de pagos'
+    }
   },
   {
-    videoTitle: 'Mari Robot explica: Extracción de datos y Notion CRM',
-    duration: 13,
-    slides: [
-      { scene: 'Escena 1/3: Pérdida de tiempo', script: '"¿Pasas horas leyendo PDFs de 50 páginas? La IA lee y entiende el contexto completo en milisegundos."' },
-      { scene: 'Escena 2/3: Extracción', script: '"La IA extrae datos clave: fechas, importes, nombres, y los organiza directamente en tablas de Notion o Google Sheets."' },
-      { scene: 'Escena 3/3: Auto-respuestas', script: '"Además, clasifica el correo por prioridad (Urgente, Reclamación, Venta) y redacta borradores que solo tienes que revisar y enviar."' },
+    core: 'Extrae datos de PDFs y clasifica correos por IA',
+    steps: [
+      { icon: '💬', label: 'Auto-respuesta según urgencia: venta, reclamación o rutina' },
+      { icon: '📁', label: 'Archivado automático en Drive por categoría y fecha' },
+      { icon: '📲', label: 'Alerta Telegram si detecta un correo urgente' },
+      { icon: '🗃️', label: 'CRM actualizado con datos extraídos automáticamente' },
+      { icon: '📊', label: 'Informe semanal de actividad de bandeja de entrada' },
     ],
-    scriptFooter: 'Clasificación de urgencia, Integración Notion/Sheets, OCR inteligente.',
+    savings: {
+      hours: '2h', unit: '/día', value: 800, per: 'mes',
+      label: 'ahorradas en gestión de email y documentos'
+    }
   },
   {
-    videoTitle: 'Mari Robot explica: Scoring de Leads automatizado',
-    duration: 11,
-    slides: [
-      { scene: 'Escena 1/3: Tráfico inútil', script: '"¿Tus comerciales pierden tiempo llamando a leads que solo querían curiosear? Eso pasa cuando tratas a todos por igual."' },
-      { scene: 'Escena 2/3: Scoring inteligente', script: '"Nuestros formularios se conectan a un scoring por IA. Si alguien rellena con datos de una gran empresa y presupuesto alto, la IA lo cualifica de inmediato."' },
-      { scene: 'Escena 3/3: Alerta en tiempo real', script: '"Instantáneamente, tu equipo recibe una notificación en Slack o Telegram: <strong>\'!¡Cliente de alto valor!\'</strong>. Con su perfil completo y botón para llamarle."' },
+    core: 'Score IA + alerta inmediata al equipo comercial',
+    steps: [
+      { icon: '📧', label: 'Email de bienvenida personalizado en segundos' },
+      { icon: '🔁', label: 'Seguimiento automático si no responde en 24h' },
+      { icon: '👤', label: 'Asignación automática al comercial correcto en CRM' },
+      { icon: '🌡️', label: 'Secuencia de nutrición para contactos fríos' },
+      { icon: '📈', label: 'Reporte semanal de conversión y pipeline' },
     ],
-    scriptFooter: 'Filtro de contactos, Notificaciones Slack/Telegram, CRM Sync.',
+    savings: {
+      hours: '+30%', unit: 'conversión', value: null, per: null,
+      label: 'más clientes cerrados · 3h/semana menos en gestión manual de leads'
+    }
+  },
+  {
+    title: 'Qué incluye',
+    core: 'Diseño web personalizado desde cero',
+    steps: [
+      { icon: '📱', label: 'Responsive: perfecta en móvil, tablet y escritorio' },
+      { icon: '⚡', label: 'Velocidad optimizada — Core Web Vitals en verde' },
+      { icon: '🔍', label: 'SEO técnico y semántico incluido desde el día 1' },
+      { icon: '🤖', label: 'Conectada a tus automatizaciones n8n (chatbot, leads, blog...)' },
+      { icon: '🛠️', label: 'Mantenimiento y actualizaciones incluidas' },
+    ],
+    proof: [
+      { label: 'Ver esta misma web (hecha con nosotros)', href: '/' }
+    ]
+  },
+  {
+    title: 'Cómo funciona',
+    core: 'IA selecciona noticias relevantes de tu sector',
+    steps: [
+      { icon: '✍️', label: 'Redacta artículos completos adaptados a tu audiencia' },
+      { icon: '🎨', label: 'Genera imagen editorial única por artículo con IA' },
+      { icon: '🌐', label: 'Publica en tu blog automáticamente' },
+      { icon: '📲', label: 'Adapta el contenido para LinkedIn, Instagram y Twitter/X' },
+      { icon: '📩', label: 'Newsletter semanal a tus suscriptores sin tocar nada' },
+    ],
+    proof: [
+      { label: 'Ver el blog de IA (publicación automática)', onClick: (nav) => nav && nav('blog') },
+    ]
   },
 ]
 
 /* ─── SERVICE CARD ───────────────────────────────────────────── */
 
-function ServiceCard({ id, open, onToggle, badge, title, desc, illustration, storyboard, demoLabel, demoContent }) {
+function ServiceCard({ id, open, onToggle, badge, title, desc, illustration, expansionIndex, demoLabel, demoContent, onNavigate }) {
+  const expansion = EXPANSIONS[expansionIndex]
+  const hasDemo = Boolean(demoContent)
   return (
     <div className={`service-card${open ? ' expanded' : ''}`} id={`service-${id}`}>
       <div className="service-card-main">
@@ -157,7 +306,7 @@ function ServiceCard({ id, open, onToggle, badge, title, desc, illustration, sto
           <h3 className="service-title">{title}</h3>
           <p className="service-copy">{desc}</p>
           <button className="btn-expand" onClick={() => onToggle(id)}>
-            <span>{open ? 'Cerrar simulador' : '¡Pruébalo aquí mismo!'}</span>
+            <span>{open ? 'Cerrar' : (hasDemo ? '¡Pruébalo aquí mismo!' : 'Ver más detalles')}</span>
             <ChevronDown size={14} className={`btn-icon${open ? ' rotated' : ''}`} />
           </button>
         </div>
@@ -165,17 +314,19 @@ function ServiceCard({ id, open, onToggle, badge, title, desc, illustration, sto
 
       {open && (
         <div className="service-details-panel">
-          <div className="panel-grid">
-            <div className="panel-col panel-video-area">
-              <StoryboardPlayer {...storyboard} />
+          <div className={`panel-grid${!hasDemo ? ' panel-grid--full' : ''}`}>
+            <div className="panel-col panel-flow-area">
+              <FlowExpansion {...expansion} onNavigate={onNavigate} />
             </div>
-            <div className="panel-col panel-demo-area">
-              <p className="panel-subtitle">
-                <Rocket size={15} />
-                {demoLabel}
-              </p>
-              {demoContent}
-            </div>
+            {hasDemo && (
+              <div className="panel-col panel-demo-area">
+                <p className="panel-subtitle">
+                  <Rocket size={15} />
+                  {demoLabel}
+                </p>
+                {demoContent}
+              </div>
+            )}
           </div>
         </div>
       )}
@@ -183,7 +334,7 @@ function ServiceCard({ id, open, onToggle, badge, title, desc, illustration, sto
   )
 }
 
-/* ─── SERVICE 1: DEMO WITH TABS ──────────────────────────────── */
+/* ─── SERVICE 1: DEMO CON TABS ───────────────────────────────── */
 
 function VoiceAndTelegramTabs() {
   const [tab, setTab] = useState('voz')
@@ -221,22 +372,16 @@ function GiantContactCard() {
     if (N8N_CUSTOM) {
       try { await fetch(N8N_CUSTOM, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ idea, contact, source: 'taller-proyecto-medida' }) }) } catch {}
     }
-    setIdea('')
-    setContact('')
-    setModal(true)
+    setIdea(''); setContact(''); setModal(true)
   }
 
   return (
     <>
       <div className="project-card" id="proyecto-medida">
         <div className="project-card__glow" />
-
-        {/* HEADER */}
         <div className="project-card__header">
           <div className="slbl">¿Tienes en mente un proceso muy tuyo?</div>
-          <h2 className="project-card__title">
-            Lo automatizamos<br />a medida.
-          </h2>
+          <h2 className="project-card__title">Lo automatizamos<br />a medida.</h2>
           <p className="project-card__subtitle">
             La verdadera magia no está en una sola herramienta — está en encadenarlas.
             Diseñamos flujos que resuelven tareas de principio a fin: desde que llega el primer
@@ -244,36 +389,20 @@ function GiantContactCard() {
             tú toques nada. Si tu negocio tiene un proceso especial, lo construimos a tu medida.
           </p>
         </div>
-
-        {/* OPTIONS */}
         <div className="project-card__options">
-
-          {/* CHATBOT — RECOMENDADO */}
           <div className="project-option project-option--featured">
-            <div className="project-option__badge">
-              <Star size={10} />
-              Recomendado
-            </div>
+            <div className="project-option__badge"><Star size={10} />Recomendado</div>
             <div className="project-option__icon"><Bot size={22} /></div>
             <h3 className="project-option__title">Habla con nuestro agente</h3>
             <p className="project-option__desc">
               Te guía paso a paso para entender qué necesitas y cómo lograrlo.
               Puedes comunicarte por <strong>audio o por chat</strong> — como prefieras.
-              Retoma la conversación a lo largo de días mientras piensas qué más te gustaría
-              automatizar en tu negocio. El agente analiza tu caso y te propone
-              <strong> soluciones reales</strong>, no respuestas genéricas.
+              El agente analiza tu caso y te propone <strong>soluciones reales</strong>, no respuestas genéricas.
             </p>
-            <a
-              className="project-option__cta project-option__cta--primary"
-              href={CHATBOT_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a className="project-option__cta project-option__cta--primary" href={CHATBOT_URL} target="_blank" rel="noopener noreferrer">
               Abrir el agente <ArrowRight size={15} />
             </a>
           </div>
-
-          {/* FORMULARIO */}
           <div className="project-option">
             <div className="project-option__icon project-option__icon--secondary"><Mail size={22} /></div>
             <h3 className="project-option__title">O déjanos tu contacto</h3>
@@ -283,39 +412,27 @@ function GiantContactCard() {
             <form className="project-form" onSubmit={submit}>
               <div className="form-group-custom">
                 <label>Tu proyecto o idea:</label>
-                <textarea
-                  required
-                  rows={3}
+                <textarea required rows={3}
                   placeholder="Ej: Cuando un cliente firma un contrato, quiero que se cree una carpeta en Drive y se le envíe un email de bienvenida automáticamente..."
-                  value={idea}
-                  onChange={e => setIdea(e.target.value)}
-                />
+                  value={idea} onChange={e => setIdea(e.target.value)} />
               </div>
               <div className="form-group-custom">
                 <label>Email o WhatsApp:</label>
-                <input
-                  type="text"
-                  required
-                  placeholder="+34 600 000 000 · tu@email.com"
-                  value={contact}
-                  onChange={e => setContact(e.target.value)}
-                />
+                <input type="text" required placeholder="+34 600 000 000 · tu@email.com"
+                  value={contact} onChange={e => setContact(e.target.value)} />
               </div>
               <button type="submit" className="project-option__cta project-option__cta--secondary">
                 Enviar <ArrowRight size={14} />
               </button>
             </form>
           </div>
-
         </div>
       </div>
 
       {modal && (
         <div className="modal-overlay active" onClick={e => e.target === e.currentTarget && setModal(false)}>
           <div className="success-modal-card">
-            <div className="check-icon-circle">
-              <Check size={30} />
-            </div>
+            <div className="check-icon-circle"><Check size={30} /></div>
             <h3 className="modal-title">¡Solicitud recibida!</h3>
             <p className="modal-text">Nos pondremos en contacto contigo en menos de 24 horas con un análisis de viabilidad de tu proyecto.</p>
             <button className="btn-modal-close" onClick={() => setModal(false)}>Cerrar</button>
@@ -331,9 +448,7 @@ function GiantContactCard() {
 export default function ServicesPage({ onNavigate }) {
   const [openCard, setOpenCard] = useState(null)
 
-  function toggle(id) {
-    setOpenCard(prev => prev === id ? null : id)
-  }
+  function toggle(id) { setOpenCard(prev => prev === id ? null : id) }
 
   const services = [
     {
@@ -342,7 +457,7 @@ export default function ServicesPage({ onNavigate }) {
       title: '1. Asistentes y Agentes Conversacionales',
       desc: 'Asistentes virtuales que no solo responden, sino que ejecutan. Atiende a tus clientes, resuelve dudas y agenda citas en automático, 24/7.',
       illustration: <IllustrationS1 />,
-      storyboard: STORYBOARDS[0],
+      expansionIndex: 0,
       demoLabel: 'Demo interactiva — elige canal',
       demoContent: <VoiceAndTelegramTabs />,
     },
@@ -350,9 +465,9 @@ export default function ServicesPage({ onNavigate }) {
       id: 2,
       badge: 'Gestión rápida',
       title: '2. Generación Automática de Facturas',
-      desc: 'Tus facturas listas en segundos. Cuéntale al sistema qué has vendido y recibe el PDF estructurado y listo para enviar.',
+      desc: 'Tus facturas listas en segundos. Cuéntale al sistema qué has vendido y recibe el PDF estructurado, enviado y registrado contablemente.',
       illustration: <IllustrationS2 />,
-      storyboard: STORYBOARDS[1],
+      expansionIndex: 1,
       demoLabel: 'Pruébalo gratis en tiempo real',
       demoContent: <InvoiceSimulator />,
     },
@@ -362,7 +477,7 @@ export default function ServicesPage({ onNavigate }) {
       title: '3. Gestión Documental y Clasificación de Correos',
       desc: 'Tu oficina sin papeles ni bandejas de entrada colapsadas. Extraemos datos clave de tus PDFs y filtramos tu correo por ti.',
       illustration: <IllustrationS3 />,
-      storyboard: STORYBOARDS[2],
+      expansionIndex: 2,
       demoLabel: 'Pon a prueba la IA lectora',
       demoContent: <DocumentSimulator />,
     },
@@ -370,43 +485,60 @@ export default function ServicesPage({ onNavigate }) {
       id: 4,
       badge: 'Conversión',
       title: '4. Conversión de clientes potenciales',
-      desc: 'Deja de perder tiempo con contactos que no van a contratar. Identificamos quién tiene intención real de compra y alertamos a tu equipo antes de que la oportunidad se enfríe.',
+      desc: 'Deja de perder tiempo con contactos que no van a contratar. Identificamos quién tiene intención real de compra y alertamos a tu equipo al instante.',
       illustration: <IllustrationS4 />,
-      storyboard: STORYBOARDS[3],
+      expansionIndex: 3,
       demoLabel: 'Simulador de filtro de clientes (rol inverso)',
       demoContent: <><p className="demo-instructions">Vas a jugar el papel del dueño del negocio. Rellena el formulario y mira la alerta que recibe tu equipo:</p><LeadSimulator /></>,
+    },
+    {
+      id: 5,
+      badge: 'Presencia digital',
+      title: '5. Creación de Páginas Web',
+      desc: 'Páginas web modernas, rápidas y conectadas a tus automatizaciones. Sin plantillas genéricas — diseño pensado para convertir y escalar contigo.',
+      illustration: <IllustrationS5 />,
+      expansionIndex: 4,
+      demoLabel: null,
+      demoContent: null,
+    },
+    {
+      id: 6,
+      badge: 'Contenido automatizado',
+      title: '6. Blog, Newsletter y RRSS en Automático',
+      desc: 'Publica contenido de calidad en tu blog, redes y newsletter sin tocar nada. La IA selecciona, redacta y publica en tu nombre, todos los días.',
+      illustration: <IllustrationS6 />,
+      expansionIndex: 5,
+      demoLabel: null,
+      demoContent: null,
     },
   ]
 
   return (
     <>
-      {/* Hero */}
       <div className="svcs-hero">
         <div className="svc-note"><div className="bdot" />Demos interactivas · Sin registro · Sin instalaciones</div>
         <h1>El Taller de <em>automatización.</em></h1>
         <p>Elige una herramienta, interactúa con el simulador en tiempo real y comprueba tú mismo cuánto tiempo recuperarías en tu negocio.</p>
       </div>
 
-      {/* Catalog */}
       <main className="catalog-section">
         <div className="container">
           <div className="section-title-wrapper">
             <h2 className="section-title">Herramientas del Taller</h2>
-            <p className="section-desc">Elige una herramienta, despliégala y prueba el simulador interactivo en tiempo real. Sin registro, sin compromiso.</p>
+            <p className="section-desc">Elige una herramienta, despliégala y explora cómo puede encajar en tu negocio. Sin registro, sin compromiso.</p>
           </div>
 
           <div className="services-grid">
             {services.map(s => (
-              <ServiceCard
-                key={s.id}
-                open={openCard === s.id}
-                onToggle={toggle}
-                {...s}
-              />
+              <ServiceCard key={s.id} open={openCard === s.id} onToggle={toggle} onNavigate={onNavigate} {...s} />
             ))}
           </div>
         </div>
       </main>
+
+      <div className="container" style={{ paddingBottom: '80px' }}>
+        <GiantContactCard />
+      </div>
     </>
   )
 }

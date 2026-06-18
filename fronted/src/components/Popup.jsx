@@ -1,17 +1,27 @@
 import { useState } from 'react'
 
+const N8N_WEBHOOK = import.meta.env.VITE_N8N_WEBHOOK_URL || ''
+
 export default function Popup({ config, onClose }) {
   const [name, setName]           = useState('')
   const [email, setEmail]         = useState('')
   const [submitted, setSubmitted] = useState(false)
 
-  function handleSubmit() {
+  async function handleSubmit() {
     if (!name.trim() || !email.trim()) {
       alert('Por favor rellena tu nombre y email.')
       return
     }
+    if (N8N_WEBHOOK) {
+      try {
+        await fetch(N8N_WEBHOOK, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, source: config.source || 'popup-web', service: config.title }),
+        })
+      } catch {}
+    }
     setSubmitted(true)
-    // TODO: fetch('TU_WEBHOOK_N8N', { method: 'POST', ... })
   }
 
   return (

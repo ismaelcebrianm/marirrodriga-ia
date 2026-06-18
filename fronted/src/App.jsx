@@ -64,7 +64,7 @@ export default function App() {
 
           {/* ── EL TALLER ──────────────────────────────────── */}
           <section id="taller">
-            <ServicesPage triggerPopup={triggerPopup} />
+            <ServicesPage triggerPopup={triggerPopup} onNavigate={navigate} />
           </section>
 
           {/* ── ACTUALIDAD IA ──────────────────────────────── */}

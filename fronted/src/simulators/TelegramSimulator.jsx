@@ -3,9 +3,9 @@ import { useState, useEffect, useRef } from 'react'
 const N8N_TG = import.meta.env.VITE_N8N_TELEGRAM || ''
 
 const QUICK = [
-  '¿Qué sabéis hacer?',
-  '¿Cuánto cuesta un bot?',
-  'Cuéntame un chiste',
+  '¿Cuándo hay disponibilidad?',
+  'Quiero agendar una demo',
+  '¿Qué puedes hacer?',
 ]
 
 const CHISTES = [
@@ -32,7 +32,7 @@ function nowTime() {
 
 export default function TelegramSimulator() {
   const [messages, setMessages] = useState([
-    { role: 'bot', text: '¡Hola! 👋 Soy MariRobot, el agente de demo de Marirrodriga.IA. Puedo responder preguntas, ejecutar herramientas y orientarte sin rodeos. ¿Qué quieres saber?', time: nowTime() }
+    { role: 'bot', text: '¡Hola! 👋 Soy el agente de demos de Marirrodriga IA. Puedo consultar disponibilidad, agendar una reunión de 45 min contigo o cancelar una cita existente. ¿Qué necesitas?', time: nowTime() }
   ])
   const [input, setInput]   = useState('')
   const [typing, setTyping] = useState(false)
@@ -51,13 +51,20 @@ export default function TelegramSimulator() {
 
     if (N8N_TG) {
       try {
-        const res  = await fetch(N8N_TG, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ message: msg }) })
+        const res  = await fetch(N8N_TG, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ message: msg, sessionId: 'demo-web' }) })
         const data = await res.json()
-        setMessages(prev => [...prev, { role: 'bot', text: data.reply || '…', time: nowTime() }])
+        const parts = Array.isArray(data.parts) && data.parts.length > 0
+          ? data.parts
+          : [data.reply || '…']
+        setTyping(false)
+        for (let i = 0; i < parts.length; i++) {
+          if (i > 0) await new Promise(r => setTimeout(r, 600))
+          setMessages(prev => [...prev, { role: 'bot', text: parts[i], time: nowTime() }])
+        }
       } catch {
+        setTyping(false)
         setMessages(prev => [...prev, { role: 'bot', text: 'Error de conexión. Prueba de nuevo.', time: nowTime() }])
       }
-      setTyping(false)
       return
     }
 
@@ -75,10 +82,10 @@ export default function TelegramSimulator() {
         <div className="tg__avatar">MR</div>
         <div className="tg__info">
           <div className="tg__name">
-            MariRobot_Agencia_Bot
+            Agente_Marirrodriga_IA
             <span className="tg__verified">✓</span>
           </div>
-          <div className="tg__status">bot · en línea</div>
+          <div className="tg__status">bot · en línea · agenda real</div>
         </div>
         <div className="tg__dots">⋮</div>
       </div>
