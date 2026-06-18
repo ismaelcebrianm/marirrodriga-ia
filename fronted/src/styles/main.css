@@ -117,6 +117,59 @@ nav {
 .nb          { background: var(--brand); color: #fff; border: none; padding: 8px 18px; border-radius: 7px; font-size: 13px; font-weight: 700; cursor: pointer; transition: var(--transition); font-family: var(--font-body); }
 .nb:hover    { background: var(--brand-hover); box-shadow: var(--shadow-brand); }
 
+/* ─── HAMBURGER BUTTON ───────────────────────────────────────── */
+.ham-btn {
+  display: none;
+  flex-direction: column; justify-content: center; align-items: center;
+  gap: 5px; width: 36px; height: 36px;
+  background: none; border: none; cursor: pointer; padding: 4px;
+  flex-shrink: 0;
+}
+.ham-btn span {
+  display: block; width: 22px; height: 2px;
+  background: var(--text-1); border-radius: 2px;
+  transition: transform .25s ease, opacity .2s ease;
+  transform-origin: center;
+}
+.ham-btn--open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.ham-btn--open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.ham-btn--open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ─── MOBILE MENU OVERLAY ────────────────────────────────────── */
+.mob-menu {
+  display: none;
+  position: fixed; inset: 0; z-index: 99;
+  background: rgba(255,255,255,.97);
+  backdrop-filter: blur(16px);
+  opacity: 0; pointer-events: none;
+  transition: opacity .25s ease;
+}
+.mob-menu--open { opacity: 1; pointer-events: auto; }
+
+.mob-menu__nav {
+  display: flex; flex-direction: column;
+  padding: 100px 32px 40px;
+  gap: 4px;
+}
+.mob-menu__link {
+  font-size: 26px; font-weight: 700; color: var(--text-1);
+  text-decoration: none; padding: 14px 0;
+  border-bottom: 1px solid var(--border-light);
+  cursor: pointer; transition: color .15s;
+  display: flex; align-items: center; gap: 10px;
+}
+.mob-menu__link:last-of-type { border-bottom: none; }
+.mob-menu__link:hover { color: var(--brand); }
+
+.mob-menu__cta {
+  margin-top: 28px; width: 100%;
+  background: var(--brand); color: #fff; border: none;
+  padding: 16px 24px; border-radius: 10px;
+  font-size: 17px; font-weight: 700; cursor: pointer;
+  font-family: var(--font-body); transition: var(--transition);
+}
+.mob-menu__cta:hover { background: var(--brand-hover); }
+
 /* ─── HERO ───────────────────────────────────────────────────── */
 .hero {
   padding: 72px 48px 64px;
@@ -2219,6 +2272,9 @@ footer               { background: var(--bg-secondary); border-top: 1px solid va
 @media (max-width: 768px) {
   nav             { padding: 14px 20px; }
   .nl             { display: none; }
+  .nb             { display: none; }
+  .ham-btn        { display: flex; }
+  .mob-menu       { display: block; }
   .hero           { padding: 56px 20px 44px; }
   .hero h1        { font-size: 36px; }
   .hstats         { flex-direction: column; }

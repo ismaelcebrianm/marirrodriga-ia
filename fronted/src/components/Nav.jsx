@@ -1,25 +1,73 @@
+import { useState, useEffect } from 'react'
 import LogoIcon from './LogoIcon'
 
+const LINKS = [
+  { id: 'inicio',     label: 'Inicio' },
+  { id: 'medida',     label: 'A medida' },
+  { id: 'taller',     label: 'El Taller' },
+  { id: 'reto-diario', label: 'Actualidad IA', badge: 'Nuevo' },
+  { id: 'contacto',   label: 'Contacto' },
+]
+
 export default function Nav({ onScrollTo }) {
-  const goHome = (id) => { onScrollTo(id) }
+  const [open, setOpen] = useState(false)
+
+  // Bloquea scroll del body cuando el menú está abierto
+  useEffect(() => {
+    document.body.style.overflow = open ? 'hidden' : ''
+    return () => { document.body.style.overflow = '' }
+  }, [open])
+
+  function go(id) {
+    setOpen(false)
+    onScrollTo(id)
+  }
 
   return (
-    <nav>
-      <a className="logo-wrap" href="#inicio" onClick={(e) => { e.preventDefault(); goHome('inicio') }}>
-        <LogoIcon className="logo-svg" />
-        <div className="logo-text">Marirrodriga<b>.IA</b></div>
-      </a>
-      <div className="nl">
-        <a onClick={() => goHome('inicio')}>Inicio</a>
-        <a onClick={() => goHome('medida')}>A medida</a>
-        <a onClick={() => goHome('taller')}>El Taller</a>
-        <a className="nav-reto" onClick={() => goHome('reto-diario')}>
-          Actualidad IA
-          <span className="nav-reto__badge">Nuevo</span>
+    <>
+      <nav>
+        <a className="logo-wrap" href="#inicio" onClick={(e) => { e.preventDefault(); go('inicio') }}>
+          <LogoIcon className="logo-svg" />
+          <div className="logo-text">Marirrodriga<b>.IA</b></div>
         </a>
-        <a onClick={() => goHome('contacto')}>Contacto</a>
+
+        {/* Desktop links */}
+        <div className="nl">
+          {LINKS.map(l => (
+            <a key={l.id} onClick={() => go(l.id)}>
+              {l.label}
+              {l.badge && <span className="nav-reto__badge">{l.badge}</span>}
+            </a>
+          ))}
+        </div>
+
+        {/* Desktop CTA */}
+        <button className="nb" onClick={() => go('taller')}>Entrar al Taller →</button>
+
+        {/* Hamburger button — solo móvil */}
+        <button
+          className={`ham-btn${open ? ' ham-btn--open' : ''}`}
+          onClick={() => setOpen(v => !v)}
+          aria-label={open ? 'Cerrar menú' : 'Abrir menú'}
+        >
+          <span /><span /><span />
+        </button>
+      </nav>
+
+      {/* Mobile overlay menu */}
+      <div className={`mob-menu${open ? ' mob-menu--open' : ''}`} aria-hidden={!open}>
+        <nav className="mob-menu__nav">
+          {LINKS.map(l => (
+            <a key={l.id} className="mob-menu__link" onClick={() => go(l.id)}>
+              {l.label}
+              {l.badge && <span className="nav-reto__badge">{l.badge}</span>}
+            </a>
+          ))}
+          <button className="mob-menu__cta" onClick={() => go('taller')}>
+            Entrar al Taller →
+          </button>
+        </nav>
       </div>
-      <button className="nb" onClick={() => goHome('taller')}>Entrar al Taller →</button>
-    </nav>
+    </>
   )
 }
