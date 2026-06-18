@@ -2330,3 +2330,22 @@ footer               { background: var(--bg-secondary); border-top: 1px solid va
   .blog-page         { padding: 24px 16px 60px; }
 }
 
+/* ─── MOBILE: TELEGRAM SIMULATOR ────────────────────────────── */
+@media (max-width: 768px) {
+  /* Demo aparece primero (encima de la explicación) */
+  .panel-demo-area  { order: -1; }
+
+  /* Más espacio para leer el chat */
+  .tg__messages     { min-height: 260px; max-height: 300px; }
+
+  /* Reducir padding del simulador en pantallas pequeñas */
+  .tg__header       { padding: 8px 12px; }
+  .tg__input-row    { padding: 6px 10px; }
+  .tg__quick        { padding: 6px 10px; gap: 5px; }
+
+  /* Quick reply: texto más pequeño para que quepan en una línea */
+  .tg__quick-btn    { font-size: 10px; padding: 4px 10px; }
+
+  /* Burbujas un poco más anchas en pantallas estrechas */
+  .tg__bubble       { max-width: 90%; }
+}
