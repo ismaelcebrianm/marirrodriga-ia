@@ -3,7 +3,6 @@ import LogoIcon from './LogoIcon'
 
 const LINKS = [
   { id: 'inicio',     label: 'Inicio' },
-  { id: 'medida',     label: 'A medida' },
   { id: 'taller',     label: 'El Taller' },
   { id: 'reto-diario', label: 'Actualidad IA', badge: 'Nuevo' },
   { id: 'contacto',   label: 'Contacto' },

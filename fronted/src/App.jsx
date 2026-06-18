@@ -5,7 +5,6 @@ import Footer       from './components/Footer'
 import Popup        from './components/Popup'
 import HomePage     from './pages/HomePage'
 import ServicesPage from './pages/ServicesPage'
-import MedidaSection from './pages/MedidaSection'
 import RetoSection   from './pages/RetoSection'
 import ContactPage  from './pages/ContactPage'
 import BlogPage     from './pages/BlogPage'
@@ -55,11 +54,6 @@ export default function App() {
           {/* ── INICIO ─────────────────────────────────────── */}
           <section id="inicio">
             <HomePage onScrollTo={scrollTo} />
-          </section>
-
-          {/* ── A MEDIDA ───────────────────────────────────── */}
-          <section id="medida">
-            <MedidaSection />
           </section>
 
           {/* ── EL TALLER ──────────────────────────────────── */}

@@ -2,12 +2,84 @@ import { useState } from 'react'
 import {
   ChevronDown, Mic, MessageSquare, Send, Rocket,
   Check, ArrowRight, Mail, FileText, FolderKey, Database,
-  Bell, Bot, Star, Globe, Rss, Clock, TrendingUp, Zap
+  Bell, Bot, Star, Globe, Rss, Brain, Zap
 } from 'lucide-react'
 import TelegramSimulator from '../simulators/TelegramSimulator'
 import InvoiceSimulator  from '../simulators/InvoiceSimulator'
 import DocumentSimulator from '../simulators/DocumentSimulator'
 import LeadSimulator     from '../simulators/LeadSimulator'
+
+/* ─── ISMABOT CARD ───────────────────────────────────────────── */
+
+const CHATBOT_URL = 'https://t.me/marirrodrigaIA_bot'
+
+const ISMABOT_FEATURES = [
+  { icon: Brain,         label: 'Memoria de chat',         desc: 'Recuerda lo que le has contado, sesión a sesión.' },
+  { icon: Mic,           label: 'Texto, imagen y audio',   desc: 'Escríbele, mándale una foto o envía un audio de voz.' },
+  { icon: MessageSquare, label: 'Conversación sin prisa',  desc: 'Vuelve cuando quieras. Retoma donde lo dejaste.' },
+  { icon: FileText,      label: 'Informes personalizados', desc: 'Te genera un plan adaptado a tu negocio concreto.' },
+]
+
+function IsmabotCard() {
+  const [open, setOpen] = useState(false)
+  return (
+    <div className={`service-card service-card--ismabot${open ? ' expanded' : ''}`}>
+      <div className="service-card-main">
+        <div className="service-visual ismabot-illustration">
+          <div className="ismabot-illus-icon"><Bot size={36} /></div>
+          <div className="ismabot-illus-dots">
+            <span /><span /><span />
+          </div>
+          <div className="ismabot-illus-bubble">Hola, ¿qué podrías automatizar?</div>
+        </div>
+        <div className="service-content">
+          <div className="service-badge service-badge--ismabot"><Star size={10} /> Agente a medida</div>
+          <h3 className="service-title">ISMABOT — Tu guía sin compromiso</h3>
+          <p className="service-copy">
+            Un agente de IA que te escucha, te hace las preguntas correctas y te ayuda a visualizar
+            cómo quedaría tu negocio con automatización. Sin jerga técnica, sin presión comercial.
+            Al final puede generarte un informe o plan personalizado.
+          </p>
+          <button className="btn-expand btn-expand--ismabot" onClick={() => setOpen(v => !v)}>
+            <span>{open ? 'Cerrar' : 'Hablar con ISMABOT'}</span>
+            <ChevronDown size={14} className={`btn-icon${open ? ' rotated' : ''}`} />
+          </button>
+        </div>
+      </div>
+
+      {open && (
+        <div className="service-details-panel service-details-panel--ismabot">
+          <div className="ismabot-expand-grid">
+            <div>
+              <p className="ismabot-expand-title">¿Qué puede hacer por ti?</p>
+              <div className="ismabot-expand-features">
+                {ISMABOT_FEATURES.map(({ icon: Icon, label, desc }) => (
+                  <div key={label} className="ismabot-expand-feat">
+                    <div className="ismabot-expand-feat__icon"><Icon size={15} /></div>
+                    <div>
+                      <div className="ismabot-expand-feat__label">{label}</div>
+                      <div className="ismabot-expand-feat__desc">{desc}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="ismabot-expand-cta-col">
+              <p className="ismabot-expand-mission">
+                Su misión es una sola: que cuando acabes la conversación tengas claro qué automatizar
+                y cómo encajaría en tu negocio. Sin necesidad de saber de tecnología.
+              </p>
+              <a className="ismabot-cta" href={CHATBOT_URL} target="_blank" rel="noopener noreferrer">
+                Abrir ISMABOT en Telegram <ArrowRight size={15} />
+              </a>
+              <p className="ismabot-expand-note">Disponible ahora · Gratis · Sin registro</p>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
 
 /* ─── ILLUSTRATIONS ──────────────────────────────────────────── */
 
@@ -319,7 +391,6 @@ function ServiceCard({ id, open, onToggle, badge, title, desc, illustration, exp
 /* ─── CONTACT GIANT CARD ─────────────────────────────────────── */
 
 const N8N_CUSTOM  = import.meta.env.VITE_N8N_WEBHOOK_URL || ''
-const CHATBOT_URL = 'https://t.me/marirrodrigaIA_bot'
 
 function GiantContactCard() {
   const [idea,    setIdea]    = useState('')
@@ -356,8 +427,8 @@ function GiantContactCard() {
             <h3 className="project-option__title">Habla con nuestro agente</h3>
             <p className="project-option__desc">
               Te guía paso a paso para entender qué necesitas y cómo lograrlo.
-              Puedes comunicarte por <strong>audio o por chat</strong> — como prefieras.
-              El agente analiza tu caso y te propone <strong>soluciones reales</strong>, no respuestas genéricas.
+              Analiza tu caso y te propone <strong>soluciones reales</strong>, no respuestas genéricas.
+              Con memoria de conversación y capacidad para generar informes personalizados.
             </p>
             <a className="project-option__cta project-option__cta--primary" href={CHATBOT_URL} target="_blank" rel="noopener noreferrer">
               Abrir el agente <ArrowRight size={15} />
@@ -487,6 +558,8 @@ export default function ServicesPage({ onNavigate }) {
             <h2 className="section-title">Herramientas del Taller</h2>
             <p className="section-desc">Elige una herramienta, despliégala y explora cómo puede encajar en tu negocio. Sin registro, sin compromiso.</p>
           </div>
+
+          <IsmabotCard />
 
           <div className="services-grid">
             {services.map(s => (

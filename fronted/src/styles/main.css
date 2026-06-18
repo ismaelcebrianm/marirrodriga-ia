@@ -943,6 +943,37 @@ footer               { background: var(--bg-secondary); border-top: 1px solid va
 .service-card:hover { border-color: var(--brand-border); }
 .service-card.expanded { border-color: var(--brand-border2); }
 
+/* ISMABOT card variant — amarillo */
+.service-card--ismabot { border: 1.5px solid #FCD34D; background: linear-gradient(135deg, #FFFBEB, #fff); margin-bottom: 8px; }
+.service-card--ismabot:hover { border-color: #F59E0B; }
+.service-card--ismabot.expanded { border-color: #F59E0B; }
+.service-badge--ismabot { background: #FEF3C7 !important; color: #92400E !important; border: 1px solid #FDE68A !important; }
+.btn-expand--ismabot { background: #F59E0B !important; color: #fff !important; border-color: #F59E0B !important; }
+.btn-expand--ismabot:hover { background: #D97706 !important; }
+.service-details-panel--ismabot { border-top: 1px solid #FDE68A; background: #FFFBEB; }
+
+/* ISMABOT illustration */
+.ismabot-illustration { flex-direction: column; gap: 10px; background: linear-gradient(160deg, #FEF3C7, #FFFBEB); }
+.ismabot-illus-icon { width: 64px; height: 64px; border-radius: 16px; background: #fff; border: 1.5px solid #FCD34D; display: flex; align-items: center; justify-content: center; color: #D97706; box-shadow: 0 4px 16px rgba(217,119,6,.15); }
+.ismabot-illus-dots { display: flex; gap: 5px; }
+.ismabot-illus-dots span { width: 6px; height: 6px; border-radius: 50%; background: #FCD34D; animation: dot-pulse 1.2s ease-in-out infinite; }
+.ismabot-illus-dots span:nth-child(2) { animation-delay: .2s; }
+.ismabot-illus-dots span:nth-child(3) { animation-delay: .4s; }
+@keyframes dot-pulse { 0%,60%,100%{opacity:.3;transform:scale(.8)} 30%{opacity:1;transform:scale(1)} }
+.ismabot-illus-bubble { background: #fff; border: 1px solid #FDE68A; border-radius: 12px 12px 12px 2px; padding: 8px 12px; font-size: 11px; color: #78716C; max-width: 160px; text-align: center; }
+
+/* ISMABOT expand panel */
+.ismabot-expand-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; padding: 32px 40px; }
+.ismabot-expand-title { font-size: 13px; font-weight: 700; color: #92400E; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 16px; }
+.ismabot-expand-features { display: flex; flex-direction: column; gap: 12px; }
+.ismabot-expand-feat { display: flex; gap: 12px; align-items: flex-start; }
+.ismabot-expand-feat__icon { flex-shrink: 0; width: 32px; height: 32px; border-radius: 8px; background: #FEF3C7; border: 1px solid #FDE68A; display: flex; align-items: center; justify-content: center; color: #D97706; }
+.ismabot-expand-feat__label { font-size: 13px; font-weight: 700; color: #1C1917; margin-bottom: 2px; }
+.ismabot-expand-feat__desc  { font-size: 12px; color: #78716C; line-height: 1.5; }
+.ismabot-expand-cta-col { display: flex; flex-direction: column; justify-content: center; gap: 16px; }
+.ismabot-expand-mission { font-size: 14px; color: #57534E; line-height: 1.75; margin: 0; }
+.ismabot-expand-note { font-size: 11px; color: #A8A29E; margin: 0; }
+
 .service-card-main {
   display: grid;
   grid-template-columns: 280px 1fr;

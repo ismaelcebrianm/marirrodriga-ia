@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { Bot, Mail, ArrowRight, Star, Brain, Mic, FileText, MessageSquare } from 'lucide-react'
 
 const BOT_URL        = 'https://t.me/marirrodrigaIA_bot'
-const VOICE_URL      = '#'
 const WEBHOOK_URL    = import.meta.env.VITE_N8N_WEBHOOK_URL
 const PERSONAL_EMAIL = 'ismaelcebrian14@gmail.com'
 
@@ -89,15 +88,6 @@ export default function ContactPage() {
 
         {/* OTRAS OPCIONES */}
         <div className="contact-options" style={{ marginTop: '16px' }}>
-          <a className="contact-opt contact-opt--secondary" href={VOICE_URL} target="_blank" rel="noopener noreferrer">
-            <div className="contact-opt__icon">🎙️</div>
-            <div>
-              <div className="contact-opt__title">Llamada con el agente de voz</div>
-              <div className="contact-opt__sub">¿Prefieres hablar? El agente de voz te atiende, responde y agenda una reunión si lo necesitas.</div>
-            </div>
-            <span className="contact-opt__arrow">→</span>
-          </a>
-
           <a className="contact-opt contact-opt--secondary" href={`mailto:${PERSONAL_EMAIL}`}>
             <div className="contact-opt__icon"><Mail size={22} /></div>
             <div>
