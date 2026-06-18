@@ -68,10 +68,13 @@ function newLine() {
 }
 
 export default function InvoiceWidget({ triggerPopup }) {
-  const [client,  setClient]  = useState('')
-  const [nif,     setNif]     = useState('')
-  const [note,    setNote]    = useState('')
-  const [lines,   setLines]   = useState([newLine()])
+  const [client,  setClient]  = useState('Clínica Bienestar S.L.')
+  const [nif,     setNif]     = useState('B87654321')
+  const [note,    setNote]    = useState('Servicio sanitario exento IVA. Art. 20.Uno.3 Ley 37/1992')
+  const [lines,   setLines]   = useState([
+    { desc: 'Sesiones de fisioterapia domiciliaria — pack 10 sesiones', qty: '10', price: '55' },
+    { desc: 'Informe de evaluación funcional y plan de rehabilitación',  qty: '1',  price: '120' }
+  ])
   const [loading, setLoading] = useState(false)
   const [html,    setHtml]    = useState(null)
 
