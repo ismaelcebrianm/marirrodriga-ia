@@ -4,9 +4,9 @@ import { Sparkles, RotateCcw } from 'lucide-react'
 const N8N_FACTURA = import.meta.env.VITE_N8N_FACTURA || ''
 
 const EXAMPLES = [
-  { label: 'Consultoría 500€', text: 'Ayer di una consultoría de marketing a la empresa Maderas Paco por 500€' },
-  { label: 'Reparación 85€',   text: 'Reparación eléctrica a Pedro Gómez por 85€' },
-  { label: 'Web 1200€ + IVA',  text: 'Desarrollo web de Landing Page a SL Inmobiliaria por 1200€ más IVA' },
+  { label: 'Fisioterapia exenta', text: 'He dado 10 sesiones de fisioterapia domiciliaria a la clínica Bienestar S.L. (B87654321) a 55€ la sesión. Es servicio sanitario, exento de IVA.' },
+  { label: 'Autónomo IRPF 7%',    text: 'Consultoría de automatización de procesos a Startup Digital Ideas S.L. por 2.800€. Soy autónomo en mi primer año de actividad, aplica retención IRPF del 7%.' },
+  { label: 'Obra con ISP',        text: 'Ejecución de obra de rehabilitación para Promotora Norte S.A. (A11223344) por 18.500€. Aplica inversión del sujeto pasivo.' },
 ]
 
 function buildLocalInvoiceHtml(inputText) {
