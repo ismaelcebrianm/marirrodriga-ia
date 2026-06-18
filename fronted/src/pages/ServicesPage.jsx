@@ -168,21 +168,20 @@ function FlowExpansion({ title, core, steps, savings, proof, onNavigate }) {
 
       {savings && (
         <div className="flow-savings">
-          <div className="savings-row">
-            <div className="savings-block">
-              <Clock size={14} className="savings-icon" />
-              <span className="savings-num">{savings.hours}</span>
-              <span className="savings-unit">{savings.unit}</span>
-            </div>
-            {savings.value && (
+          {savings.hours && (
+            <div className="savings-row">
               <div className="savings-block">
-                <TrendingUp size={14} className="savings-icon" />
-                <span className="savings-num">~{savings.value}€</span>
-                <span className="savings-unit">/{savings.per}</span>
+                <Clock size={14} className="savings-icon" />
+                <span className="savings-num">{savings.hours}</span>
+                <span className="savings-unit">{savings.unit}</span>
+                {savings.cost && (
+                  <span className="savings-cost">({savings.cost} en coste salarial estimado*)</span>
+                )}
               </div>
-            )}
-          </div>
+            </div>
+          )}
           <p className="savings-desc">{savings.label}</p>
+          {savings.note && <p className="savings-note">{savings.note}</p>}
         </div>
       )}
 
@@ -208,21 +207,22 @@ const EXPANSIONS = [
   {
     core: 'Atiende consultas y agenda citas 24/7',
     steps: [
-      { icon: '🔔', label: 'Recuerda la cita al cliente 1 hora antes' },
+      { icon: '🔔', label: 'Recuerda la cita al cliente 1 hora antes por WhatsApp o SMS' },
       { icon: '⭐', label: 'Solicita reseña en Google Business tras el servicio' },
       { icon: '🧾', label: 'Genera la factura del servicio automáticamente' },
       { icon: '📊', label: 'Actualiza historial del cliente en tu CRM' },
       { icon: '📋', label: 'Prepara el informe mensual de citas y facturación' },
     ],
     savings: {
-      hours: '4h', unit: '/semana', value: 320, per: 'mes',
-      label: 'ahorradas en atención, agenda y seguimiento manual'
+      hours: '2h', unit: '/día', cost: '~315€/mes',
+      label: 'Un recepcionista cuesta 315€/mes solo en salario. El agente trabaja también a las 3 de la mañana, en fiestas y fines de semana — cuando ningún empleado estaría cogiendo el teléfono.',
+      note: '* Calculado sobre SMI 2025 (1.150€/mes bruto). Coste real del agente: significativamente inferior.'
     }
   },
   {
     core: 'Mensaje de texto → Factura PDF lista al instante',
     steps: [
-      { icon: '✅', label: 'Validación y envío por Verifactu (obligatorio desde 2025)' },
+      { icon: '✅', label: 'Validación y envío por Verifactu (obligatorio desde 2026)' },
       { icon: '📧', label: 'Envío automático al cliente por email' },
       { icon: '⏰', label: 'Recordatorio de pago si no abona en 15 días' },
       { icon: '📑', label: 'Registro contable automático en Google Sheets' },
@@ -230,8 +230,9 @@ const EXPANSIONS = [
       { icon: '📆', label: 'Informe mensual listo para la gestoría en un clic' },
     ],
     savings: {
-      hours: '5h', unit: '/mes', value: 100, per: 'mes',
-      label: 'ahorradas en facturación, contabilidad y seguimiento de pagos'
+      hours: '15-20h', unit: '/mes', cost: '~110-145€/mes',
+      label: 'Facturar, cuadrar la contabilidad y preparar documentación para gestoría consume entre 15 y 20 horas al mes en la mayoría de negocios. El agente lo hace solo — y cumple con Verifactu de serie.',
+      note: '* Calculado sobre SMI 2025 (1.150€/mes bruto). Coste real del agente: significativamente inferior.'
     }
   },
   {
@@ -244,22 +245,23 @@ const EXPANSIONS = [
       { icon: '📊', label: 'Informe semanal de actividad de bandeja de entrada' },
     ],
     savings: {
-      hours: '2h', unit: '/día', value: 800, per: 'mes',
-      label: 'ahorradas en gestión de email y documentos'
+      hours: '2h', unit: '/día', cost: '~315€/mes',
+      label: 'Clasificar correos, extraer datos de facturas y archivar documentos: tareas que bloquean 2 horas diarias de trabajo real. El agente las procesa en tiempo real, sin acumulación.',
+      note: '* Calculado sobre SMI 2025 (1.150€/mes bruto). Coste real del agente: significativamente inferior.'
     }
   },
   {
     core: 'Score IA + alerta inmediata al equipo comercial',
     steps: [
+      { icon: '🔍', label: 'Cruza LinkedIn, Google Maps, noticias y registros mercantiles' },
       { icon: '📧', label: 'Email de bienvenida personalizado en segundos' },
       { icon: '🔁', label: 'Seguimiento automático si no responde en 24h' },
       { icon: '👤', label: 'Asignación automática al comercial correcto en CRM' },
-      { icon: '🌡️', label: 'Secuencia de nutrición para contactos fríos' },
       { icon: '📈', label: 'Reporte semanal de conversión y pipeline' },
     ],
     savings: {
-      hours: '+30%', unit: 'conversión', value: null, per: null,
-      label: 'más clientes cerrados · 3h/semana menos en gestión manual de leads'
+      hours: null, unit: null, cost: null,
+      label: 'Un comercial tarda semanas en localizar, investigar y cualificar 50 leads. Un agente lo hace en minutos cruzando múltiples fuentes de datos: LinkedIn, Google Maps, noticias de empresa, registros mercantiles. Tu equipo solo habla con quien ya está listo para comprar.',
     }
   },
   {

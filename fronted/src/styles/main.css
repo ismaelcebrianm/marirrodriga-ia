@@ -905,7 +905,9 @@ footer               { background: var(--bg-secondary); border-top: 1px solid va
 .savings-icon { color: #a855f7; position: relative; top: 2px; flex-shrink: 0; }
 .savings-num { font-size: 22px; font-weight: 800; color: #fff; line-height: 1; }
 .savings-unit { font-size: 12px; color: #a78bfa; font-weight: 600; }
-.savings-desc { font-size: 12px; color: rgba(167,139,250,.8); margin: 0; }
+.savings-cost { font-size: 11px; color: rgba(167,139,250,.7); font-style: italic; white-space: nowrap; }
+.savings-desc { font-size: 13px; color: rgba(220,210,255,.85); margin: 0; line-height: 1.6; }
+.savings-note { font-size: 10px; color: rgba(167,139,250,.45); margin: 6px 0 0; font-style: italic; }
 
 .flow-proof { display: flex; flex-direction: column; gap: 8px; }
 .proof-label {
