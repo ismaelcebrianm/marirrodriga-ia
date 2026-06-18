@@ -1,10 +1,9 @@
 import { useState } from 'react'
 import {
-  ChevronDown, Mic, MessageSquare, Phone, Send, Rocket,
+  ChevronDown, Mic, MessageSquare, Send, Rocket,
   Check, ArrowRight, Mail, FileText, FolderKey, Database,
   Bell, Bot, Star, Globe, Rss, Clock, TrendingUp, Zap
 } from 'lucide-react'
-import VoiceSimulator    from '../simulators/VoiceSimulator'
 import TelegramSimulator from '../simulators/TelegramSimulator'
 import InvoiceSimulator  from '../simulators/InvoiceSimulator'
 import DocumentSimulator from '../simulators/DocumentSimulator'
@@ -316,27 +315,6 @@ function ServiceCard({ id, open, onToggle, badge, title, desc, illustration, exp
   )
 }
 
-/* ─── SERVICE 1: DEMO CON TABS ───────────────────────────────── */
-
-function VoiceAndTelegramTabs() {
-  const [tab, setTab] = useState('voz')
-  return (
-    <div className="sub-demo-container active">
-      <div className="panel-header-row">
-        <div className="demo-selector-tabs">
-          <button className={`demo-tab${tab === 'voz' ? ' active' : ''}`} onClick={() => setTab('voz')}>
-            <Phone size={13} /> Voz
-          </button>
-          <button className={`demo-tab${tab === 'telegram' ? ' active' : ''}`} onClick={() => setTab('telegram')}>
-            <Send size={13} /> WhatsApp / Telegram
-          </button>
-        </div>
-      </div>
-      {tab === 'voz'      && <><p className="demo-instructions">Simula una llamada interactiva con el agente conversacional:</p><VoiceSimulator /></>}
-      {tab === 'telegram' && <><p className="demo-instructions">Explora una demostración de chat con nuestro bot de personalidad:</p><TelegramSimulator /></>}
-    </div>
-  )
-}
 
 /* ─── CONTACT GIANT CARD ─────────────────────────────────────── */
 
@@ -435,13 +413,13 @@ export default function ServicesPage({ onNavigate }) {
   const services = [
     {
       id: 1,
-      badge: 'Voz & Texto',
+      badge: 'Chat & Voz',
       title: '1. Asistentes y Agentes Conversacionales',
-      desc: 'Asistentes virtuales que no solo responden, sino que ejecutan. Atiende a tus clientes, resuelve dudas y agenda citas en automático, 24/7.',
+      desc: 'Asistentes virtuales que no solo responden, sino que ejecutan. Atienden por chat, WhatsApp o incluso por voz — resuelven dudas, agendan citas y gestionan solicitudes en automático, 24/7.',
       illustration: <IllustrationS1 />,
       expansionIndex: 0,
-      demoLabel: 'Demo interactiva — elige canal',
-      demoContent: <VoiceAndTelegramTabs />,
+      demoLabel: 'Agente real en vivo — Mari Robot',
+      demoContent: <TelegramSimulator />,
     },
     {
       id: 2,
