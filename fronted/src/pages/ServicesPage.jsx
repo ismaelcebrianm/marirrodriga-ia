@@ -501,34 +501,35 @@ function TallerNav({ onGo }) {
 
 /* ─── DEMO GRÁFICOS: WEB & RRSS ──────────────────────────────── */
 
-function WebPreviewDemo() {
+function WebPreviewDemo({ onNavigate }) {
   return (
     <div className="demo-preview demo-preview--web">
-      <p className="demo-preview__tag">Ejemplo real</p>
-      <div className="wp-browser">
-        <div className="wp-browser__bar">
-          <span /><span /><span />
-          <div className="wp-browser__url">marirrodriga.ia</div>
+      <p className="demo-preview__tag">Portfolio · Ejemplo real en producción</p>
+      <div className="wp-site-card">
+        <div className="wp-site-card__header">
+          <div className="wp-site-brand">Marirrodriga<strong>.IA</strong></div>
+          <div className="wp-site-badge">● En vivo</div>
         </div>
-        <div className="wp-browser__body">
-          <div className="wp-hero-strip" />
-          <div className="wp-grid">
-            <div className="wp-block" />
-            <div className="wp-block wp-block--tall" />
-            <div className="wp-block" />
-            <div className="wp-block wp-block--wide" />
-          </div>
+        <div className="wp-site-sections">
+          <div className="wp-section-chip">El Taller</div>
+          <div className="wp-section-chip">Actualidad IA</div>
+          <div className="wp-section-chip">ISMABOT</div>
+          <div className="wp-section-chip">Blog automático</div>
+          <div className="wp-section-chip">Contacto</div>
         </div>
+        <p className="wp-site-claim">React · Vite · Supabase · n8n · <span>construida en menos de 14 días</span></p>
       </div>
-      <div className="demo-preview__stack">
-        <span>React</span><span>Vite</span><span>Supabase</span><span>n8n</span>
-      </div>
-      <p className="demo-preview__note">Esta misma web fue construida por nosotros en &lt;14 días.</p>
+      <p className="demo-preview__note">
+        Esta misma web es nuestro mejor ejemplo: conectada a todas las automatizaciones en vivo, con blog de publicación diaria automática, simuladores interactivos y agente de IA integrado.
+      </p>
+      <button className="demo-preview__live-btn" onClick={() => onNavigate && onNavigate('inicio')}>
+        Ver la web completa →
+      </button>
     </div>
   )
 }
 
-function RrssPreviewDemo() {
+function RrssPreviewDemo({ onNavigate }) {
   return (
     <div className="demo-preview demo-preview--rrss">
       <p className="demo-preview__tag">Publicado automáticamente · hace 3h</p>
@@ -552,11 +553,19 @@ function RrssPreviewDemo() {
           <span>↗ 12 reposts</span>
         </div>
       </div>
+      <p className="demo-preview__note">
+        Noticias de última hora seleccionadas por IA, redactadas con imagen editorial generada automáticamente y publicadas solas — en tu blog, LinkedIn, Instagram, X y newsletter. Sin tocar nada. Adaptable a cualquier sector o red social.
+      </p>
       <div className="rrss-channels">
         <div className="rrss-ch"><Globe size={11} /> Blog</div>
         <div className="rrss-ch"><Send size={11} /> LinkedIn</div>
         <div className="rrss-ch"><Mail size={11} /> Newsletter</div>
+        <div className="rrss-ch">✕ X / Twitter</div>
+        <div className="rrss-ch">📸 Instagram</div>
       </div>
+      <button className="demo-preview__live-btn" onClick={() => onNavigate && onNavigate('reto-diario')}>
+        Ver las noticias en vivo →
+      </button>
     </div>
   )
 }
@@ -625,7 +634,7 @@ export default function ServicesPage({ onNavigate }) {
       illustration: <IllustrationS5 />,
       expansionIndex: 4,
       demoLabel: 'Portfolio — ejemplo real en producción',
-      demoContent: <WebPreviewDemo />,
+      demoContent: <WebPreviewDemo onNavigate={onNavigate} />,
     },
     {
       id: 6,
@@ -635,7 +644,7 @@ export default function ServicesPage({ onNavigate }) {
       illustration: <IllustrationS6 />,
       expansionIndex: 5,
       demoLabel: 'Publicación generada por IA — ejemplo real',
-      demoContent: <RrssPreviewDemo />,
+      demoContent: <RrssPreviewDemo onNavigate={onNavigate} />,
     },
   ]
 
