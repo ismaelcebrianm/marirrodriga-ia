@@ -11,7 +11,7 @@ import LeadSimulator     from '../simulators/LeadSimulator'
 
 /* ─── ISMABOT CARD ───────────────────────────────────────────── */
 
-const CHATBOT_URL = 'https://t.me/Marirrodrigabot'
+const CHATBOT_URL = 'https://t.me/marirrodrigaIA_bot'
 
 const ISMABOT_FEATURES = [
   { icon: Brain,         label: 'Memoria de chat',         desc: 'Recuerda lo que le has contado, sesión a sesión.' },
@@ -599,6 +599,7 @@ export default function ServicesPage({ onNavigate }) {
         </div>
       </main>
 
+      <GiantContactCard />
     </>
   )
 }

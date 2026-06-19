@@ -12,7 +12,6 @@ export default function Footer({ onScrollTo }) {
       </div>
       <div className="footer-links">
         <a onClick={() => onScrollTo('inicio')}>Inicio</a>
-        <a onClick={() => onScrollTo('medida')}>A medida</a>
         <a onClick={() => onScrollTo('taller')}>El Taller</a>
         <a onClick={() => onScrollTo('reto-diario')}>Actualidad IA</a>
         <a onClick={() => onScrollTo('contacto')}>Contacto</a>
