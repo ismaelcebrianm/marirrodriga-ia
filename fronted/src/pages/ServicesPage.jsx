@@ -526,7 +526,7 @@ export default function ServicesPage({ onNavigate }) {
       id: 5,
       badge: 'Presencia digital',
       title: '5. Creación de Páginas Web',
-      desc: 'Páginas web modernas, rápidas y conectadas a tus automatizaciones. Sin plantillas genéricas — diseño pensado para convertir y escalar contigo.',
+      desc: 'Páginas web modernas, rápidas y conectadas a tus automatizaciones. Sin plantillas genéricas. Esta misma web fue creada por 2 personas en menos de 14 días.',
       illustration: <IllustrationS5 />,
       expansionIndex: 4,
       demoLabel: null,

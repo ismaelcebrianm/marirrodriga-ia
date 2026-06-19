@@ -2483,6 +2483,7 @@ footer               { background: var(--bg-secondary); border-top: 1px solid va
   .service-card-main  { grid-template-columns: 1fr; }
   .service-visual     { border-right: none; border-bottom: 1px solid var(--border-light); min-height: 140px; }
   .service-details-panel { padding: 20px 16px; }
+  .ismabot-expand-grid   { grid-template-columns: 1fr; padding: 20px 16px; }
   .giant-request-card { padding: 28px 20px; }
   .lead-sim-grid      { grid-template-columns: 1fr; }
 }
