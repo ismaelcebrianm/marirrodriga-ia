@@ -25,7 +25,7 @@ const CHAT_MSGS = [
   { from: 'user', text: 'Tengo una clínica de fisioterapia, somos 3 fisios. La agenda, las facturas y los recordatorios los llevamos todo a mano.' },
   { from: 'bot',  text: 'Perfecto. Para darte un plan realmente útil necesito escucharte con detalle. Mándame un audio contándome cómo gestionáis las citas desde que llama un paciente hasta que paga — sin filtros, como si me lo explicaras a un amigo.' },
   { from: 'user', text: '🎤 Audio · 1:24', audio: true },
-  { from: 'bot',  text: 'He escuchado con atención. Veo tres cuellos de botella claros: la confirmación manual de citas, las facturas que preparáis el viernes noche y los recordatorios que mandáis uno a uno. Los tres tienen solución directa y encajan bien con vuestro flujo. Dale una vuelta esta tarde — y mañana me sigues contando cuál queréis atacar primero 💪' },
+  { from: 'bot',  text: 'Ah, esos son los cuellos de botella clásicos de un negocio como el tuyo. Te propongo que durante unos días hagas un esfuerzo activo por pensar, mientras trabajas, en si hay más cosas que automatizarías. Si ya tienes claro lo que necesitas — dime y agendamos una asesoría con el boss: Ismael 🤝' },
 ]
 
 function IsmabotChatPreview() {
