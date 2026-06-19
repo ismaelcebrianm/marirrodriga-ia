@@ -1057,6 +1057,39 @@ footer               { background: var(--bg-secondary); border-top: 1px solid va
 .icp-typing span:nth-child(2) { animation-delay: .2s; }
 .icp-typing span:nth-child(3) { animation-delay: .4s; }
 
+.icp-bubble--audio {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 14px;
+}
+.icp-audio-icon { font-size: 14px; flex-shrink: 0; }
+.icp-audio-bars {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex: 1;
+}
+.icp-audio-bars span {
+  display: block;
+  width: 3px;
+  border-radius: 2px;
+  background: rgba(167,139,250,.6);
+  animation: audioBar .8s ease-in-out infinite alternate;
+}
+.icp-audio-bars span:nth-child(odd)  { height: 10px; }
+.icp-audio-bars span:nth-child(even) { height: 16px; animation-delay: .15s; }
+.icp-audio-bars span:nth-child(3n)   { height: 7px;  animation-delay: .3s; }
+@keyframes audioBar {
+  from { opacity: .4; transform: scaleY(.7); }
+  to   { opacity: 1;  transform: scaleY(1); }
+}
+.icp-audio-dur {
+  font-size: 11px;
+  color: rgba(203,213,225,.6);
+  flex-shrink: 0;
+}
+
 .ismabot-cta--inline {
   font-size: 13px;
   padding: 11px 16px;

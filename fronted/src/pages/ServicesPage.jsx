@@ -21,11 +21,11 @@ const ISMABOT_FEATURES = [
 ]
 
 const CHAT_MSGS = [
-  { from: 'bot',  text: 'Hola 👋 Soy ISMABOT. ¿Qué parte de tu negocio te roba más tiempo cada semana?' },
-  { from: 'user', text: 'Pues gestionar emails y hacer facturas a mano...' },
-  { from: 'bot',  text: '¿Cuántas facturas haces al mes, más o menos?' },
-  { from: 'user', text: 'Unas 20 o 30' },
-  { from: 'bot',  text: 'Con ese volumen te ahorrarías unas 5-6 horas al mes solo en facturas, y otras 3h en correos. Te preparo el análisis y se lo paso a Ismael para que lo reviséis juntos. ¿Empezamos?' },
+  { from: 'bot',  text: 'Hola 👋 Soy ISMABOT. Antes de recomendarte nada, necesito entender bien cómo trabajas. ¿A qué te dedicas y qué procesos repites más a lo largo de tu semana?' },
+  { from: 'user', text: 'Tengo una clínica de fisioterapia, somos 3 fisios. La agenda, las facturas y los recordatorios los llevamos todo a mano.' },
+  { from: 'bot',  text: 'Perfecto. Para darte un plan realmente útil necesito escucharte con detalle. Mándame un audio contándome cómo gestionáis las citas desde que llama un paciente hasta que paga — sin filtros, como si me lo explicaras a un amigo.' },
+  { from: 'user', text: '🎤 Audio · 1:24', audio: true },
+  { from: 'bot',  text: 'He escuchado con atención. Veo tres cuellos de botella claros: la confirmación manual de citas, las facturas que preparáis el viernes noche y los recordatorios que mandáis uno a uno. Los tres tienen solución directa y encajan bien con vuestro flujo. Dale una vuelta esta tarde — y mañana me sigues contando cuál queréis atacar primero 💪' },
 ]
 
 function IsmabotChatPreview() {
@@ -37,15 +37,15 @@ function IsmabotChatPreview() {
     const ts = []
     const add = (fn, ms) => ts.push(setTimeout(fn, ms))
 
-    add(() => setTyping(true),                                    500)
+    add(() => setTyping(true),                                    400)
     add(() => { setTyping(false); setShown([0]) },               1900)
-    add(() => setShown(m => [...m, 1]),                          2700)
-    add(() => setTyping(true),                                   3200)
-    add(() => { setTyping(false); setShown(m => [...m, 2]) },   4500)
-    add(() => setShown(m => [...m, 3]),                          5300)
-    add(() => setTyping(true),                                   5800)
-    add(() => { setTyping(false); setShown(m => [...m, 4]) },   7400)
-    add(() => setCta(true),                                      8200)
+    add(() => setShown(m => [...m, 1]),                          2800)
+    add(() => setTyping(true),                                   3300)
+    add(() => { setTyping(false); setShown(m => [...m, 2]) },   4700)
+    add(() => setShown(m => [...m, 3]),                          5600)  // audio
+    add(() => setTyping(true),                                   6200)  // "procesando audio"
+    add(() => { setTyping(false); setShown(m => [...m, 4]) },   8400)  // respuesta larga
+    add(() => setCta(true),                                      9200)
 
     return () => ts.forEach(clearTimeout)
   }, [])
@@ -58,11 +58,19 @@ function IsmabotChatPreview() {
         <span className="icp-online">● En línea</span>
       </div>
       <div className="icp-messages">
-        {shown.map(i => (
-          <div key={i} className={`icp-bubble icp-bubble--${CHAT_MSGS[i].from}`}>
-            {CHAT_MSGS[i].text}
-          </div>
-        ))}
+        {shown.map(i => {
+          const msg = CHAT_MSGS[i]
+          if (msg.audio) return (
+            <div key={i} className="icp-bubble icp-bubble--user icp-bubble--audio">
+              <span className="icp-audio-icon">🎤</span>
+              <div className="icp-audio-bars">{[...Array(12)].map((_, j) => <span key={j} />)}</div>
+              <span className="icp-audio-dur">1:24</span>
+            </div>
+          )
+          return (
+            <div key={i} className={`icp-bubble icp-bubble--${msg.from}`}>{msg.text}</div>
+          )
+        })}
         {typing && (
           <div className="icp-bubble icp-bubble--bot icp-typing">
             <span /><span /><span />
