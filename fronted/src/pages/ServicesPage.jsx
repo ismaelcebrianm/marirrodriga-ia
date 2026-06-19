@@ -474,12 +474,28 @@ function GiantContactCard() {
   )
 }
 
+/* ─── FILTERS ────────────────────────────────────────────────── */
+
+const FILTERS = ['Todos', 'Atención al cliente', 'Gestión interna', 'Captar clientes', 'Presencia digital']
+
+const SERVICE_CATEGORY = {
+  1: 'Atención al cliente',
+  2: 'Gestión interna',
+  3: 'Gestión interna',
+  4: 'Captar clientes',
+  5: 'Presencia digital',
+  6: 'Captar clientes',
+}
+
 /* ─── MAIN PAGE ──────────────────────────────────────────────── */
 
 export default function ServicesPage({ onNavigate }) {
   const [openCard, setOpenCard] = useState(null)
+  const [filter,   setFilter]   = useState('Todos')
 
   function toggle(id) { setOpenCard(prev => prev === id ? null : id) }
+
+  function changeFilter(f) { setFilter(f); setOpenCard(null) }
 
   const services = [
     {
@@ -559,12 +575,26 @@ export default function ServicesPage({ onNavigate }) {
             <p className="section-desc">Elige una herramienta, despliégala y explora cómo puede encajar en tu negocio. Sin registro, sin compromiso.</p>
           </div>
 
+          <div className="blog-filters blog-filters--left">
+            {FILTERS.map(f => (
+              <button
+                key={f}
+                className={`blog-filter-btn${filter === f ? ' active' : ''}`}
+                onClick={() => changeFilter(f)}
+              >
+                {f}
+              </button>
+            ))}
+          </div>
+
           <IsmabotCard />
 
           <div className="services-grid">
-            {services.map(s => (
-              <ServiceCard key={s.id} open={openCard === s.id} onToggle={toggle} onNavigate={onNavigate} {...s} />
-            ))}
+            {services
+              .filter(s => filter === 'Todos' || SERVICE_CATEGORY[s.id] === filter)
+              .map(s => (
+                <ServiceCard key={s.id} open={openCard === s.id} onToggle={toggle} onNavigate={onNavigate} {...s} />
+              ))}
           </div>
         </div>
       </main>
