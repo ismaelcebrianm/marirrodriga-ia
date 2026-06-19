@@ -669,7 +669,6 @@ export default function ServicesPage({ onNavigate }) {
         </div>
       </main>
 
-      <GiantContactCard />
     </>
   )
 }
