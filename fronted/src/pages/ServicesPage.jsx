@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
   ChevronDown, Mic, MessageSquare, Send, Rocket,
   Check, ArrowRight, Mail, FileText, FolderKey, Database,
@@ -20,10 +20,68 @@ const ISMABOT_FEATURES = [
   { icon: FileText,      label: 'Informes personalizados', desc: 'Te genera un plan adaptado a tu negocio concreto.' },
 ]
 
+const CHAT_MSGS = [
+  { from: 'bot',  text: 'Hola 👋 Soy ISMABOT. ¿Qué parte de tu negocio te roba más tiempo cada semana?' },
+  { from: 'user', text: 'Pues gestionar emails y hacer facturas a mano...' },
+  { from: 'bot',  text: '¿Cuántas facturas haces al mes, más o menos?' },
+  { from: 'user', text: 'Unas 20 o 30' },
+  { from: 'bot',  text: 'Con ese volumen te ahorrarías unas 5-6 horas al mes solo en facturas, y otras 3h en correos. ¿Te preparo un análisis con los flujos concretos para tu negocio?' },
+]
+
+function IsmabotChatPreview() {
+  const [shown,  setShown]  = useState([])
+  const [typing, setTyping] = useState(false)
+  const [cta,    setCta]    = useState(false)
+
+  useEffect(() => {
+    const ts = []
+    const add = (fn, ms) => ts.push(setTimeout(fn, ms))
+
+    add(() => setTyping(true),                                    500)
+    add(() => { setTyping(false); setShown([0]) },               1900)
+    add(() => setShown(m => [...m, 1]),                          2700)
+    add(() => setTyping(true),                                   3200)
+    add(() => { setTyping(false); setShown(m => [...m, 2]) },   4500)
+    add(() => setShown(m => [...m, 3]),                          5300)
+    add(() => setTyping(true),                                   5800)
+    add(() => { setTyping(false); setShown(m => [...m, 4]) },   7400)
+    add(() => setCta(true),                                      8200)
+
+    return () => ts.forEach(clearTimeout)
+  }, [])
+
+  return (
+    <div className="icp-wrap">
+      <div className="icp-header">
+        <div className="icp-avatar"><Bot size={13} /></div>
+        <span className="icp-name">ISMABOT</span>
+        <span className="icp-online">● En línea</span>
+      </div>
+      <div className="icp-messages">
+        {shown.map(i => (
+          <div key={i} className={`icp-bubble icp-bubble--${CHAT_MSGS[i].from}`}>
+            {CHAT_MSGS[i].text}
+          </div>
+        ))}
+        {typing && (
+          <div className="icp-bubble icp-bubble--bot icp-typing">
+            <span /><span /><span />
+          </div>
+        )}
+      </div>
+      {cta && (
+        <a className="ismabot-cta ismabot-cta--inline" href={CHATBOT_URL} target="_blank" rel="noopener noreferrer">
+          Continuar en Telegram — recibe tu plan <ArrowRight size={13} />
+        </a>
+      )}
+    </div>
+  )
+}
+
 function IsmabotCard() {
   const [open, setOpen] = useState(false)
   return (
-    <div className={`service-card service-card--ismabot${open ? ' expanded' : ''}`}>
+    <div className={`service-card service-card--ismabot${open ? ' expanded' : ''}`} id="service-ismabot">
       <div className="service-card-main">
         <div className="service-visual ismabot-illustration">
           <div className="ismabot-illus-icon"><Bot size={36} /></div>
@@ -36,12 +94,12 @@ function IsmabotCard() {
           <div className="service-badge service-badge--ismabot"><Star size={10} /> Agente a medida</div>
           <h3 className="service-title">ISMABOT — Tu guía sin compromiso</h3>
           <p className="service-copy">
-            Un agente de IA que te escucha, te hace las preguntas correctas y te ayuda a visualizar
-            cómo quedaría tu negocio con automatización. Sin jerga técnica, sin presión comercial.
-            Al final puede generarte un informe o plan personalizado.
+            Has explorado las herramientas. Ahora ISMABOT te ayuda a decidir cuál encaja en tu negocio.
+            Te hace las preguntas correctas, analiza tu caso y te genera un plan personalizado.
+            Sin jerga técnica, sin presión comercial.
           </p>
           <button className="btn-expand btn-expand--ismabot" onClick={() => setOpen(v => !v)}>
-            <span>{open ? 'Cerrar' : 'Hablar con ISMABOT'}</span>
+            <span>{open ? 'Cerrar' : 'Ver cómo piensa ISMABOT'}</span>
             <ChevronDown size={14} className={`btn-icon${open ? ' rotated' : ''}`} />
           </button>
         </div>
@@ -63,16 +121,11 @@ function IsmabotCard() {
                   </div>
                 ))}
               </div>
+              <p className="ismabot-expand-note" style={{marginTop: '16px'}}>Disponible ahora · Gratis · Sin registro</p>
             </div>
-            <div className="ismabot-expand-cta-col">
-              <p className="ismabot-expand-mission">
-                Su misión es una sola: que cuando acabes la conversación tengas claro qué automatizar
-                y cómo encajaría en tu negocio. Sin necesidad de saber de tecnología.
-              </p>
-              <a className="ismabot-cta" href={CHATBOT_URL} target="_blank" rel="noopener noreferrer">
-                Abrir ISMABOT en Telegram <ArrowRight size={15} />
-              </a>
-              <p className="ismabot-expand-note">Disponible ahora · Gratis · Sin registro</p>
+            <div className="panel-demo-area">
+              <p className="panel-subtitle"><Rocket size={15} />Así piensa ISMABOT</p>
+              <IsmabotChatPreview />
             </div>
           </div>
         </div>
@@ -495,6 +548,10 @@ function TallerNav({ onGo }) {
           {label}
         </button>
       ))}
+      <button className="taller-nav-btn taller-nav-btn--ismabot" onClick={() => onGo('ismabot')}>
+        <span className="taller-nav-num taller-nav-num--ismabot">★</span>
+        ISMABOT
+      </button>
     </nav>
   )
 }
@@ -572,10 +629,15 @@ export default function ServicesPage({ onNavigate }) {
   function toggle(id) { setOpenCard(prev => prev === id ? null : id) }
 
   function goToService(id) {
+    if (id === 'ismabot') {
+      setTimeout(() => {
+        document.getElementById('service-ismabot')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }, 60)
+      return
+    }
     setOpenCard(id)
     setTimeout(() => {
-      const el = document.getElementById(`service-${id}`)
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      document.getElementById(`service-${id}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }, 60)
   }
 
@@ -659,13 +721,13 @@ export default function ServicesPage({ onNavigate }) {
 
           <TallerNav onGo={goToService} />
 
-          <IsmabotCard />
-
           <div className="services-grid">
             {services.map(s => (
               <ServiceCard key={s.id} open={openCard === s.id} onToggle={toggle} onNavigate={onNavigate} {...s} />
             ))}
           </div>
+
+          <IsmabotCard />
         </div>
       </main>
 

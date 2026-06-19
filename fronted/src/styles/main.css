@@ -984,6 +984,91 @@ footer               { background: var(--bg-secondary); border-top: 1px solid va
 .ismabot-expand-mission { font-size: 14px; color: #57534E; line-height: 1.75; margin: 0; }
 .ismabot-expand-note { font-size: 11px; color: #A8A29E; margin: 0; }
 
+/* ─── ISMABOT CHAT PREVIEW ───────────────────────────────────── */
+.icp-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.icp-header {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #a78bfa;
+}
+.icp-avatar {
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: rgba(124,58,237,.2);
+  border: 1px solid rgba(124,58,237,.3);
+  display: flex; align-items: center; justify-content: center;
+  color: #a78bfa;
+  flex-shrink: 0;
+}
+.icp-name { color: #a78bfa; font-weight: 700; }
+.icp-online {
+  font-size: 10px;
+  color: #4ADE80;
+  font-weight: 600;
+  margin-left: auto;
+}
+.icp-messages {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  min-height: 100px;
+}
+.icp-bubble {
+  max-width: 88%;
+  padding: 8px 12px;
+  font-size: 13px;
+  line-height: 1.5;
+  animation: icpFadeIn .25s ease;
+}
+.icp-bubble--bot {
+  background: rgba(124,58,237,.18);
+  border: 1px solid rgba(124,58,237,.25);
+  color: #E2E8F0;
+  border-radius: 4px 12px 12px 12px;
+  align-self: flex-start;
+}
+.icp-bubble--user {
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.1);
+  color: #CBD5E1;
+  border-radius: 12px 4px 12px 12px;
+  align-self: flex-end;
+}
+.icp-typing {
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
+  padding: 10px 14px;
+}
+.icp-typing span {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #a78bfa;
+  animation: dot-pulse 1.2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+.icp-typing span:nth-child(2) { animation-delay: .2s; }
+.icp-typing span:nth-child(3) { animation-delay: .4s; }
+
+.ismabot-cta--inline {
+  font-size: 13px;
+  padding: 11px 16px;
+  animation: icpFadeIn .4s ease;
+  margin-top: 4px;
+}
+
+@keyframes icpFadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to   { opacity: 1; transform: none; }
+}
+
 .service-card-main {
   display: grid;
   grid-template-columns: 280px 1fr;
@@ -1129,6 +1214,21 @@ footer               { background: var(--bg-secondary); border-top: 1px solid va
   font-size: 10px;
   font-weight: 700;
   flex-shrink: 0;
+}
+.taller-nav-btn--ismabot {
+  border-color: #FCD34D;
+  background: #FFFBEB;
+  color: #92400E;
+  font-weight: 700;
+}
+.taller-nav-btn--ismabot:hover {
+  background: #FEF3C7;
+  border-color: #F59E0B;
+  color: #78350F;
+}
+.taller-nav-num--ismabot {
+  background: #F59E0B;
+  font-size: 11px;
 }
 
 /* ─── WEB PREVIEW DEMO ───────────────────────────────────────── */
