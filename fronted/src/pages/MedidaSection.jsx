@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Bot, Star, Mail, ArrowRight, Check, Mic, Image, Brain, FileText, MessageSquare } from 'lucide-react'
 
 const N8N_CUSTOM  = import.meta.env.VITE_N8N_WEBHOOK_URL || ''
-const CHATBOT_URL = 'https://t.me/marirrodrigaIA_bot'
+const CHATBOT_URL = 'https://t.me/Marirrodrigabot'
 
 const FEATURES = [
   { icon: Brain,       label: 'Memoria de chat',          desc: 'Recuerda todo lo que le has contado, sesión a sesión.' },
