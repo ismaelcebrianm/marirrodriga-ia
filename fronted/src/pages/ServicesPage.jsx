@@ -25,7 +25,7 @@ const CHAT_MSGS = [
   { from: 'user', text: 'Pues gestionar emails y hacer facturas a mano...' },
   { from: 'bot',  text: '¿Cuántas facturas haces al mes, más o menos?' },
   { from: 'user', text: 'Unas 20 o 30' },
-  { from: 'bot',  text: 'Con ese volumen te ahorrarías unas 5-6 horas al mes solo en facturas, y otras 3h en correos. ¿Te preparo un análisis con los flujos concretos para tu negocio?' },
+  { from: 'bot',  text: 'Con ese volumen te ahorrarías unas 5-6 horas al mes solo en facturas, y otras 3h en correos. Te preparo el análisis y se lo paso a Ismael para que lo reviséis juntos. ¿Empezamos?' },
 ]
 
 function IsmabotChatPreview() {
@@ -71,7 +71,7 @@ function IsmabotChatPreview() {
       </div>
       {cta && (
         <a className="ismabot-cta ismabot-cta--inline" href={CHATBOT_URL} target="_blank" rel="noopener noreferrer">
-          Continuar en Telegram — recibe tu plan <ArrowRight size={13} />
+          Hablar con ISMABOT → Ismael te contacta <ArrowRight size={13} />
         </a>
       )}
     </div>
@@ -94,9 +94,10 @@ function IsmabotCard() {
           <div className="service-badge service-badge--ismabot"><Star size={10} /> Agente a medida</div>
           <h3 className="service-title">ISMABOT — Tu guía sin compromiso</h3>
           <p className="service-copy">
-            Has explorado las herramientas. Ahora ISMABOT te ayuda a decidir cuál encaja en tu negocio.
-            Te hace las preguntas correctas, analiza tu caso y te genera un plan personalizado.
-            Sin jerga técnica, sin presión comercial.
+            Has explorado las herramientas. Ahora ISMABOT analiza tu negocio, identifica qué automatizaciones
+            son realmente aplicables a tu caso y te prepara un plan concreto.
+            Después te pone en contacto directo con <strong>Ismael</strong>, el experto detrás de todo esto,
+            para que lo llevéis a la práctica juntos.
           </p>
           <button className="btn-expand btn-expand--ismabot" onClick={() => setOpen(v => !v)}>
             <span>{open ? 'Cerrar' : 'Ver cómo piensa ISMABOT'}</span>
