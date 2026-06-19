@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useId, useState } from 'react'
 import { Sparkles, BookOpen, Users } from 'lucide-react'
 
 const WEBHOOK_URL = import.meta.env.VITE_N8N_WEBHOOK_URL
@@ -9,6 +9,8 @@ const INITIAL_FORM = {
 }
 
 export default function LeadFormSection() {
+  const uid = useId()
+  const fid = (name) => `${uid}-${name}`
   const [form,      setForm]      = useState(INITIAL_FORM)
   const [errors,    setErrors]    = useState({})
   const [loading,   setLoading]   = useState(false)
@@ -97,8 +99,9 @@ export default function LeadFormSection() {
             <form className="gift-form" onSubmit={submit} noValidate>
               <div className="gift-form__row">
                 <div className="gift-form__field">
-                  <label className="gift-form__label">Nombre *</label>
+                  <label className="gift-form__label" htmlFor={fid('nombre')}>Nombre *</label>
                   <input
+                    id={fid('nombre')}
                     className={`gift-form__input${errors.nombre ? ' gift-form__input--error' : ''}`}
                     placeholder="María"
                     value={form.nombre}
@@ -107,8 +110,9 @@ export default function LeadFormSection() {
                   {errors.nombre && <span className="gift-form__error">{errors.nombre}</span>}
                 </div>
                 <div className="gift-form__field">
-                  <label className="gift-form__label">Apellido *</label>
+                  <label className="gift-form__label" htmlFor={fid('apellido')}>Apellido *</label>
                   <input
+                    id={fid('apellido')}
                     className={`gift-form__input${errors.apellido ? ' gift-form__input--error' : ''}`}
                     placeholder="García"
                     value={form.apellido}
@@ -119,8 +123,9 @@ export default function LeadFormSection() {
               </div>
 
               <div className="gift-form__field">
-                <label className="gift-form__label">Email *</label>
+                <label className="gift-form__label" htmlFor={fid('email')}>Email *</label>
                 <input
+                  id={fid('email')}
                   type="email"
                   className={`gift-form__input${errors.email ? ' gift-form__input--error' : ''}`}
                   placeholder="maria@tuempresa.com"
@@ -132,8 +137,9 @@ export default function LeadFormSection() {
 
               <div className="gift-form__row">
                 <div className="gift-form__field">
-                  <label className="gift-form__label">¿A qué te dedicas? *</label>
+                  <label className="gift-form__label" htmlFor={fid('dedicacion')}>¿A qué te dedicas? *</label>
                   <select
+                    id={fid('dedicacion')}
                     className={`gift-form__select${errors.dedicacion ? ' gift-form__input--error' : ''}`}
                     value={form.dedicacion}
                     onChange={(e) => update('dedicacion', e.target.value)}
@@ -147,8 +153,9 @@ export default function LeadFormSection() {
                   {errors.dedicacion && <span className="gift-form__error">{errors.dedicacion}</span>}
                 </div>
                 <div className="gift-form__field">
-                  <label className="gift-form__label">Nivel con la IA *</label>
+                  <label className="gift-form__label" htmlFor={fid('nivel_ia')}>Nivel con la IA *</label>
                   <select
+                    id={fid('nivel_ia')}
                     className={`gift-form__select${errors.nivel_ia ? ' gift-form__input--error' : ''}`}
                     value={form.nivel_ia}
                     onChange={(e) => update('nivel_ia', e.target.value)}
@@ -164,8 +171,9 @@ export default function LeadFormSection() {
               </div>
 
               <div className="gift-form__field">
-                <label className="gift-form__label">¿Qué quieres automatizar? <span className="gift-form__optional">(nos ayuda a personalizar el recurso)</span></label>
+                <label className="gift-form__label" htmlFor={fid('reto')}>¿Qué quieres automatizar? <span className="gift-form__optional">(nos ayuda a personalizar el recurso)</span></label>
                 <textarea
+                  id={fid('reto')}
                   className="gift-form__textarea"
                   placeholder="Ej: gestión de citas, emails de seguimiento, facturación…"
                   rows={2}
@@ -175,8 +183,9 @@ export default function LeadFormSection() {
               </div>
 
               <div className="gift-form__field">
-                <label className="gift-form__label">¿Cómo nos conociste? <span className="gift-form__optional">(opcional)</span></label>
+                <label className="gift-form__label" htmlFor={fid('como_conocido')}>¿Cómo nos conociste? <span className="gift-form__optional">(opcional)</span></label>
                 <select
+                  id={fid('como_conocido')}
                   className="gift-form__select"
                   value={form.como_conocido}
                   onChange={(e) => update('como_conocido', e.target.value)}

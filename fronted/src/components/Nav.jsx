@@ -33,7 +33,7 @@ export default function Nav({ onScrollTo }) {
         {/* Desktop links */}
         <div className="nl">
           {LINKS.map(l => (
-            <a key={l.id} onClick={() => go(l.id)}>
+            <a key={l.id} href={`#${l.id}`} onClick={(e) => { e.preventDefault(); go(l.id) }}>
               <span className="nav-label-wrap">
                 {l.label}
                 {l.badge && <span className={l.badgeCls}>{l.badge}</span>}
@@ -59,7 +59,7 @@ export default function Nav({ onScrollTo }) {
       <div className={`mob-menu${open ? ' mob-menu--open' : ''}`} aria-hidden={!open}>
         <nav className="mob-menu__nav">
           {LINKS.map(l => (
-            <a key={l.id} className="mob-menu__link" onClick={() => go(l.id)}>
+            <a key={l.id} className="mob-menu__link" href={`#${l.id}`} onClick={(e) => { e.preventDefault(); go(l.id) }}>
               <span className="nav-label-wrap">
                 {l.label}
                 {l.badge && <span className={l.badgeCls}>{l.badge}</span>}
