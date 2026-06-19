@@ -718,12 +718,12 @@ footer               { background: var(--bg-secondary); border-top: 1px solid va
 .contact-ismabot__cta:hover { background: #D97706; transform: translateY(-1px); }
 
 /* ─── SERVICES HERO ──────────────────────────────────────────── */
-.svcs-hero          { padding: 60px 48px 44px; position: relative; overflow: hidden; border-bottom: 1px solid var(--border-light); background: #EDE9FE; text-align: center; }
-.svcs-hero::before  { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(124,58,237,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(124,58,237,.06) 1px, transparent 1px); background-size: 40px 40px; }
+.svcs-hero          { padding: 60px 48px 44px; position: relative; overflow: hidden; border-bottom: 1.5px solid #FCD34D; background: linear-gradient(135deg, #FFFBEB, #FEF3C7); text-align: center; }
+.svcs-hero::before  { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(217,119,6,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(217,119,6,.06) 1px, transparent 1px); background-size: 40px 40px; }
 .svcs-hero h1       { font-family: var(--font-heading); font-size: 38px; font-weight: 900; letter-spacing: -1.2px; margin-bottom: 14px; position: relative; color: var(--text-1); }
-.svcs-hero h1 em    { font-style: normal; background: linear-gradient(135deg, #7C3AED, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-.svcs-hero p        { font-size: 15px; color: var(--text-3); max-width: 560px; line-height: 1.8; position: relative; margin: 0 auto; }
-.svc-note           { display: inline-flex; align-items: center; gap: 7px; background: rgba(124,58,237,.1); border: 1px solid var(--brand-border); padding: 5px 14px; border-radius: 100px; font-size: 12px; color: #a78bfa; margin-bottom: 18px; position: relative; font-weight: 600; }
+.svcs-hero h1 em    { font-style: normal; background: linear-gradient(135deg, #D97706, #F59E0B); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.svcs-hero p        { font-size: 15px; color: #78350F; max-width: 560px; line-height: 1.8; position: relative; margin: 0 auto; }
+.svc-note           { display: inline-flex; align-items: center; gap: 7px; background: rgba(217,119,6,.1); border: 1px solid #FCD34D; padding: 5px 14px; border-radius: 100px; font-size: 12px; color: #D97706; margin-bottom: 18px; position: relative; font-weight: 600; }
 .section--services  { padding: 32px 48px 60px; border-top: none; }
 
 /* ─── OLD SERVICE CARDS (HomePage widgets) ───────────────────── */
