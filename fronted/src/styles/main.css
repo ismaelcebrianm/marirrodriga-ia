@@ -213,8 +213,8 @@ nav {
 .hero h1 em  { font-style: normal; background: linear-gradient(135deg, #7C3AED, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 .hero .sub   { font-size: 16px; color: var(--text-3); max-width: 480px; line-height: 1.8; position: relative; margin-bottom: 34px; }
 .hbtns       { display: flex; gap: 12px; position: relative; flex-wrap: wrap; }
-.hb1         { background: #F59E0B; color: #1C1917; padding: 13px 28px; border-radius: var(--radius-md); font-size: 15px; font-weight: 700; border: none; cursor: pointer; transition: var(--transition); box-shadow: 0 4px 20px rgba(245,158,11,.4); font-family: var(--font-body); }
-.hb1:hover   { background: #D97706; color: #fff; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(245,158,11,.5); }
+.hb1         { background: linear-gradient(135deg, #FFFBEB, #FEF3C7); color: #92400E; padding: 13px 28px; border-radius: var(--radius-md); font-size: 15px; font-weight: 700; border: 1.5px solid #FCD34D; cursor: pointer; transition: var(--transition); box-shadow: 0 4px 20px rgba(217,119,6,.2); font-family: var(--font-body); }
+.hb1:hover   { background: #FEF3C7; border-color: #F59E0B; color: #78350F; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(217,119,6,.3); }
 .hb2         { background: var(--bg-card); color: var(--text-2); padding: 13px 26px; border-radius: var(--radius-md); font-size: 15px; border: 1px solid var(--border); cursor: pointer; transition: var(--transition); font-family: var(--font-body); }
 .hb2:hover   { border-color: var(--brand-border2); background: var(--bg-card-hover); }
 .hero-prehook {
