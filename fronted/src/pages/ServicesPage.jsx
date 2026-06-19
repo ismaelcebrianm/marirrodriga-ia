@@ -474,28 +474,107 @@ function GiantContactCard() {
   )
 }
 
-/* ─── FILTERS ────────────────────────────────────────────────── */
+/* ─── QUICK NAV ──────────────────────────────────────────────── */
 
-const FILTERS = ['Todos', 'Atención al cliente', 'Gestión interna', 'Captar clientes', 'Presencia digital']
+const NAV_ITEMS = [
+  { id: 1, label: 'Chat & Voz' },
+  { id: 2, label: 'Facturas' },
+  { id: 3, label: 'Documentos' },
+  { id: 4, label: 'Leads' },
+  { id: 5, label: 'Web' },
+  { id: 6, label: 'Blog & RRSS' },
+]
 
-const SERVICE_CATEGORY = {
-  1: 'Atención al cliente',
-  2: 'Gestión interna',
-  3: 'Gestión interna',
-  4: 'Captar clientes',
-  5: 'Presencia digital',
-  6: 'Captar clientes',
+function TallerNav({ onGo }) {
+  return (
+    <nav className="taller-nav">
+      <span className="taller-nav__label">Ir a:</span>
+      {NAV_ITEMS.map(({ id, label }) => (
+        <button key={id} className="taller-nav-btn" onClick={() => onGo(id)}>
+          <span className="taller-nav-num">{id}</span>
+          {label}
+        </button>
+      ))}
+    </nav>
+  )
+}
+
+/* ─── DEMO GRÁFICOS: WEB & RRSS ──────────────────────────────── */
+
+function WebPreviewDemo() {
+  return (
+    <div className="demo-preview demo-preview--web">
+      <p className="demo-preview__tag">Ejemplo real</p>
+      <div className="wp-browser">
+        <div className="wp-browser__bar">
+          <span /><span /><span />
+          <div className="wp-browser__url">marirrodriga.ia</div>
+        </div>
+        <div className="wp-browser__body">
+          <div className="wp-hero-strip" />
+          <div className="wp-grid">
+            <div className="wp-block" />
+            <div className="wp-block wp-block--tall" />
+            <div className="wp-block" />
+            <div className="wp-block wp-block--wide" />
+          </div>
+        </div>
+      </div>
+      <div className="demo-preview__stack">
+        <span>React</span><span>Vite</span><span>Supabase</span><span>n8n</span>
+      </div>
+      <p className="demo-preview__note">Esta misma web fue construida por nosotros en &lt;14 días.</p>
+    </div>
+  )
+}
+
+function RrssPreviewDemo() {
+  return (
+    <div className="demo-preview demo-preview--rrss">
+      <p className="demo-preview__tag">Publicado automáticamente · hace 3h</p>
+      <div className="rrss-post-card">
+        <div className="rrss-post-header">
+          <div className="rrss-avatar">M</div>
+          <div className="rrss-post-header-text">
+            <div className="rrss-author">Marirrodriga.IA</div>
+            <div className="rrss-platform">LinkedIn · Automatizado con IA</div>
+          </div>
+          <div className="rrss-platform-badge">in</div>
+        </div>
+        <p className="rrss-post-body">
+          La IA no está aquí para reemplazar tu negocio.<br />
+          Está aquí para que dejes de hacer lo que odias — y puedas centrarte en lo que solo tú puedes hacer.<br /><br />
+          <span className="rrss-hashtags">#AutomatizaciónIA #PYMEs #n8n</span>
+        </p>
+        <div className="rrss-post-footer">
+          <span>👍 <strong>41</strong></span>
+          <span>💬 9 comentarios</span>
+          <span>↗ 12 reposts</span>
+        </div>
+      </div>
+      <div className="rrss-channels">
+        <div className="rrss-ch"><Globe size={11} /> Blog</div>
+        <div className="rrss-ch"><Send size={11} /> LinkedIn</div>
+        <div className="rrss-ch"><Mail size={11} /> Newsletter</div>
+      </div>
+    </div>
+  )
 }
 
 /* ─── MAIN PAGE ──────────────────────────────────────────────── */
 
 export default function ServicesPage({ onNavigate }) {
   const [openCard, setOpenCard] = useState(null)
-  const [filter,   setFilter]   = useState('Todos')
 
   function toggle(id) { setOpenCard(prev => prev === id ? null : id) }
 
-  function changeFilter(f) { setFilter(f); setOpenCard(null) }
+  function goToService(id) {
+    setOpenCard(id)
+    setTimeout(() => {
+      const el = document.getElementById(`service-${id}`)
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }, 60)
+  }
 
   const services = [
     {
@@ -545,8 +624,8 @@ export default function ServicesPage({ onNavigate }) {
       desc: 'Páginas web modernas, rápidas y conectadas a tus automatizaciones. Sin plantillas genéricas. Esta misma web fue creada por mi hermano y por mí en menos de 14 días.',
       illustration: <IllustrationS5 />,
       expansionIndex: 4,
-      demoLabel: null,
-      demoContent: null,
+      demoLabel: 'Portfolio — ejemplo real en producción',
+      demoContent: <WebPreviewDemo />,
     },
     {
       id: 6,
@@ -555,8 +634,8 @@ export default function ServicesPage({ onNavigate }) {
       desc: 'Publica contenido de calidad en tu blog, redes y newsletter sin tocar nada. La IA selecciona, redacta y publica en tu nombre, todos los días.',
       illustration: <IllustrationS6 />,
       expansionIndex: 5,
-      demoLabel: null,
-      demoContent: null,
+      demoLabel: 'Publicación generada por IA — ejemplo real',
+      demoContent: <RrssPreviewDemo />,
     },
   ]
 
@@ -572,29 +651,17 @@ export default function ServicesPage({ onNavigate }) {
         <div className="container">
           <div className="section-title-wrapper">
             <h2 className="section-title">Herramientas del Taller</h2>
-            <p className="section-desc">Elige una herramienta, despliégala y explora cómo puede encajar en tu negocio. Sin registro, sin compromiso.</p>
+            <p className="section-desc">Despliega cualquier servicio y pruébalo en tiempo real. Sin registro, sin compromiso.</p>
           </div>
 
-          <div className="blog-filters blog-filters--left">
-            {FILTERS.map(f => (
-              <button
-                key={f}
-                className={`blog-filter-btn${filter === f ? ' active' : ''}`}
-                onClick={() => changeFilter(f)}
-              >
-                {f}
-              </button>
-            ))}
-          </div>
+          <TallerNav onGo={goToService} />
 
           <IsmabotCard />
 
           <div className="services-grid">
-            {services
-              .filter(s => filter === 'Todos' || SERVICE_CATEGORY[s.id] === filter)
-              .map(s => (
-                <ServiceCard key={s.id} open={openCard === s.id} onToggle={toggle} onNavigate={onNavigate} {...s} />
-              ))}
+            {services.map(s => (
+              <ServiceCard key={s.id} open={openCard === s.id} onToggle={toggle} onNavigate={onNavigate} {...s} />
+            ))}
           </div>
         </div>
       </main>
