@@ -529,33 +529,27 @@ function WebPreviewDemo({ onNavigate }) {
   )
 }
 
-function RrssPreviewDemo({ onNavigate }) {
+function RrssPreviewDemo() {
+  function goToNoticias() {
+    const el = document.getElementById('reto-diario')
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+
   return (
     <div className="demo-preview demo-preview--rrss">
-      <p className="demo-preview__tag">Publicado automáticamente · hace 3h</p>
-      <div className="rrss-post-card">
-        <div className="rrss-post-header">
-          <div className="rrss-avatar">M</div>
-          <div className="rrss-post-header-text">
-            <div className="rrss-author">Marirrodriga.IA</div>
-            <div className="rrss-platform">LinkedIn · Automatizado con IA</div>
-          </div>
-          <div className="rrss-platform-badge">in</div>
-        </div>
-        <p className="rrss-post-body">
-          La IA no está aquí para reemplazar tu negocio.<br />
-          Está aquí para que dejes de hacer lo que odias — y puedas centrarte en lo que solo tú puedes hacer.<br /><br />
-          <span className="rrss-hashtags">#AutomatizaciónIA #PYMEs #n8n</span>
-        </p>
-        <div className="rrss-post-footer">
-          <span>👍 <strong>41</strong></span>
-          <span>💬 9 comentarios</span>
-          <span>↗ 12 reposts</span>
+      <div className="rrss-preview-img-wrap" onClick={goToNoticias} title="Ver Actualidad IA">
+        <img
+          src="/noticias-preview.png"
+          alt="Sección Actualidad IA — noticias generadas automáticamente"
+          className="rrss-preview-img"
+        />
+        <div className="rrss-preview-img__overlay">
+          <div className="rrss-preview-img__badge">🤖 Gestionado 100% con IA</div>
+          <p className="rrss-preview-img__claim">
+            Noticias de última hora seleccionadas, redactadas e ilustradas por IA. Se publican solas en tu blog, LinkedIn, Instagram, X y newsletter. Sin tocar nada.
+          </p>
         </div>
       </div>
-      <p className="demo-preview__note">
-        Noticias de última hora seleccionadas por IA, redactadas con imagen editorial generada automáticamente y publicadas solas — en tu blog, LinkedIn, Instagram, X y newsletter. Sin tocar nada. Adaptable a cualquier sector o red social.
-      </p>
       <div className="rrss-channels">
         <div className="rrss-ch"><Globe size={11} /> Blog</div>
         <div className="rrss-ch"><Send size={11} /> LinkedIn</div>
@@ -563,8 +557,8 @@ function RrssPreviewDemo({ onNavigate }) {
         <div className="rrss-ch">✕ X / Twitter</div>
         <div className="rrss-ch">📸 Instagram</div>
       </div>
-      <button className="demo-preview__live-btn" onClick={() => onNavigate && onNavigate('reto-diario')}>
-        Ver las noticias en vivo →
+      <button className="demo-preview__live-btn" onClick={goToNoticias}>
+        Ver Actualidad IA en vivo →
       </button>
     </div>
   )
@@ -644,7 +638,7 @@ export default function ServicesPage({ onNavigate }) {
       illustration: <IllustrationS6 />,
       expansionIndex: 5,
       demoLabel: 'Publicación generada por IA — ejemplo real',
-      demoContent: <RrssPreviewDemo onNavigate={onNavigate} />,
+      demoContent: <RrssPreviewDemo />,
     },
   ]
 
