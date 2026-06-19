@@ -21,11 +21,16 @@ const ISMABOT_FEATURES = [
 ]
 
 const CHAT_MSGS = [
-  { from: 'bot',  text: 'Hola 👋 Soy ISMABOT. Antes de recomendarte nada, necesito entender bien cómo trabajas. ¿A qué te dedicas y qué procesos repites más a lo largo de tu semana?' },
-  { from: 'user', text: 'Tengo una clínica de fisioterapia, somos 3 fisios. La agenda, las facturas y los recordatorios los llevamos todo a mano.' },
-  { from: 'bot',  text: 'Perfecto. Para darte un plan realmente útil necesito escucharte con detalle. Mándame un audio contándome cómo gestionáis las citas desde que llama un paciente hasta que paga — sin filtros, como si me lo explicaras a un amigo.' },
+  { from: 'bot',  text: 'Hola 👋 Soy ISMABOT. ¿A qué te dedicas?' },
+  { from: 'user', text: 'Clínica de fisioterapia. Somos 3 fisios.' },
+  { from: 'bot',  text: '¿Qué procesos lleváis todavía a mano?' },
+  { from: 'user', text: 'Agenda, facturas y recordatorios.' },
+  { from: 'bot',  text: 'Para darte un plan útil de verdad, necesito escucharte.' },
+  { from: 'bot',  text: 'Mándame un audio de cómo va el flujo desde que llama un paciente hasta que paga.' },
   { from: 'user', text: '🎤 Audio · 1:24', audio: true },
-  { from: 'bot',  text: 'Ah, esos son los cuellos de botella clásicos de un negocio como el tuyo. Te propongo que durante unos días hagas un esfuerzo activo por pensar, mientras trabajas, en si hay más cosas que automatizarías. Si ya tienes claro lo que necesitas — dime y agendamos una asesoría con el boss: Ismael 🤝' },
+  { from: 'bot',  text: 'Esos son los cuellos de botella clásicos 👌' },
+  { from: 'bot',  text: 'Pásate unos días fijándote en qué más automatizarías mientras trabajas.' },
+  { from: 'bot',  text: 'Cuando lo tengas claro — agendamos con el boss: Ismael 🤝' },
 ]
 
 function IsmabotChatPreview() {
@@ -37,15 +42,24 @@ function IsmabotChatPreview() {
     const ts = []
     const add = (fn, ms) => ts.push(setTimeout(fn, ms))
 
-    add(() => setTyping(true),                                    400)
-    add(() => { setTyping(false); setShown([0]) },               1900)
-    add(() => setShown(m => [...m, 1]),                          2800)
-    add(() => setTyping(true),                                   3300)
-    add(() => { setTyping(false); setShown(m => [...m, 2]) },   4700)
-    add(() => setShown(m => [...m, 3]),                          5600)  // audio
-    add(() => setTyping(true),                                   6200)  // "procesando audio"
-    add(() => { setTyping(false); setShown(m => [...m, 4]) },   8400)  // respuesta larga
-    add(() => setCta(true),                                      9200)
+    add(() => setTyping(true),                                    300)
+    add(() => { setTyping(false); setShown([0]) },               1100)  // bot: "Hola..."
+    add(() => setShown(m => [...m, 1]),                          1800)  // user: "Clínica..."
+    add(() => setTyping(true),                                   2100)
+    add(() => { setTyping(false); setShown(m => [...m, 2]) },   2900)  // bot: "¿Qué procesos..."
+    add(() => setShown(m => [...m, 3]),                          3600)  // user: "Agenda..."
+    add(() => setTyping(true),                                   3900)
+    add(() => { setTyping(false); setShown(m => [...m, 4]) },   4600)  // bot: "Para darte..."
+    add(() => setTyping(true),                                   4900)
+    add(() => { setTyping(false); setShown(m => [...m, 5]) },   5600)  // bot: "Mándame un audio..."
+    add(() => setShown(m => [...m, 6]),                          6400)  // user: audio
+    add(() => setTyping(true),                                   6900)
+    add(() => { setTyping(false); setShown(m => [...m, 7]) },   8100)  // bot: "Esos son..." (pausa larga)
+    add(() => setTyping(true),                                   8400)
+    add(() => { setTyping(false); setShown(m => [...m, 8]) },   9100)  // bot: "Pásate..."
+    add(() => setTyping(true),                                   9400)
+    add(() => { setTyping(false); setShown(m => [...m, 9]) },  10100)  // bot: "Cuando lo tengas..."
+    add(() => setCta(true),                                    10800)
 
     return () => ts.forEach(clearTimeout)
   }, [])
