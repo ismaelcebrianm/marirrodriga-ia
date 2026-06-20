@@ -108,8 +108,9 @@ export default function ContactPage() {
           <form className="contact-form" onSubmit={submit} noValidate>
             <div className="contact-form__row">
               <div className="contact-form__field">
-                <label className="contact-form__label">Nombre *</label>
+                <label className="contact-form__label" htmlFor="contact-nombre">Nombre *</label>
                 <input
+                  id="contact-nombre"
                   className="contact-form__input"
                   placeholder="Tu nombre"
                   value={form.nombre}
@@ -118,8 +119,9 @@ export default function ContactPage() {
                 />
               </div>
               <div className="contact-form__field">
-                <label className="contact-form__label">Email *</label>
+                <label className="contact-form__label" htmlFor="contact-email">Email *</label>
                 <input
+                  id="contact-email"
                   type="email"
                   className="contact-form__input"
                   placeholder="tu@email.com"
@@ -130,8 +132,9 @@ export default function ContactPage() {
               </div>
             </div>
             <div className="contact-form__field">
-              <label className="contact-form__label">¿Qué quieres automatizar? <span className="label-optional">(opcional)</span></label>
+              <label className="contact-form__label" htmlFor="contact-mensaje">¿Qué quieres automatizar? <span className="label-optional">(opcional)</span></label>
               <textarea
+                id="contact-mensaje"
                 className="contact-form__textarea"
                 rows={3}
                 placeholder="Ej: Quiero automatizar la gestión de citas de mi clínica..."

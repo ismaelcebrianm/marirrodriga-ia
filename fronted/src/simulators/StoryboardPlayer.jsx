@@ -1,6 +1,14 @@
 import { useState, useEffect, useRef } from 'react'
 import { PlayCircle, Pause, Play } from 'lucide-react'
 
+function renderScript(text) {
+  return text.split(/(<strong>.*?<\/strong>)/g).map((part, i) =>
+    part.startsWith('<strong>')
+      ? <strong key={i}>{part.replace(/<\/?strong>/g, '')}</strong>
+      : part
+  )
+}
+
 export default function StoryboardPlayer({ videoTitle, duration = 15, slides, scriptFooter }) {
   const [playing, setPlaying]   = useState(false)
   const [progress, setProgress] = useState(0)
@@ -54,7 +62,7 @@ export default function StoryboardPlayer({ videoTitle, duration = 15, slides, sc
               {slides.map((slide, i) => (
                 <div key={i} className={`storyboard-slide${i === currentSlide ? ' active' : ''}`}>
                   <span className="slide-scene">{slide.scene}</span>
-                  <p className="slide-script" dangerouslySetInnerHTML={{ __html: slide.script }} />
+                  <p className="slide-script">{renderScript(slide.script)}</p>
                 </div>
               ))}
             </div>

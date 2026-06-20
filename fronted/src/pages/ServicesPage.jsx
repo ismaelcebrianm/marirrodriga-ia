@@ -622,6 +622,7 @@ function RrssPreviewDemo() {
           src="/noticias-preview.png"
           alt="Sección Actualidad IA — noticias generadas automáticamente"
           className="rrss-preview-img"
+          loading="lazy"
         />
         <div className="rrss-preview-img__overlay">
           <div className="rrss-preview-img__badge">🤖 Gestionado 100% con IA</div>
