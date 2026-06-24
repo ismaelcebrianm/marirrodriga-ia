@@ -304,16 +304,16 @@ nav {
 .hero-sidenav__item:hover .hero-sidenav__num {
   opacity: .8;
 }
-.hero-sidenav__item--taller {
+.hero-sidenav__item--negocio {
   background: #FFFBEB; border-color: #FCD34D;
 }
-.hero-sidenav__item--taller:hover {
+.hero-sidenav__item--negocio:hover {
   background: #FEF3C7; border-color: #F59E0B;
   box-shadow: 0 4px 16px rgba(217,119,6,.15);
 }
-.hero-sidenav__item--taller .hero-sidenav__num { color: #D97706; }
-.hero-sidenav__item--taller .hero-sidenav__arrow { color: #D97706; }
-.hero-sidenav__item--taller:hover .hero-sidenav__arrow { color: #92400E; }
+.hero-sidenav__item--negocio .hero-sidenav__num { color: #D97706; }
+.hero-sidenav__item--negocio .hero-sidenav__arrow { color: #D97706; }
+.hero-sidenav__item--negocio:hover .hero-sidenav__arrow { color: #92400E; }
 
 @media (max-width: 768px) {
   .hero-inner          { grid-template-columns: 1fr; }

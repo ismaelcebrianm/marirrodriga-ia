@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import CursorEffect from './components/CursorEffect'
 import Nav          from './components/Nav'
 import Footer       from './components/Footer'
@@ -8,6 +8,10 @@ import ServicesPage from './pages/ServicesPage'
 import RetoSection   from './pages/RetoSection'
 import ContactPage  from './pages/ContactPage'
 import BlogPage     from './pages/BlogPage'
+import NegocioPage  from './pages/NegocioPage'
+import DentalPage   from './pages/DentalPage'
+
+const HASH_PAGES = ['dental', 'blog']
 
 const POPUP_CONFIG = {
   chatbot: { icon: '🤖', gift: '🎁 Demo configurada gratis',   title: '¿Quieres este chatbot para tu empresa?', desc: 'Lo configuramos con tu información real. Listo en 48h.',                          cta: 'Quiero el chatbot →' },
@@ -19,15 +23,26 @@ const POPUP_CONFIG = {
 
 export default function App() {
   const [popup, setPopup]   = useState(null)
-  const [page, setPage]     = useState('home')
+  const [page, setPage]     = useState(() => {
+    const hash = window.location.hash.slice(1)
+    return HASH_PAGES.includes(hash) ? hash : 'home'
+  })
   const interacted          = useRef({})
 
+  useEffect(() => {
+    const hash = window.location.hash.slice(1)
+    if (HASH_PAGES.includes(hash) && hash !== page) setPage(hash)
+  }, [])
+
   function scrollTo(id) {
-    if (page !== 'home') { setPage('home'); setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }), 100) }
+    if (page !== 'home') { navigate('home'); setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }), 100) }
     else document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
   }
 
   function navigate(p) {
+    if (p === 'contacto-scroll') { navigate('home'); setTimeout(() => document.getElementById('contacto')?.scrollIntoView({ behavior: 'smooth' }), 100); return }
+    if (HASH_PAGES.includes(p)) { window.location.hash = p }
+    else { window.location.hash = '' }
     setPage(p)
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
@@ -49,6 +64,8 @@ export default function App() {
 
       {page === 'blog' ? (
         <BlogPage onNavigateHome={() => navigate('home')} />
+      ) : page === 'dental' ? (
+        <DentalPage onBack={() => { window.location.hash = ''; setPage('home'); setTimeout(() => document.getElementById('negocio')?.scrollIntoView({ behavior: 'smooth' }), 100) }} />
       ) : (
         <>
           {/* ── INICIO ─────────────────────────────────────── */}
@@ -56,8 +73,13 @@ export default function App() {
             <HomePage onScrollTo={scrollTo} />
           </section>
 
-          {/* ── EL TALLER ──────────────────────────────────── */}
-          <section id="taller">
+          {/* ── PARA TU NEGOCIO ────────────────────────────── */}
+          <section id="negocio">
+            <NegocioPage onNavigate={navigate} onScrollTo={scrollTo} />
+          </section>
+
+          {/* ── AGENTES INDIVIDUALES ───────────────────────── */}
+          <section id="agentes">
             <ServicesPage triggerPopup={triggerPopup} onNavigate={navigate} />
           </section>
 
@@ -71,7 +93,7 @@ export default function App() {
         </>
       )}
 
-      <Footer onScrollTo={scrollTo} />
+      <Footer onScrollTo={scrollTo} onNavigate={navigate} />
 
       {popup && (
         <Popup

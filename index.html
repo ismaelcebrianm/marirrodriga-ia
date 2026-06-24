@@ -38,7 +38,7 @@
     <div class="nl">
       <a class="on" id="nh" onclick="sp('home')">Inicio</a>
       <a id="ns" onclick="sp('svcs')">Servicios</a>
-      <a href="#contacto">Blog</a>
+      <a id="nn" onclick="sp('negocio')">Para tu negocio</a>
       <a href="#contacto">Contacto</a>
     </div>
     <button class="nb" onclick="sp('svcs')">Ver servicios →</button>
@@ -313,6 +313,51 @@
     </div>
   </div>
 
+  <!-- PARA TU NEGOCIO -->
+  <div id="page-negocio" class="page">
+    <div class="svcs-hero">
+      <div class="svc-note"><div class="bdot"></div>Soluciones verticales · IA adaptada a cada sector</div>
+      <h1>IA diseñada para <em>tu tipo de negocio</em></h1>
+      <p>No todas las empresas tienen los mismos problemas. Aquí encontrarás sistemas a medida, pensados para cómo funciona realmente tu sector — con precios claros y resultados medibles.</p>
+    </div>
+
+    <section class="section--services" style="border-top:none;">
+      <div style="display:flex;gap:8px;margin-bottom:28px;flex-wrap:wrap;">
+        <button class="soc-tab on" style="cursor:default;pointer-events:none;">🦷 Clínica Dental</button>
+        <button class="soc-tab" style="opacity:.45;cursor:default;pointer-events:none;">💆 Estética · Próximamente</button>
+        <button class="soc-tab" style="opacity:.45;cursor:default;pointer-events:none;">🏋️ Deporte · Próximamente</button>
+      </div>
+
+      <div style="max-width:480px;">
+        <a href="dental.html" class="sc" style="display:block;text-decoration:none;padding:0;cursor:pointer;">
+          <div class="sch">
+            <div class="sci" style="font-size:22px;">🦷</div>
+            <div class="scinfo">
+              <h3>Clínica Dental</h3>
+              <p>Chatbot de citas y presupuestos, recordatorios anti no-show, reactivación de pacientes e informes mensuales. 24/7, sin cambiar tu software de gestión.</p>
+            </div>
+          </div>
+          <div style="padding:14px 18px 10px;display:flex;gap:8px;flex-wrap:wrap;">
+            <span style="font-size:11px;background:#f5f3ff;border:1px solid #ede9fe;color:#7c6eec;padding:3px 10px;border-radius:100px;font-weight:600;">Chatbot citas</span>
+            <span style="font-size:11px;background:#f5f3ff;border:1px solid #ede9fe;color:#7c6eec;padding:3px 10px;border-radius:100px;font-weight:600;">Cierre de presupuestos</span>
+            <span style="font-size:11px;background:#f5f3ff;border:1px solid #ede9fe;color:#7c6eec;padding:3px 10px;border-radius:100px;font-weight:600;">Reactivación pacientes</span>
+          </div>
+          <div style="padding:0 18px 18px;display:flex;align-items:center;justify-content:space-between;">
+            <div style="font-size:13px;color:#374151;font-weight:700;">Desde 200€/mes</div>
+            <div style="font-size:13px;color:#7c6eec;font-weight:700;">Ver oferta completa →</div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <div class="ctasec">
+      <h2>¿Tu sector no está aquí <em>todavía</em>?</h2>
+      <p>Trabajamos con nuevos sectores por orden de demanda. Si quieres que lo añadamos, cuéntanoslo.</p>
+      <button class="ctabig" onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'})">Proponer mi sector</button>
+      <div class="ctasub">Sin compromiso · Primera consulta gratuita</div>
+    </div>
+  </div>
+
   <!-- FOOTER -->
   <footer>
     <div class="footer-logo">
@@ -374,6 +419,7 @@
       document.getElementById('page-' + p).classList.add('active');
       document.getElementById('nh').classList.toggle('on', p === 'home');
       document.getElementById('ns').classList.toggle('on', p === 'svcs');
+      document.getElementById('nn').classList.toggle('on', p === 'negocio');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 

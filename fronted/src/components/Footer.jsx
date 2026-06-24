@@ -1,6 +1,6 @@
 import LogoIcon from './LogoIcon'
 
-export default function Footer({ onScrollTo }) {
+export default function Footer({ onScrollTo, onNavigate }) {
   return (
     <footer>
       <div className="footer-logo">
@@ -12,7 +12,8 @@ export default function Footer({ onScrollTo }) {
       </div>
       <div className="footer-links">
         <a onClick={() => onScrollTo('inicio')}>Inicio</a>
-        <a onClick={() => onScrollTo('taller')}>El Taller</a>
+        <a onClick={() => onScrollTo('negocio')}>Para tu negocio</a>
+        <a onClick={() => onScrollTo('agentes')}>Agentes individuales</a>
         <a onClick={() => onScrollTo('reto-diario')}>Actualidad IA</a>
         <a onClick={() => onScrollTo('contacto')}>Contacto</a>
       </div>

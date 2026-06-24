@@ -4,18 +4,18 @@ import { Bot, Zap, MessageSquare, ArrowRight } from 'lucide-react'
 const IA_CONCEPTS = [
   {
     icon: Bot,
-    title: '¿Qué es un agente de IA?',
-    body: 'Una IA que no solo responde, sino que actúa. Puede reservar citas, clasificar correos o generar facturas. Tú decides qué acciones ocurren solas y cuáles requieren tu visto bueno antes de ejecutarse.',
+    title: 'SaaS por sector',
+    body: 'Un paquete completo de automatización diseñado para tu tipo de negocio. Citas, presupuestos, recordatorios e informes — configurado en 48h y funcionando solo desde el primer mes.',
   },
   {
     icon: Zap,
-    title: '¿Qué significa automatizar?',
-    body: 'Convertir una tarea repetitiva en un proceso que ocurre solo. Una vez configurado, funciona 24/7 sin coste adicional por cada ejecución.',
+    title: 'Agentes individuales',
+    body: '¿Ya tienes tu software y solo quieres añadir una función concreta? Elige el agente que necesitas del catálogo — sin cambiar lo que ya tienes, sin permanencia.',
   },
   {
     icon: MessageSquare,
-    title: '¿En qué se diferencia del bot de antes?',
-    body: 'El bot antiguo seguía un guion fijo. Los agentes actuales entienden contexto, toman decisiones y se conectan a tus herramientas reales.',
+    title: 'Sin código, sin técnicos',
+    body: 'Nos encargamos de todo: configuración, integración y mantenimiento. Tú decides qué automatizar, nosotros lo montamos y lo mantenemos funcionando.',
   },
 ]
 
@@ -56,50 +56,49 @@ export default function HomePage({ onScrollTo }) {
           {/* IZQUIERDA: copy */}
           <div className="hero-copy">
             <p className="hero-prehook">
-              Ya te han dicho que debes implementar IA en tu negocio.
+              Automatización con IA para negocios que quieren crecer.
             </p>
-            <h1>Aquí puedes<br />comprobarlo <em>tú mismo.</em></h1>
+            <h1>Tu negocio,<br />trabajando <em>solo.</em></h1>
             <p className="sub">
-              Sin vendedores, sin precios, sin promesas vacías. Solo herramientas reales
-              funcionando en tu navegador — para que veas con tus propios ojos qué puede
-              hacer la IA por tu empresa.
+              Paquetes de IA completos para tu sector o agentes individuales para una tarea
+              concreta. Setup en 48h, sin permanencia y con resultados medibles desde el primer mes.
             </p>
             <div className="hbtns">
-              <button className="hb1" onClick={() => onScrollTo('taller')}>Entrar al Taller →</button>
+              <button className="hb1" onClick={() => onScrollTo('negocio')}>Ver soluciones por sector →</button>
               <button className="hb2" onClick={() => onScrollTo('contacto')}>Hablar con nosotros</button>
             </div>
             <div className="hero-trust">
-              <span>Sin registro</span>
+              <span>Garantía de resultados</span>
               <span className="hero-trust__sep" />
-              <span>Sin hablar de dinero</span>
+              <span>Sin permanencia</span>
               <span className="hero-trust__sep" />
-              <span>Sin compromiso</span>
+              <span>Resultados medibles desde el mes 1</span>
             </div>
           </div>
 
           {/* DERECHA: menú de secciones */}
           <nav className="hero-sidenav" aria-label="Secciones de la página">
-            <button className="hero-sidenav__item hero-sidenav__item--taller" onClick={() => onScrollTo('taller')}>
+            <button className="hero-sidenav__item hero-sidenav__item--negocio" onClick={() => onScrollTo('negocio')}>
               <span className="hero-sidenav__num">01</span>
               <div className="hero-sidenav__text">
-                <span className="hero-sidenav__title">El Taller</span>
-                <span className="hero-sidenav__desc">Simuladores de IA en tiempo real + ISMABOT, tu guía personalizada</span>
+                <span className="hero-sidenav__title">Para tu negocio</span>
+                <span className="hero-sidenav__desc">Soluciones IA pensadas para tu sector — con precios claros y resultados medibles</span>
+              </div>
+              <ArrowRight size={14} className="hero-sidenav__arrow" />
+            </button>
+            <button className="hero-sidenav__item" onClick={() => onScrollTo('agentes')}>
+              <span className="hero-sidenav__num">02</span>
+              <div className="hero-sidenav__text">
+                <span className="hero-sidenav__title">Agentes individuales</span>
+                <span className="hero-sidenav__desc">Automatización a la carta — elige la herramienta que necesitas, sin cambiar lo que ya tienes</span>
               </div>
               <ArrowRight size={14} className="hero-sidenav__arrow" />
             </button>
             <button className="hero-sidenav__item" onClick={() => onScrollTo('reto-diario')}>
-              <span className="hero-sidenav__num">02</span>
+              <span className="hero-sidenav__num">03</span>
               <div className="hero-sidenav__text">
                 <span className="hero-sidenav__title">Actualidad IA</span>
                 <span className="hero-sidenav__desc">Noticias de IA aplicadas a tu negocio, actualizadas cada día</span>
-              </div>
-              <ArrowRight size={14} className="hero-sidenav__arrow" />
-            </button>
-            <button className="hero-sidenav__item" onClick={() => onScrollTo('contacto')}>
-              <span className="hero-sidenav__num">03</span>
-              <div className="hero-sidenav__text">
-                <span className="hero-sidenav__title">Contacto</span>
-                <span className="hero-sidenav__desc">Cuéntanos tu caso, te respondemos hoy mismo</span>
               </div>
               <ArrowRight size={14} className="hero-sidenav__arrow" />
             </button>
@@ -112,11 +111,11 @@ export default function HomePage({ onScrollTo }) {
 
         {/* Cabecera */}
         <div className="antes-header">
-          <div className="slbl">Antes de entrar</div>
-          <h2 className="antes-header__title">Todo lo que necesitas saber<br />en tres minutos.</h2>
+          <div className="slbl">Cómo funciona</div>
+          <h2 className="antes-header__title">Dos formas de trabajar<br />con nosotros.</h2>
           <p className="antes-header__sub">
-            Sin tecnicismos, sin jerga de Silicon Valley. Empieza aquí y llega al Taller
-            sabiendo exactamente qué esperar.
+            Un paquete completo para tu sector o un agente individual para una tarea concreta.
+            Tú eliges el nivel de implicación.
           </p>
         </div>
 
@@ -145,26 +144,27 @@ export default function HomePage({ onScrollTo }) {
           </div>
         </div>
 
-        {/* Qué es El Taller */}
+        {/* Dos formas de trabajar */}
         <div className="antes-taller">
           <div className="antes-taller__copy">
-            <div className="slbl">El Taller</div>
-            <h3 className="antes-taller__title">Un espacio para probar,<br />no para comprar.</h3>
+            <div className="slbl">¿Cuál es tu caso?</div>
+            <h3 className="antes-taller__title">¿SaaS completo o<br />agente individual?</h3>
             <p className="antes-taller__body">
-              El Taller es la parte de esta web donde puedes interactuar con agentes de IA
-              reales en tiempo real. Sin registros, sin vendedores, sin presión.
-              Pon a trabajar un agente de voz, genera una factura en segundos o filtra
-              quién quiere comprar de verdad entre tus contactos.
+              Si tienes un negocio con un sector definido — clínica dental, centro deportivo, autoescuela —
+              el paquete de tu sector cubre todo desde el primer día: citas, presupuestos, recordatorios e informes.
+              Si ya tienes tu propio software y solo quieres añadir una función concreta,
+              elige un agente individual del catálogo sin compromisos ni permanencia.
             </p>
-            <button className="hb1" onClick={() => onScrollTo('taller')}>
-              Entrar al Taller →
-            </button>
+            <div style={{ display: 'flex', gap: 10, marginTop: 20, flexWrap: 'wrap' }}>
+              <button className="hb1" onClick={() => onScrollTo('negocio')}>Ver soluciones por sector →</button>
+              <button className="hb2" onClick={() => onScrollTo('agentes')}>Ver agentes individuales</button>
+            </div>
           </div>
           <div className="antes-taller__pills">
-            <div className="taller-pill"><span className="taller-pill__dot" />Prueba sin registrarte</div>
-            <div className="taller-pill"><span className="taller-pill__dot" />Simuladores en tiempo real</div>
-            <div className="taller-pill"><span className="taller-pill__dot" />Explicación paso a paso</div>
-            <div className="taller-pill"><span className="taller-pill__dot" />Tú decides qué explorar</div>
+            <div className="taller-pill"><span className="taller-pill__dot" />Setup en 48h</div>
+            <div className="taller-pill"><span className="taller-pill__dot" />Sin permanencia</div>
+            <div className="taller-pill"><span className="taller-pill__dot" />Resultados medibles desde el mes 1</div>
+            <div className="taller-pill"><span className="taller-pill__dot" />Garantía de funcionamiento incluida</div>
           </div>
         </div>
 

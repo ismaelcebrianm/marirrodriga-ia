@@ -1,17 +1,17 @@
 import { useState, useEffect } from 'react'
 import LogoIcon from './LogoIcon'
 
-const LINKS = [
+const SCROLL_LINKS = [
   { id: 'inicio',      label: 'Inicio' },
-  { id: 'taller',      label: 'El Taller',    badge: '★', badgeCls: 'nav-star__badge' },
+  { id: 'negocio',     label: 'Para tu negocio' },
+  { id: 'agentes',     label: 'Agentes individuales' },
   { id: 'reto-diario', label: 'Actualidad IA', badge: 'Nuevo', badgeCls: 'nav-reto__badge' },
   { id: 'contacto',    label: 'Contacto' },
 ]
 
-export default function Nav({ onScrollTo }) {
+export default function Nav({ onScrollTo, onNavigate, currentPage }) {
   const [open, setOpen] = useState(false)
 
-  // Bloquea scroll del body cuando el menú está abierto
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
@@ -32,8 +32,13 @@ export default function Nav({ onScrollTo }) {
 
         {/* Desktop links */}
         <div className="nl">
-          {LINKS.map(l => (
-            <a key={l.id} href={`#${l.id}`} onClick={(e) => { e.preventDefault(); go(l.id) }}>
+          {SCROLL_LINKS.map(l => (
+            <a
+              key={l.id}
+              href={`#${l.id}`}
+              className={l.id === 'negocio' && currentPage === 'dental' ? 'on' : ''}
+              onClick={(e) => { e.preventDefault(); go(l.id) }}
+            >
               <span className="nav-label-wrap">
                 {l.label}
                 {l.badge && <span className={l.badgeCls}>{l.badge}</span>}
@@ -43,7 +48,7 @@ export default function Nav({ onScrollTo }) {
         </div>
 
         {/* Desktop CTA */}
-        <button className="nb" onClick={() => go('taller')}>Entrar al Taller →</button>
+        <button className="nb" onClick={() => go('negocio')}>Para tu negocio →</button>
 
         {/* Hamburger button — solo móvil */}
         <button
@@ -58,7 +63,7 @@ export default function Nav({ onScrollTo }) {
       {/* Mobile overlay menu */}
       <div className={`mob-menu${open ? ' mob-menu--open' : ''}`} aria-hidden={!open}>
         <nav className="mob-menu__nav">
-          {LINKS.map(l => (
+          {SCROLL_LINKS.map(l => (
             <a key={l.id} className="mob-menu__link" href={`#${l.id}`} onClick={(e) => { e.preventDefault(); go(l.id) }}>
               <span className="nav-label-wrap">
                 {l.label}
@@ -66,8 +71,8 @@ export default function Nav({ onScrollTo }) {
               </span>
             </a>
           ))}
-          <button className="mob-menu__cta" onClick={() => go('taller')}>
-            Entrar al Taller →
+          <button className="mob-menu__cta" onClick={() => go('negocio')}>
+            Para tu negocio →
           </button>
         </nav>
       </div>

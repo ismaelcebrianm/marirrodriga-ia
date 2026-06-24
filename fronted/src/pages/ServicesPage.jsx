@@ -391,33 +391,101 @@ const EXPANSIONS = [
       label: 'Un comercial tarda semanas en localizar, investigar y cualificar 50 leads. Un agente lo hace en minutos cruzando múltiples fuentes de datos: LinkedIn, Google Maps, noticias de empresa, registros mercantiles. Tu equipo solo habla con quien ya está listo para comprar.',
     }
   },
+  // 4 — Recordatorios de cita
   {
-    title: 'Qué incluye',
-    core: 'Diseño web personalizado desde cero',
+    core: 'Aviso automático 48h y 24h antes de cada cita',
     steps: [
-      { icon: '📱', label: 'Responsive: perfecta en móvil, tablet y escritorio' },
-      { icon: '⚡', label: 'Velocidad optimizada — Core Web Vitals en verde' },
-      { icon: '🔍', label: 'SEO técnico y semántico incluido desde el día 1' },
-      { icon: '🤖', label: 'Conectada a tus automatizaciones n8n (chatbot, leads, blog...)' },
-      { icon: '🛠️', label: 'Mantenimiento y actualizaciones incluidas' },
+      { icon: '✅', label: 'El cliente confirma o cancela con un toque — sin llamar' },
+      { icon: '🔄', label: 'Si cancela, el hueco se libera y se ofrece a la lista de espera' },
+      { icon: '📧', label: 'Canal configurable: WhatsApp, email o ambos' },
+      { icon: '📊', label: 'Log de confirmaciones en tiempo real' },
+      { icon: '🧾', label: 'Se integra con tu calendario sin cambiar nada' },
     ],
-    proof: [
-      { label: 'Ver esta misma web (hecha por nosotros)', href: '/' }
-    ]
+    savings: { label: 'Un no-show en consulta, clínica o peluquería cuesta entre 30€ y 150€ de media. Con recordatorios automáticos la tasa baja entre el 50% y el 75% desde el primer mes.' }
   },
+  // 5 — Reseñas Google
   {
-    title: 'Cómo funciona',
-    core: 'IA selecciona noticias relevantes de tu sector',
+    core: 'Solicitud de reseña enviada justo después del servicio',
     steps: [
-      { icon: '✍️', label: 'Redacta artículos completos adaptados a tu audiencia' },
-      { icon: '🎨', label: 'Genera imagen editorial única por artículo con IA' },
-      { icon: '🌐', label: 'Publica en tu blog automáticamente' },
-      { icon: '📲', label: 'Adapta el contenido para LinkedIn, Instagram y Twitter/X' },
-      { icon: '📩', label: 'Newsletter semanal a tus suscriptores sin tocar nada' },
+      { icon: '🎯', label: 'Personalizado con el nombre del cliente y el servicio recibido' },
+      { icon: '🔗', label: 'Enlace directo a tu perfil de Google Business' },
+      { icon: '⏱️', label: 'Timing optimizado: se envía cuando el cliente está más satisfecho' },
+      { icon: '📈', label: 'Más reseñas = más visibilidad en Google Maps y buscador' },
+      { icon: '🔔', label: 'Alerta si llega una reseña negativa para responder rápido' },
     ],
-    proof: [
-      { label: 'Ver el blog de IA (publicación automática)', onClick: (nav) => nav && nav('blog') },
-    ]
+    savings: { label: 'Una estrella más en Google puede suponer hasta un 9% de aumento en ingresos. El 88% de los consumidores confía en reseñas igual que en recomendaciones personales. Este agente las consigue en automático.' }
+  },
+  // 6 — Resumen diario
+  {
+    core: 'Informe diario a las 18:00 en Telegram o email',
+    steps: [
+      { icon: '📅', label: 'Citas del día: completadas, canceladas y pendientes' },
+      { icon: '💬', label: 'Mensajes y consultas recibidos — con los urgentes marcados' },
+      { icon: '💶', label: 'Facturación estimada del día' },
+      { icon: '🔔', label: 'Alertas: presupuestos sin responder, clientes inactivos' },
+      { icon: '📆', label: 'Resumen semanal automático los viernes' },
+    ],
+    savings: { label: 'Saber qué ha pasado en tu negocio sin abrir 5 apps. Un informe consolidado cada tarde para cerrar el día con toda la información relevante en 30 segundos.' }
+  },
+  // 7 — Seguimiento de presupuestos
+  {
+    core: 'Seguimiento automático a los 3, 7 y 14 días',
+    steps: [
+      { icon: '📧', label: 'Primer recordatorio útil: "¿tienes alguna duda sobre el presupuesto?"' },
+      { icon: '💬', label: 'Segundo aviso con respuestas a las objeciones más frecuentes' },
+      { icon: '🔔', label: 'Alerta al comercial si el cliente abre el email pero no responde' },
+      { icon: '❌', label: 'Se detiene automáticamente si el cliente acepta o rechaza' },
+      { icon: '📊', label: 'Tasa de cierre y motivos de rechazo en informe mensual' },
+    ],
+    savings: { label: 'El 80% de las ventas requieren 5 contactos. El 44% de los comerciales se rinden tras el primero. Este agente hace el seguimiento que nadie quiere hacer — de forma sistemática y sin molestar.' }
+  },
+  // 8 — Reactivación de inactivos
+  {
+    core: 'Detecta clientes sin actividad y los contacta solo',
+    steps: [
+      { icon: '🔍', label: 'Umbral configurable: 30, 60 o 90 días sin actividad' },
+      { icon: '✍️', label: 'Mensaje personalizado con el historial del cliente' },
+      { icon: '🎁', label: 'Opción de incluir oferta o descuento de reactivación' },
+      { icon: '📅', label: 'Si responde con interés, agenda cita sin intervención' },
+      { icon: '📊', label: 'Informe de recuperaciones conseguidas cada mes' },
+    ],
+    savings: { label: 'Recuperar un cliente inactivo cuesta 5 veces menos que captar uno nuevo. La mayoría de negocios tienen cientos de clientes que simplemente "se olvidaron". Este agente los recupera en automático.' }
+  },
+  // 9 — Agente de voz
+  {
+    core: 'Atiende llamadas entrantes y gestiona la agenda 24/7',
+    steps: [
+      { icon: '📞', label: 'Consulta disponibilidad real y reserva cita en el momento' },
+      { icon: '🔄', label: 'Modifica o cancela citas con lenguaje natural' },
+      { icon: '❓', label: 'Responde preguntas frecuentes: precios, ubicación, servicios' },
+      { icon: '👤', label: 'Escala a persona real si la consulta es compleja' },
+      { icon: '📋', label: 'Resumen de cada llamada enviado por email al instante' },
+    ],
+    savings: { label: 'Una llamada perdida fuera de horario es un cliente que va a la competencia. Con un agente de voz, ninguna llamada queda sin responder — ni a las 10 de la noche ni en festivos.' }
+  },
+  // 10 — Pipeline outbound
+  {
+    core: 'Del prospecto frío al contacto cualificado, solo',
+    steps: [
+      { icon: '🔍', label: 'Localiza prospectos en Google Maps, LinkedIn o tu base de datos' },
+      { icon: '✉️', label: 'Primer contacto personalizado por email o LinkedIn' },
+      { icon: '🔁', label: 'Seguimiento automático si no responde en 48h y 7 días' },
+      { icon: '🎯', label: 'Solo alerta al comercial cuando hay respuesta o interés real' },
+      { icon: '📊', label: 'KPIs de apertura, respuesta y conversión en tiempo real' },
+    ],
+    savings: { label: 'Un comercial puede gestionar 30-40 contactos en frío por semana. Un pipeline automatizado gestiona 500. Sin cambiar a tu equipo, multiplicando el alcance.' }
+  },
+  // 11 — WhatsApp automático
+  {
+    core: 'Tu WhatsApp responde solo, a cualquier hora',
+    steps: [
+      { icon: '💬', label: 'Preguntas frecuentes, precios y disponibilidad respondidas al instante' },
+      { icon: '📅', label: 'Gestiona reservas directamente desde el chat' },
+      { icon: '🔔', label: 'Te avisa si hay una consulta que no sabe resolver' },
+      { icon: '🧠', label: 'Aprende de tu negocio: menú, servicios, horarios, tarifas' },
+      { icon: '📊', label: 'Log de conversaciones y consultas más frecuentes' },
+    ],
+    savings: { label: 'El 67% de los clientes prefiere WhatsApp antes de llamar. Si tardas más de 5 minutos en responder, el 50% busca otra opción. Este agente responde en segundos, sin que tú estés pendiente.' }
   },
 ]
 
@@ -553,12 +621,18 @@ function GiantContactCard() {
 /* ─── QUICK NAV ──────────────────────────────────────────────── */
 
 const NAV_ITEMS = [
-  { id: 1, label: 'Chat & Voz' },
-  { id: 2, label: 'Facturas' },
-  { id: 3, label: 'Documentos' },
-  { id: 4, label: 'Leads' },
-  { id: 5, label: 'Web' },
-  { id: 6, label: 'Blog & RRSS' },
+  { id: 1,  label: 'Chat & Voz' },
+  { id: 2,  label: 'Facturas' },
+  { id: 3,  label: 'Documentos' },
+  { id: 4,  label: 'Leads' },
+  { id: 5,  label: 'Recordatorios' },
+  { id: 6,  label: 'Reseñas' },
+  { id: 7,  label: 'Resumen diario' },
+  { id: 8,  label: 'Presupuestos' },
+  { id: 9,  label: 'Reactivación' },
+  { id: 10, label: 'Agente de voz' },
+  { id: 11, label: 'Outbound' },
+  { id: 12, label: 'WhatsApp' },
 ]
 
 function TallerNav({ onGo }) {
@@ -576,6 +650,22 @@ function TallerNav({ onGo }) {
         ISMABOT
       </button>
     </nav>
+  )
+}
+
+function AgentIllus({ emoji, accent = '#7C3AED' }) {
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
+      <div style={{
+        width: 84, height: 84, borderRadius: 22,
+        background: `radial-gradient(circle at 35% 35%, ${accent}28, ${accent}0a)`,
+        border: `1.5px solid ${accent}40`,
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        fontSize: 42, boxShadow: `0 0 28px ${accent}20`,
+      }}>
+        {emoji}
+      </div>
+    </div>
   )
 }
 
@@ -708,39 +798,91 @@ export default function ServicesPage({ onNavigate }) {
     },
     {
       id: 5,
-      badge: 'Presencia digital',
-      title: '5. Creación de Páginas Web',
-      desc: 'Páginas web modernas, rápidas y conectadas a tus automatizaciones. Sin plantillas genéricas. Esta misma web fue creada por mi hermano y por mí en menos de 14 días.',
-      illustration: <IllustrationS5 />,
+      badge: 'Anti no-show',
+      title: '5. Recordatorios Automáticos de Cita',
+      desc: 'Avisa a tus clientes 48h y 24h antes de su cita. Ellos confirman o cancelan con un toque — sin llamar. Si cancelan, el hueco se reasigna a la lista de espera automáticamente.',
+      illustration: <AgentIllus emoji="🔔" accent="#F59E0B" />,
       expansionIndex: 4,
-      demoLabel: 'Portfolio — ejemplo real en producción',
-      demoContent: <WebPreviewDemo onNavigate={onNavigate} />,
+      demoContent: null,
     },
     {
       id: 6,
-      badge: 'Contenido automatizado',
-      title: '6. Blog, Newsletter y RRSS en Automático',
-      desc: 'Publica contenido de calidad en tu blog, redes y newsletter sin tocar nada. La IA selecciona, redacta y publica en tu nombre, todos los días.',
-      illustration: <IllustrationS6 />,
+      badge: 'Reputación',
+      title: '6. Reseñas en Google en Automático',
+      desc: 'Tras cada servicio, el agente envía un mensaje personalizado con enlace directo a tu perfil de Google. Sin pedir nada — simplemente en el momento en que el cliente está más satisfecho.',
+      illustration: <AgentIllus emoji="⭐" accent="#EAB308" />,
       expansionIndex: 5,
-      demoLabel: 'Publicación generada por IA — ejemplo real',
-      demoContent: <RrssPreviewDemo />,
+      demoContent: null,
+    },
+    {
+      id: 7,
+      badge: 'Control total',
+      title: '7. Resumen Diario del Negocio',
+      desc: 'Cada tarde a las 18:00 recibes en Telegram o email un informe completo: citas, consultas, facturación estimada y alertas urgentes. Los viernes también el resumen semanal.',
+      illustration: <AgentIllus emoji="📊" accent="#6366F1" />,
+      expansionIndex: 6,
+      demoContent: null,
+    },
+    {
+      id: 8,
+      badge: 'Ventas',
+      title: '8. Seguimiento Automático de Presupuestos',
+      desc: 'El agente contacta a los 3, 7 y 14 días de enviar un presupuesto con mensajes útiles — no spam. Se detiene solo cuando el cliente acepta o rechaza.',
+      illustration: <AgentIllus emoji="📋" accent="#10B981" />,
+      expansionIndex: 7,
+      demoContent: null,
+    },
+    {
+      id: 9,
+      badge: 'Retención',
+      title: '9. Reactivación de Clientes Inactivos',
+      desc: 'Detecta clientes sin actividad en 30, 60 o 90 días y les envía un mensaje con su historial. Si responden con interés, agenda la cita directamente — sin que tú hagas nada.',
+      illustration: <AgentIllus emoji="🔄" accent="#EC4899" />,
+      expansionIndex: 8,
+      demoContent: null,
+    },
+    {
+      id: 10,
+      badge: 'Atención 24/7',
+      title: '10. Agente de Voz para Citas',
+      desc: 'Atiende llamadas entrantes, consulta tu agenda en tiempo real y gestiona reservas con lenguaje natural. Ninguna llamada queda sin responder — ni a las 10 de la noche ni en festivos.',
+      illustration: <AgentIllus emoji="📞" accent="#8B5CF6" />,
+      expansionIndex: 9,
+      demoContent: null,
+    },
+    {
+      id: 11,
+      badge: 'Captación',
+      title: '11. Pipeline de Captación Outbound',
+      desc: 'Del prospecto frío al contacto cualificado, solo. El agente localiza, contacta y hace seguimiento. Tu comercial solo actúa cuando hay interés real de compra.',
+      illustration: <AgentIllus emoji="🎯" accent="#EF4444" />,
+      expansionIndex: 10,
+      demoContent: null,
+    },
+    {
+      id: 12,
+      badge: 'WhatsApp',
+      title: '12. Respuesta Automática por WhatsApp',
+      desc: 'Tu WhatsApp responde solo: preguntas frecuentes, precios, disponibilidad y reservas — al instante, a cualquier hora. Te avisa si hay algo que no sabe gestionar.',
+      illustration: <AgentIllus emoji="💬" accent="#22C55E" />,
+      expansionIndex: 11,
+      demoContent: null,
     },
   ]
 
   return (
     <>
       <div className="svcs-hero">
-        <div className="svc-note"><div className="bdot" />Demos interactivas · Sin registro · Sin instalaciones</div>
-        <h1>El Taller de <em>automatización.</em></h1>
-        <p>Elige una herramienta, interactúa con el simulador en tiempo real y comprueba tú mismo cuánto tiempo recuperarías en tu negocio.</p>
+        <div className="svc-note"><div className="bdot" />Agentes individuales · A la carta · Sin permanencia</div>
+        <h1>Automatización <em>a la carta.</em></h1>
+        <p>¿Contento con tu software pero buscas una funcionalidad concreta? Elige el agente que necesitas, pruébalo en tiempo real y actívalo sin cambiar nada de lo que ya tienes.</p>
       </div>
 
       <main className="catalog-section">
         <div className="container">
           <div className="section-title-wrapper">
-            <h2 className="section-title">Herramientas del Taller</h2>
-            <p className="section-desc">Despliega cualquier servicio y pruébalo en tiempo real. Sin registro, sin compromiso.</p>
+            <h2 className="section-title">Catálogo de agentes</h2>
+            <p className="section-desc">Despliega cualquier agente y pruébalo en tiempo real. Sin registro, sin compromiso.</p>
           </div>
 
           <TallerNav onGo={goToService} />
