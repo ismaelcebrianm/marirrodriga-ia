@@ -220,9 +220,9 @@ function CitasOfferCard({ onNavigate }) {
       </div>
 
       <div style={{ marginTop: 24, paddingTop: 20, borderTop: '1px solid rgba(255,255,255,.08)' }}>
-        <div style={{ fontSize: 11, color: 'rgba(255,255,255,.38)', marginBottom: 6 }}>Plan único</div>
-        <div style={{ fontSize: 22, fontWeight: 800, color: '#fff', fontFamily: "Georgia, serif", marginBottom: 2 }}>150€<span style={{ fontSize: 13, fontWeight: 400, color: 'rgba(255,255,255,.4)' }}>/mes</span></div>
-        <div style={{ fontSize: 11, color: 'rgba(255,255,255,.3)', marginBottom: 18 }}>+ 400€ puesta en marcha</div>
+        <div style={{ fontSize: 11, color: 'rgba(255,255,255,.38)', marginBottom: 6 }}>2 planes disponibles</div>
+        <div style={{ fontSize: 22, fontWeight: 800, color: '#fff', fontFamily: "Georgia, serif", marginBottom: 2 }}>desde 150€<span style={{ fontSize: 13, fontWeight: 400, color: 'rgba(255,255,255,.4)' }}>/mes</span></div>
+        <div style={{ fontSize: 11, color: 'rgba(255,255,255,.3)', marginBottom: 18 }}>+ setup pago único</div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: 13, fontWeight: 700, color: hov ? '#C8A052' : 'rgba(255,255,255,.75)', transition: 'color .2s' }}>
           Ver la oferta completa
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
