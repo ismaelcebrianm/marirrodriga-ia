@@ -169,51 +169,63 @@ function SectorRequestForm() {
   )
 }
 
-function CitasOfferBanner({ onNavigate }) {
+function CitasOfferCard({ onNavigate }) {
   const [hov, setHov] = useState(false)
   return (
-    <div style={{ maxWidth: 1100, margin: '40px auto 0', padding: '0 24px' }}>
-      <div
-        role="button"
-        tabIndex={0}
-        onClick={() => onNavigate('reservas')}
-        onKeyDown={e => e.key === 'Enter' && onNavigate('reservas')}
-        onMouseEnter={() => setHov(true)}
-        onMouseLeave={() => setHov(false)}
-        style={{
-          background: '#1A1A2E',
-          borderRadius: 18,
-          border: `1.5px solid ${hov ? '#C8A052' : 'rgba(200,160,82,.4)'}`,
-          padding: '32px 40px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          flexWrap: 'wrap',
-          gap: 28,
-          cursor: 'pointer',
-          transition: 'border-color .2s, box-shadow .2s',
-          boxShadow: hov ? '0 8px 40px rgba(200,160,82,.18)' : '0 4px 20px rgba(26,26,46,.18)',
-        }}
-      >
-        <div style={{ flex: 1, minWidth: 280 }}>
-          <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#C8A052', marginBottom: 10 }}>
-            Para negocios con citas
+    <div
+      role="button"
+      tabIndex={0}
+      onClick={() => onNavigate('reservas')}
+      onKeyDown={e => e.key === 'Enter' && onNavigate('reservas')}
+      onMouseEnter={() => setHov(true)}
+      onMouseLeave={() => setHov(false)}
+      style={{
+        width: 252,
+        flexShrink: 0,
+        background: '#1A1A2E',
+        borderRadius: 16,
+        border: `1.5px solid ${hov ? '#C8A052' : 'rgba(200,160,82,.35)'}`,
+        padding: '26px 22px',
+        display: 'flex',
+        flexDirection: 'column',
+        cursor: 'pointer',
+        transition: 'border-color .2s, box-shadow .2s',
+        boxShadow: hov ? '0 8px 40px rgba(200,160,82,.2)' : '0 4px 20px rgba(26,26,46,.2)',
+      }}
+    >
+      <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#C8A052', marginBottom: 14 }}>
+        Para negocios con citas
+      </div>
+      <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: 17, fontWeight: 900, color: '#fff', margin: '0 0 14px', lineHeight: 1.25, letterSpacing: '-0.3px' }}>
+        ¿Solo buscas automatizar tu agenda?
+      </h3>
+      <p style={{ fontSize: 13, color: 'rgba(255,255,255,.52)', lineHeight: 1.7, margin: '0 0 20px' }}>
+        Tu propio sistema de reservas por WhatsApp — sin Booksy, sin Fresha, sin comisiones.
+      </p>
+
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 'auto' }}>
+        {[
+          'Reservas 24/7 por WhatsApp',
+          'Recordatorios con confirmación',
+          'Reseñas Google automáticas',
+          'Reactivación de inactivos',
+        ].map(feat => (
+          <div key={feat} style={{ display: 'flex', alignItems: 'flex-start', gap: 8 }}>
+            <svg width="14" height="14" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0, marginTop: 2 }}>
+              <path d="M5 10.5L8.5 14L15 7" stroke="#C8A052" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            <span style={{ fontSize: 12.5, color: 'rgba(255,255,255,.65)', lineHeight: 1.45 }}>{feat}</span>
           </div>
-          <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(18px, 2.2vw, 23px)', fontWeight: 900, color: '#fff', margin: '0 0 10px', lineHeight: 1.2, letterSpacing: '-0.5px' }}>
-            ¿Pagas cada mes a Booksy, Fresha o Treatwell?
-          </h3>
-          <p style={{ fontSize: 14, color: 'rgba(255,255,255,.55)', lineHeight: 1.7, margin: 0, maxWidth: 480 }}>
-            Te montamos tu propio sistema de reservas por WhatsApp — sin comisiones, sin que tus clientes estén registrados en casa de otro y sin pagar por funciones que no usas.
-          </p>
-        </div>
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 12, flexShrink: 0 }}>
-          <div style={{ background: 'rgba(200,160,82,.15)', border: '1px solid rgba(200,160,82,.4)', borderRadius: 10, padding: '8px 18px', fontSize: 13, fontWeight: 700, color: '#C8A052', letterSpacing: '.02em' }}>
-            Desde 150€/mes
-          </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 14, fontWeight: 700, color: '#fff' }}>
-            Ver la oferta completa
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C8A052" strokeWidth="2.5" strokeLinecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </div>
+        ))}
+      </div>
+
+      <div style={{ marginTop: 24, paddingTop: 20, borderTop: '1px solid rgba(255,255,255,.08)' }}>
+        <div style={{ fontSize: 11, color: 'rgba(255,255,255,.38)', marginBottom: 6 }}>Plan único</div>
+        <div style={{ fontSize: 22, fontWeight: 800, color: '#fff', fontFamily: "Georgia, serif", marginBottom: 2 }}>150€<span style={{ fontSize: 13, fontWeight: 400, color: 'rgba(255,255,255,.4)' }}>/mes</span></div>
+        <div style={{ fontSize: 11, color: 'rgba(255,255,255,.3)', marginBottom: 18 }}>+ 400€ puesta en marcha</div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: 13, fontWeight: 700, color: hov ? '#C8A052' : 'rgba(255,255,255,.75)', transition: 'color .2s' }}>
+          Ver la oferta completa
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </div>
       </div>
     </div>
@@ -230,58 +242,60 @@ export default function NegocioPage({ onNavigate, onScrollTo }) {
         <p>No todas las empresas tienen los mismos problemas. Aquí encontrarás sistemas pensados para cómo funciona realmente tu sector — con precios claros y resultados medibles.</p>
       </div>
 
-      {/* ── CARDS ────────────────────────────────────────── */}
-      <div className="section--services" style={{ maxWidth: 1100, margin: '0 auto' }}>
-        <div className="blog-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>
-          {SECTORS.map(s => (
-            <div
-              key={s.id}
-              className="blog-card"
-              style={{ opacity: s.available ? 1 : 0.55, cursor: s.available ? 'pointer' : 'default', position: 'relative' }}
-              onClick={() => s.available && onNavigate(s.id)}
-              role={s.available ? 'button' : undefined}
-              tabIndex={s.available ? 0 : undefined}
-              onKeyDown={s.available ? (e) => e.key === 'Enter' && onNavigate(s.id) : undefined}
-            >
-              {/* Cover */}
-              <div className="blog-card__img" style={s.coverPhoto ? {} : { background: s.coverBg, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 10 }}>
-                {s.coverPhoto
-                  ? <img src={s.coverPhoto} alt={s.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                  : <span style={{ fontSize: 60, lineHeight: 1 }}>{s.emoji}</span>
-                }
-                {!s.available && (
-                  <span style={{ position: 'absolute', top: 10, right: 10, display: 'inline-flex', alignItems: 'center', gap: 5, background: 'rgba(0,0,0,.55)', borderRadius: 20, padding: '4px 12px', fontSize: 11, fontWeight: 700, color: '#fff', letterSpacing: '.04em' }}>
-                    <Clock size={10} /> Próximamente
-                  </span>
-                )}
-              </div>
-
-              {/* Body */}
-              <div className="blog-card__body">
-                <span className="blog-tag">{s.name}</span>
-                <h3 className="blog-card__title">{s.tagline}</h3>
-                <p className="blog-card__summary">{s.desc}</p>
-                <div className="blog-card__footer">
-                  <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-1)' }}>
-                    {s.price
-                      ? s.price
-                      : <span style={{ color: 'var(--text-4)', fontWeight: 400, fontSize: 11 }}>Disponible próximamente</span>
+      {/* ── CARDS + CITAS CARD ───────────────────────────── */}
+      <div className="section--services" style={{ maxWidth: 1200, margin: '0 auto' }}>
+        <div style={{ display: 'flex', gap: 24, alignItems: 'flex-start', flexWrap: 'wrap' }}>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div className="blog-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>
+              {SECTORS.map(s => (
+                <div
+                  key={s.id}
+                  className="blog-card"
+                  style={{ opacity: s.available ? 1 : 0.55, cursor: s.available ? 'pointer' : 'default', position: 'relative' }}
+                  onClick={() => s.available && onNavigate(s.id)}
+                  role={s.available ? 'button' : undefined}
+                  tabIndex={s.available ? 0 : undefined}
+                  onKeyDown={s.available ? (e) => e.key === 'Enter' && onNavigate(s.id) : undefined}
+                >
+                  {/* Cover */}
+                  <div className="blog-card__img" style={s.coverPhoto ? {} : { background: s.coverBg, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 10 }}>
+                    {s.coverPhoto
+                      ? <img src={s.coverPhoto} alt={s.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      : <span style={{ fontSize: 60, lineHeight: 1 }}>{s.emoji}</span>
                     }
-                  </span>
-                  {s.available && (
-                    <span className="blog-card__read-more" style={{ display: 'flex', alignItems: 'center', gap: 3 }}>
-                      Ver oferta <ArrowRight size={11} />
-                    </span>
-                  )}
+                    {!s.available && (
+                      <span style={{ position: 'absolute', top: 10, right: 10, display: 'inline-flex', alignItems: 'center', gap: 5, background: 'rgba(0,0,0,.55)', borderRadius: 20, padding: '4px 12px', fontSize: 11, fontWeight: 700, color: '#fff', letterSpacing: '.04em' }}>
+                        <Clock size={10} /> Próximamente
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Body */}
+                  <div className="blog-card__body">
+                    <span className="blog-tag">{s.name}</span>
+                    <h3 className="blog-card__title">{s.tagline}</h3>
+                    <p className="blog-card__summary">{s.desc}</p>
+                    <div className="blog-card__footer">
+                      <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-1)' }}>
+                        {s.price
+                          ? s.price
+                          : <span style={{ color: 'var(--text-4)', fontWeight: 400, fontSize: 11 }}>Ver oferta</span>
+                        }
+                      </span>
+                      {s.available && (
+                        <span className="blog-card__read-more" style={{ display: 'flex', alignItems: 'center', gap: 3 }}>
+                          Ver oferta <ArrowRight size={11} />
+                        </span>
+                      )}
+                    </div>
+                  </div>
                 </div>
-              </div>
+              ))}
             </div>
-          ))}
+          </div>
+          <CitasOfferCard onNavigate={onNavigate} />
         </div>
       </div>
-
-      {/* ── BANNER RESERVAS ──────────────────────────────── */}
-      <CitasOfferBanner onNavigate={onNavigate} />
 
       {/* ── SECTOR REQUEST FORM ──────────────────────────── */}
       <SectorRequestForm />
