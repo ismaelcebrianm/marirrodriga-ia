@@ -82,7 +82,7 @@ export default function HomePage({ onScrollTo }) {
               <span className="hero-sidenav__num">01</span>
               <div className="hero-sidenav__text">
                 <span className="hero-sidenav__title">Para tu negocio</span>
-                <span className="hero-sidenav__desc">Soluciones IA pensadas para tu sector — con precios claros y resultados medibles</span>
+                <span className="hero-sidenav__desc">Más funciones que tu software actual y, en la mayoría de casos, más barato — hecho para tu sector</span>
               </div>
               <ArrowRight size={14} className="hero-sidenav__arrow" />
             </button>
