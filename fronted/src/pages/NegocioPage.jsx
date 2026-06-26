@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { ArrowRight, Clock, Send, CheckCircle } from 'lucide-react'
+import { ArrowRight, Clock, Send, CheckCircle, Star } from 'lucide-react'
 
 // Reemplazar por la URL del webhook n8n cuando esté creado el workflow
 const SECTOR_WEBHOOK = ''
@@ -225,6 +225,26 @@ const SECTORS = [
   },
 ]
 
+const FILTER_SECTORS = [
+  { id: 'dental',      label: 'Clínica Dental',   emoji: '🦷' },
+  { id: 'estetica',    label: 'Estética',          emoji: '💆' },
+  { id: 'deporte',     label: 'Centro Deportivo',  emoji: '🏋️' },
+  { id: 'autoescuela', label: 'Autoescuela',       emoji: '🚗' },
+]
+
+const CITAS_CARD = {
+  id: 'reservas',
+  emoji: '📅',
+  name: 'Solo Citas',
+  tagline: '¿Solo buscas automatizar tu agenda?',
+  desc: 'Tu propio sistema de reservas por WhatsApp — sin Booksy, sin Fresha, sin comisiones. Desde 150€/mes.',
+  price: 'Desde 150€/mes',
+  coverBg: 'linear-gradient(135deg, #1A1A2E 0%, #2D2D4E 100%)',
+  coverIllus: null,
+  coverPhoto: null,
+  available: true,
+}
+
 const S = {
   bg:      'var(--bg-secondary)',
   border:  'var(--border-light)',
@@ -385,6 +405,76 @@ function CitasOfferCard({ onNavigate }) {
 }
 
 export default function NegocioPage({ onNavigate, onScrollTo }) {
+  const [filter, setFilter] = useState(null)
+
+  const filteredCards = filter ? [
+    SECTORS.find(s => s.id === filter),
+    SECTORS.find(s => s.id === 'rrss'),
+    SECTORS.find(s => s.id === 'web'),
+    CITAS_CARD,
+  ] : null
+
+  function renderCard(s, recommended = false) {
+    const CoverIllus = s.coverIllus
+    return (
+      <div
+        key={s.id}
+        className="blog-card"
+        style={{ opacity: s.available ? 1 : 0.55, cursor: s.available ? 'pointer' : 'default', position: 'relative' }}
+        onClick={() => s.available && onNavigate(s.id)}
+        role={s.available ? 'button' : undefined}
+        tabIndex={s.available ? 0 : undefined}
+        onKeyDown={s.available ? e => e.key === 'Enter' && onNavigate(s.id) : undefined}
+      >
+        <div className="blog-card__img" style={(s.coverPhoto || CoverIllus) ? {} : { background: s.coverBg, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 10 }}>
+          {s.coverPhoto
+            ? <img src={s.coverPhoto} alt={s.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            : CoverIllus
+              ? <CoverIllus />
+              : <span style={{ fontSize: 60, lineHeight: 1 }}>{s.emoji}</span>
+          }
+          {recommended && (
+            <div style={{ position: 'absolute', top: 10, left: 10, display: 'inline-flex', alignItems: 'center', gap: 5, background: '#C8A052', borderRadius: 20, padding: '5px 13px', fontSize: 11, fontWeight: 700, color: '#fff', letterSpacing: '.04em' }}>
+              <Star size={10} fill="#fff" strokeWidth={0} /> Recomendado para ti
+            </div>
+          )}
+          {!s.available && (
+            <span style={{ position: 'absolute', top: 10, right: 10, display: 'inline-flex', alignItems: 'center', gap: 5, background: 'rgba(0,0,0,.55)', borderRadius: 20, padding: '4px 12px', fontSize: 11, fontWeight: 700, color: '#fff', letterSpacing: '.04em' }}>
+              <Clock size={10} /> Próximamente
+            </span>
+          )}
+        </div>
+        <div className="blog-card__body">
+          <span className="blog-tag">{s.name}</span>
+          <h3 className="blog-card__title">{s.tagline}</h3>
+          <p className="blog-card__summary">{s.desc}</p>
+          <div className="blog-card__footer">
+            <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-1)' }}>
+              {s.price
+                ? s.price
+                : <span style={{ color: 'var(--text-4)', fontWeight: 400, fontSize: 11 }}>Ver oferta</span>
+              }
+            </span>
+            {s.available && (
+              <span className="blog-card__read-more" style={{ display: 'flex', alignItems: 'center', gap: 3 }}>
+                Ver oferta <ArrowRight size={11} />
+              </span>
+            )}
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  const pill = active => ({
+    padding: '9px 20px', borderRadius: 100, fontSize: 13, fontWeight: 600,
+    cursor: 'pointer', fontFamily: 'inherit', transition: 'all .18s',
+    border: '1.5px solid',
+    background: active ? '#1A1A2E' : 'transparent',
+    color: active ? '#fff' : 'var(--text-2)',
+    borderColor: active ? '#1A1A2E' : 'var(--border)',
+  })
+
   return (
     <div>
       {/* ── HERO ─────────────────────────────────────────── */}
@@ -394,64 +484,37 @@ export default function NegocioPage({ onNavigate, onScrollTo }) {
         <p>No todas las empresas tienen los mismos problemas. Aquí encontrarás sistemas pensados para cómo funciona realmente tu sector — con precios claros y resultados medibles.</p>
       </div>
 
-      {/* ── CARDS + CITAS CARD ───────────────────────────── */}
-      <div className="section--services" style={{ maxWidth: 1200, margin: '0 auto' }}>
-        <div style={{ display: 'flex', gap: 24, alignItems: 'flex-start', flexWrap: 'wrap' }}>
-          <div style={{ flex: 1, minWidth: 0 }}>
-            <div className="blog-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>
-              {SECTORS.map(s => {
-                const CoverIllus = s.coverIllus
-                return (
-                <div
-                  key={s.id}
-                  className="blog-card"
-                  style={{ opacity: s.available ? 1 : 0.55, cursor: s.available ? 'pointer' : 'default', position: 'relative' }}
-                  onClick={() => s.available && onNavigate(s.id)}
-                  role={s.available ? 'button' : undefined}
-                  tabIndex={s.available ? 0 : undefined}
-                  onKeyDown={s.available ? (e) => e.key === 'Enter' && onNavigate(s.id) : undefined}
-                >
-                  {/* Cover */}
-                  <div className="blog-card__img" style={(s.coverPhoto || CoverIllus) ? {} : { background: s.coverBg, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 10 }}>
-                    {s.coverPhoto
-                      ? <img src={s.coverPhoto} alt={s.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                      : CoverIllus
-                        ? <CoverIllus />
-                        : <span style={{ fontSize: 60, lineHeight: 1 }}>{s.emoji}</span>
-                    }
-                    {!s.available && (
-                      <span style={{ position: 'absolute', top: 10, right: 10, display: 'inline-flex', alignItems: 'center', gap: 5, background: 'rgba(0,0,0,.55)', borderRadius: 20, padding: '4px 12px', fontSize: 11, fontWeight: 700, color: '#fff', letterSpacing: '.04em' }}>
-                        <Clock size={10} /> Próximamente
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Body */}
-                  <div className="blog-card__body">
-                    <span className="blog-tag">{s.name}</span>
-                    <h3 className="blog-card__title">{s.tagline}</h3>
-                    <p className="blog-card__summary">{s.desc}</p>
-                    <div className="blog-card__footer">
-                      <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-1)' }}>
-                        {s.price
-                          ? s.price
-                          : <span style={{ color: 'var(--text-4)', fontWeight: 400, fontSize: 11 }}>Ver oferta</span>
-                        }
-                      </span>
-                      {s.available && (
-                        <span className="blog-card__read-more" style={{ display: 'flex', alignItems: 'center', gap: 3 }}>
-                          Ver oferta <ArrowRight size={11} />
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              )})}
-            </div>
-          </div>
-          <CitasOfferCard onNavigate={onNavigate} />
-        </div>
+      {/* ── FILTRO ───────────────────────────────────────── */}
+      <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', justifyContent: 'center', padding: '0 24px 36px', maxWidth: 1200, margin: '0 auto' }}>
+        <button onClick={() => setFilter(null)} style={pill(filter === null)}>
+          Todos los sectores
+        </button>
+        {FILTER_SECTORS.map(f => (
+          <button key={f.id} onClick={() => setFilter(f.id)} style={pill(filter === f.id)}>
+            {f.emoji} {f.label}
+          </button>
+        ))}
       </div>
+
+      {/* ── CARDS ────────────────────────────────────────── */}
+      {filter ? (
+        <div className="section--services" style={{ maxWidth: 860, margin: '0 auto' }}>
+          <div className="blog-grid" style={{ gridTemplateColumns: 'repeat(2, 1fr)' }}>
+            {filteredCards.map((s, i) => renderCard(s, i === 0))}
+          </div>
+        </div>
+      ) : (
+        <div className="section--services" style={{ maxWidth: 1200, margin: '0 auto' }}>
+          <div style={{ display: 'flex', gap: 24, alignItems: 'flex-start', flexWrap: 'wrap' }}>
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div className="blog-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>
+                {SECTORS.map(s => renderCard(s, false))}
+              </div>
+            </div>
+            <CitasOfferCard onNavigate={onNavigate} />
+          </div>
+        </div>
+      )}
 
       {/* ── SECTOR REQUEST FORM ──────────────────────────── */}
       <SectorRequestForm />
