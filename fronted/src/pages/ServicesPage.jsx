@@ -491,7 +491,7 @@ const EXPANSIONS = [
 
 /* ─── SERVICE CARD ───────────────────────────────────────────── */
 
-function ServiceCard({ id, open, onToggle, badge, title, desc, illustration, expansionIndex, demoLabel, demoContent, onNavigate }) {
+function ServiceCard({ id, open, onToggle, badge, title, desc, illustration, expansionIndex, demoLabel, demoContent, onNavigate, inCart, onCartToggle }) {
   const expansion = EXPANSIONS[expansionIndex]
   const hasDemo = Boolean(demoContent)
   return (
@@ -506,23 +506,12 @@ function ServiceCard({ id, open, onToggle, badge, title, desc, illustration, exp
             <span>{open ? 'Cerrar' : (hasDemo ? '¡Pruébalo aquí mismo!' : 'Ver más detalles')}</span>
             <ChevronDown size={14} className={`btn-icon${open ? ' rotated' : ''}`} />
           </button>
-          <div className="svc-contact-bar">
-            <a
-              href={`mailto:ismaelcebrian14@gmail.com?subject=${encodeURIComponent('Me interesa: ' + title)}&body=${encodeURIComponent('Hola, me gustaría recibir información y presupuesto para este servicio.')}`}
-              className="svc-contact-link"
-            >
-              <Mail size={12} /> Email
-            </a>
-            <span className="svc-contact-sep">·</span>
-            <a
-              href="https://t.me/Marirrodrigabot"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="svc-contact-link"
-            >
-              <Bot size={12} /> Chat IA
-            </a>
-          </div>
+          <button
+            className={`btn-cart-add${inCart ? ' btn-cart-add--active' : ''}`}
+            onClick={(e) => { e.stopPropagation(); onCartToggle() }}
+          >
+            {inCart ? <><Check size={13} /> Añadido al presupuesto</> : '+ Añadir al presupuesto'}
+          </button>
         </div>
       </div>
 
@@ -632,6 +621,101 @@ function GiantContactCard() {
         </div>
       )}
     </>
+  )
+}
+
+/* ─── CART ───────────────────────────────────────────────────── */
+
+function CartBar({ count, cartServices, onOpen }) {
+  if (count === 0) return null
+  return (
+    <div className="cart-bar">
+      <div className="cart-bar__info">
+        <span className="cart-bar__count">{count} {count === 1 ? 'función seleccionada' : 'funciones seleccionadas'}</span>
+        <span className="cart-bar__names">
+          {cartServices.slice(0, 2).map(s => s.badge).join(' · ')}
+          {count > 2 ? ` · +${count - 2} más` : ''}
+        </span>
+      </div>
+      <button className="cart-bar__cta" onClick={onOpen}>
+        Solicitar presupuesto <ArrowRight size={15} />
+      </button>
+    </div>
+  )
+}
+
+function CartModal({ cartServices, onRemove, onClose }) {
+  const [name,  setName]  = useState('')
+  const [email, setEmail] = useState('')
+  const [sent,  setSent]  = useState(false)
+
+  async function handleSubmit() {
+    if (!name.trim() || !email.trim()) return
+    const titles = cartServices.map(s => s.title)
+    const payload = { nombre: name, email, servicios: titles, source: 'carrito-ia-carta' }
+    if (N8N_CUSTOM) {
+      try { await fetch(N8N_CUSTOM, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }) } catch {}
+    } else {
+      const sub  = encodeURIComponent('Solicitud de presupuesto — IA a la carta')
+      const body = encodeURIComponent(`Nombre: ${name}\nEmail: ${email}\n\nFunciones seleccionadas:\n${titles.map((t, i) => `${i + 1}. ${t}`).join('\n')}`)
+      window.open(`mailto:ismaelcebrian14@gmail.com?subject=${sub}&body=${body}`)
+    }
+    setSent(true)
+  }
+
+  return (
+    <div className="cart-modal-overlay" onClick={onClose}>
+      <div className="cart-modal" onClick={e => e.stopPropagation()}>
+        {sent ? (
+          <div className="cart-modal__success">
+            <div className="cart-modal__success-icon"><Check size={24} /></div>
+            <h3>¡Solicitud enviada!</h3>
+            <p>Te contactamos en menos de 24 horas con tu presupuesto personalizado.</p>
+            <button className="cart-modal__close-btn" onClick={onClose}>Cerrar</button>
+          </div>
+        ) : (
+          <>
+            <div className="cart-modal__header">
+              <h3>Tu selección de funciones</h3>
+              <button className="cart-modal__x" onClick={onClose}>✕</button>
+            </div>
+            <ul className="cart-modal__list">
+              {cartServices.map(s => (
+                <li key={s.id} className="cart-modal__item">
+                  <span className="cart-modal__item-badge">{s.badge}</span>
+                  <span className="cart-modal__item-title">{s.title}</span>
+                  <button className="cart-modal__item-remove" onClick={() => onRemove(s.id)}>✕</button>
+                </li>
+              ))}
+            </ul>
+            <div className="cart-modal__form">
+              <p className="cart-modal__form-label">Déjanos tus datos y te enviamos el presupuesto:</p>
+              <input
+                type="text"
+                placeholder="Tu nombre"
+                value={name}
+                onChange={e => setName(e.target.value)}
+                className="cart-modal__input"
+              />
+              <input
+                type="email"
+                placeholder="Tu email"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+                className="cart-modal__input"
+              />
+              <button
+                className="cart-modal__submit"
+                onClick={handleSubmit}
+                disabled={!name.trim() || !email.trim()}
+              >
+                Solicitar presupuesto <ArrowRight size={14} />
+              </button>
+            </div>
+          </>
+        )}
+      </div>
+    </div>
   )
 }
 
@@ -755,9 +839,19 @@ function RrssPreviewDemo() {
 /* ─── MAIN PAGE ──────────────────────────────────────────────── */
 
 export default function ServicesPage({ onNavigate }) {
-  const [openCard, setOpenCard] = useState(null)
+  const [openCard,   setOpenCard]   = useState(null)
+  const [cart,       setCart]       = useState(new Set())
+  const [cartModal,  setCartModal]  = useState(false)
 
   function toggle(id) { setOpenCard(prev => prev === id ? null : id) }
+
+  function toggleCart(id) {
+    setCart(prev => {
+      const next = new Set(prev)
+      next.has(id) ? next.delete(id) : next.add(id)
+      return next
+    })
+  }
 
   function goToService(id) {
     if (id === 'ismabot') {
@@ -887,6 +981,8 @@ export default function ServicesPage({ onNavigate }) {
     },
   ]
 
+  const cartServices = services.filter(s => cart.has(s.id))
+
   return (
     <>
       <div className="svcs-hero">
@@ -906,7 +1002,15 @@ export default function ServicesPage({ onNavigate }) {
 
           <div className="services-grid">
             {services.map(s => (
-              <ServiceCard key={s.id} open={openCard === s.id} onToggle={toggle} onNavigate={onNavigate} {...s} />
+              <ServiceCard
+                key={s.id}
+                open={openCard === s.id}
+                onToggle={toggle}
+                onNavigate={onNavigate}
+                inCart={cart.has(s.id)}
+                onCartToggle={() => toggleCart(s.id)}
+                {...s}
+              />
             ))}
           </div>
 
@@ -914,6 +1018,10 @@ export default function ServicesPage({ onNavigate }) {
         </div>
       </main>
 
+      <CartBar count={cart.size} cartServices={cartServices} onOpen={() => setCartModal(true)} />
+      {cartModal && (
+        <CartModal cartServices={cartServices} onRemove={toggleCart} onClose={() => setCartModal(false)} />
+      )}
     </>
   )
 }

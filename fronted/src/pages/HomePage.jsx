@@ -4,8 +4,8 @@ import { Bot, Zap, MessageSquare, ArrowRight } from 'lucide-react'
 const IA_CONCEPTS = [
   {
     icon: Bot,
-    title: 'SaaS por sector',
-    body: 'Un paquete completo de automatización diseñado para tu tipo de negocio. Citas, presupuestos, recordatorios e informes — configurado en 48h y funcionando solo desde el primer mes.',
+    title: 'Software por sector',
+    body: 'Un software completo de automatización diseñado para tu tipo de negocio. Citas, presupuestos, recordatorios e informes — configurado en 48h y funcionando solo desde el primer mes.',
   },
   {
     icon: Zap,
@@ -60,8 +60,8 @@ export default function HomePage({ onScrollTo }) {
             </p>
             <h1>Tu negocio,<br />trabajando <em>solo.</em></h1>
             <p className="sub">
-              Paquetes de IA completos para tu sector o IA a la carta para una tarea
-              concreta. Setup en 48h, sin permanencia y con resultados medibles desde el primer mes.
+              Softwares de IA para tu sector o funciones a la carta para lo que necesitas.
+              Setup en 48h, sin permanencia y con resultados medibles desde el primer mes.
             </p>
             <div className="hbtns">
               <button className="hb1" onClick={() => onScrollTo('negocio')}>Ver soluciones por sector →</button>
@@ -148,12 +148,12 @@ export default function HomePage({ onScrollTo }) {
         <div className="antes-taller">
           <div className="antes-taller__copy">
             <div className="slbl">¿Cuál es tu caso?</div>
-            <h3 className="antes-taller__title">¿SaaS completo o<br />agente individual?</h3>
+            <h3 className="antes-taller__title">¿Software completo o<br />función a la carta?</h3>
             <p className="antes-taller__body">
               Si tienes un negocio con un sector definido — clínica dental, centro deportivo, autoescuela —
-              el paquete de tu sector cubre todo desde el primer día: citas, presupuestos, recordatorios e informes.
+              el software de tu sector cubre todo desde el primer día: citas, presupuestos, recordatorios e informes.
               Si ya tienes tu propio software y solo quieres añadir una función concreta,
-              elige un agente individual del catálogo sin compromisos ni permanencia.
+              elige lo que necesitas del catálogo sin compromisos ni permanencia.
             </p>
             <div style={{ display: 'flex', gap: 10, marginTop: 20, flexWrap: 'wrap' }}>
               <button className="hb1" onClick={() => onScrollTo('negocio')}>Ver soluciones por sector →</button>
