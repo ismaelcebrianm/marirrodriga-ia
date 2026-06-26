@@ -1266,7 +1266,7 @@ export default function ServicesPage({ onNavigate }) {
         </div>
       </main>
 
-      <CartBar count={cart.size} cartServices={cartServices} onOpen={() => setCartModal(true)} />
+      {!cartModal && <CartBar count={cart.size} cartServices={cartServices} onOpen={() => setCartModal(true)} />}
       {cartModal && (
         <CartModal cartServices={cartServices} onRemove={toggleCart} onClose={() => setCartModal(false)} />
       )}
