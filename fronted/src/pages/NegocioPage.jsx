@@ -467,12 +467,13 @@ export default function NegocioPage({ onNavigate, onScrollTo }) {
   }
 
   const pill = active => ({
-    padding: '9px 20px', borderRadius: 100, fontSize: 13, fontWeight: 600,
+    padding: '11px 24px', borderRadius: 100, fontSize: 14, fontWeight: 600,
     cursor: 'pointer', fontFamily: 'inherit', transition: 'all .18s',
     border: '1.5px solid',
-    background: active ? '#1A1A2E' : 'transparent',
-    color: active ? '#fff' : 'var(--text-2)',
+    background: active ? '#1A1A2E' : '#fff',
+    color: active ? '#fff' : 'var(--text-1)',
     borderColor: active ? '#1A1A2E' : 'var(--border)',
+    boxShadow: active ? '0 4px 16px rgba(26,26,46,.22)' : '0 1px 5px rgba(0,0,0,.07)',
   })
 
   return (
@@ -485,15 +486,29 @@ export default function NegocioPage({ onNavigate, onScrollTo }) {
       </div>
 
       {/* ── FILTRO ───────────────────────────────────────── */}
-      <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', justifyContent: 'center', padding: '0 24px 36px', maxWidth: 1200, margin: '0 auto' }}>
-        <button onClick={() => setFilter(null)} style={pill(filter === null)}>
-          Todos los sectores
-        </button>
-        {FILTER_SECTORS.map(f => (
-          <button key={f.id} onClick={() => setFilter(f.id)} style={pill(filter === f.id)}>
-            {f.emoji} {f.label}
+      <div style={{
+        position: 'sticky', top: 62, zIndex: 20,
+        borderTop: '1px solid var(--border-light)',
+        borderBottom: '1px solid var(--border-light)',
+        background: 'rgba(255,255,255,0.9)',
+        backdropFilter: 'blur(14px)',
+        WebkitBackdropFilter: 'blur(14px)',
+        padding: '18px 24px',
+      }}>
+        <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center', maxWidth: 1200, margin: '0 auto' }}>
+          <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '.12em', textTransform: 'uppercase', color: 'var(--text-3)', flexShrink: 0, marginRight: 6 }}>
+            Tu sector
+          </span>
+          <div style={{ width: 1, height: 22, background: 'var(--border-light)', marginRight: 4, flexShrink: 0 }} />
+          <button onClick={() => setFilter(null)} style={pill(filter === null)}>
+            Todos
           </button>
-        ))}
+          {FILTER_SECTORS.map(f => (
+            <button key={f.id} onClick={() => setFilter(f.id)} style={pill(filter === f.id)}>
+              {f.emoji} {f.label}
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* ── CARDS ────────────────────────────────────────── */}
