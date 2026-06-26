@@ -4,8 +4,8 @@ import LogoIcon from './LogoIcon'
 const SCROLL_LINKS = [
   { id: 'inicio',      label: 'Inicio' },
   { id: 'negocio',     label: 'Para tu negocio', cls: 'nav-negocio' },
-  { id: 'agentes',     label: 'IA a la carta' },
-  { id: 'reto-diario', label: 'Actualidad IA', badge: 'Nuevo', badgeCls: 'nav-reto__badge' },
+  { id: 'agentes',     label: 'IA a la carta', cls: 'nav-agentes' },
+  { id: 'reto-diario', label: 'Actualidad IA' },
   { id: 'contacto',    label: 'Contacto' },
 ]
 

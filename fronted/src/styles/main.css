@@ -116,6 +116,8 @@ nav {
 .nl a.on     { color: #a78bfa; background: var(--brand-border); }
 .nl a.nav-negocio { color: var(--brand) !important; font-weight: 600 !important; }
 .mob-menu__link.nav-negocio { color: var(--brand) !important; }
+.nl a.nav-agentes { color: var(--brand) !important; font-weight: 600 !important; }
+.mob-menu__link.nav-agentes { color: var(--brand) !important; }
 .nb          { background: var(--brand); color: #fff; border: none; padding: 8px 18px; border-radius: 7px; font-size: 13px; font-weight: 700; cursor: pointer; transition: var(--transition); font-family: var(--font-body); }
 .nb:hover    { background: var(--brand-hover); box-shadow: var(--shadow-brand); }
 
@@ -1437,10 +1439,7 @@ footer               { background: var(--bg-secondary); border-top: 1px solid va
   color: var(--brand);
 }
 .taller-nav-dropdown {
-  position: absolute;
-  top: calc(100% + 6px);
-  left: 0;
-  right: 0;
+  margin-top: 6px;
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: 12px;
@@ -1448,8 +1447,7 @@ footer               { background: var(--bg-secondary); border-top: 1px solid va
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(148px, 1fr));
   gap: 6px;
-  z-index: 200;
-  box-shadow: 0 8px 32px rgba(0,0,0,.15);
+  box-shadow: 0 4px 16px rgba(0,0,0,.08);
   animation: fade-in .15s ease;
 }
 @keyframes fade-in {
