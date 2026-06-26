@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { ArrowLeft, Check, Shield, Calendar, Star, RefreshCw } from 'lucide-react'
 
 /* ── Paleta dental ───────────────────────────────────────────── */
+const WEBHOOK = import.meta.env.VITE_N8N_WEBHOOK_URL || ''
+
 const C = {
   cream:  '#F5F0E8',
   cream2: '#EDE8DD',
@@ -193,6 +195,19 @@ function ContactPopup({ plan, onClose }) {
   const [sent, setSent]     = useState(false)
   const cfg = POPUP_CFG[plan] || POPUP_CFG.general
 
+  async function handleSubmit() {
+    if (!name.trim() || !email.trim()) return
+    const payload = { nombre: name, email, negocio: clinic, plan, source: 'web-sector-dental' }
+    if (WEBHOOK) {
+      try { await fetch(WEBHOOK, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }) } catch {}
+    } else {
+      const sub = encodeURIComponent(`Lead web — ${plan} — ${name}`)
+      const body = encodeURIComponent(`Nombre: ${name}\nEmail: ${email}\nClínica: ${clinic || '-'}\nPlan: ${plan}`)
+      window.open(`mailto:ismaelcebrian14@gmail.com?subject=${sub}&body=${body}`)
+    }
+    setSent(true)
+  }
+
   return (
     <div
       style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,.5)', backdropFilter: 'blur(6px)', zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20, animation: 'fadeIn .2s ease' }}
@@ -225,7 +240,7 @@ function ContactPopup({ plan, onClose }) {
               </div>
             ))}
             <button
-              onClick={() => { if (name.trim() && email.trim()) setSent(true) }}
+              onClick={handleSubmit}
               disabled={!name.trim() || !email.trim()}
               style={{ width: '100%', background: C.navy, color: '#fff', border: 'none', padding: 13, borderRadius: 8, fontSize: 14, fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit', opacity: (!name.trim() || !email.trim()) ? .45 : 1 }}
             >

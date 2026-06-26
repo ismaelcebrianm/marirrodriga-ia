@@ -9,7 +9,7 @@ const IA_CONCEPTS = [
   },
   {
     icon: Zap,
-    title: 'Agentes individuales',
+    title: 'IA a la carta',
     body: '¿Ya tienes tu software y solo quieres añadir una función concreta? Elige el agente que necesitas del catálogo — sin cambiar lo que ya tienes, sin permanencia.',
   },
   {
@@ -60,7 +60,7 @@ export default function HomePage({ onScrollTo }) {
             </p>
             <h1>Tu negocio,<br />trabajando <em>solo.</em></h1>
             <p className="sub">
-              Paquetes de IA completos para tu sector o agentes individuales para una tarea
+              Paquetes de IA completos para tu sector o IA a la carta para una tarea
               concreta. Setup en 48h, sin permanencia y con resultados medibles desde el primer mes.
             </p>
             <div className="hbtns">
@@ -89,7 +89,7 @@ export default function HomePage({ onScrollTo }) {
             <button className="hero-sidenav__item" onClick={() => onScrollTo('agentes')}>
               <span className="hero-sidenav__num">02</span>
               <div className="hero-sidenav__text">
-                <span className="hero-sidenav__title">Agentes individuales</span>
+                <span className="hero-sidenav__title">IA a la carta</span>
                 <span className="hero-sidenav__desc">Automatización a la carta — elige la herramienta que necesitas, sin cambiar lo que ya tienes</span>
               </div>
               <ArrowRight size={14} className="hero-sidenav__arrow" />
@@ -157,7 +157,7 @@ export default function HomePage({ onScrollTo }) {
             </p>
             <div style={{ display: 'flex', gap: 10, marginTop: 20, flexWrap: 'wrap' }}>
               <button className="hb1" onClick={() => onScrollTo('negocio')}>Ver soluciones por sector →</button>
-              <button className="hb2" onClick={() => onScrollTo('agentes')}>Ver agentes individuales</button>
+              <button className="hb2" onClick={() => onScrollTo('agentes')}>Ver IA a la carta</button>
             </div>
           </div>
           <div className="antes-taller__pills">

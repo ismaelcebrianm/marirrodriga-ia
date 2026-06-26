@@ -114,6 +114,8 @@ nav {
 .nl a        { font-size: 13px; color: var(--text-3); text-decoration: none; padding: 6px 12px; border-radius: 7px; transition: var(--transition); cursor: pointer; }
 .nl a:hover,
 .nl a.on     { color: #a78bfa; background: var(--brand-border); }
+.nl a.nav-negocio { color: var(--brand) !important; font-weight: 600 !important; }
+.mob-menu__link.nav-negocio { color: var(--brand) !important; }
 .nb          { background: var(--brand); color: #fff; border: none; padding: 8px 18px; border-radius: 7px; font-size: 13px; font-weight: 700; cursor: pointer; transition: var(--transition); font-family: var(--font-body); }
 .nb:hover    { background: var(--brand-hover); box-shadow: var(--shadow-brand); }
 
@@ -1153,6 +1155,24 @@ footer               { background: var(--bg-secondary); border-top: 1px solid va
 .btn-expand:hover { background: var(--brand-hover); border-color: var(--brand-hover); transform: translateY(-1px); box-shadow: 0 4px 20px rgba(124,58,237,.35); }
 .btn-expand .btn-icon { transition: transform .3s ease; font-size: 11px; }
 .btn-expand .btn-icon.rotated { transform: rotate(180deg); }
+.svc-contact-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+.svc-contact-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-3);
+  text-decoration: none;
+  transition: color .15s;
+}
+.svc-contact-link:hover { color: var(--brand); }
+.svc-contact-sep { color: var(--text-4); font-size: 12px; }
 
 /* ─── SERVICE DETAILS PANEL ──────────────────────────────────── */
 .service-details-panel {
@@ -1200,7 +1220,9 @@ footer               { background: var(--bg-secondary); border-top: 1px solid va
 .taller-nav {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
   gap: 8px;
   margin-bottom: 28px;
   padding: 14px 18px;
@@ -1208,6 +1230,7 @@ footer               { background: var(--bg-secondary); border-top: 1px solid va
   border: 1px solid var(--border);
   border-radius: 12px;
 }
+.taller-nav::-webkit-scrollbar { display: none; }
 .taller-nav__label {
   font-size: 12px;
   font-weight: 600;
@@ -2816,14 +2839,14 @@ footer               { background: var(--bg-secondary); border-top: 1px solid va
 /* ─── CURSOR ──────────────────────────────────────────────────── */
 * { cursor: none !important; }
 .cursor-dot {
-  position: fixed; top: 0; left: 0; z-index: 9999;
+  position: fixed; top: 0; left: 0; z-index: 100000;
   width: 6px; height: 6px; background: #7C3AED;
   border-radius: 50%; pointer-events: none;
   margin-left: -3px; margin-top: -3px;
   opacity: 0; transition: opacity .2s;
 }
 .cursor-ring {
-  position: fixed; top: 0; left: 0; z-index: 9998;
+  position: fixed; top: 0; left: 0; z-index: 99999;
   width: 32px; height: 32px; border: 1.5px solid rgba(124,58,237,.6);
   border-radius: 50%; pointer-events: none;
   margin-left: -16px; margin-top: -16px;

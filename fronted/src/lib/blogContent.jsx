@@ -47,7 +47,7 @@ export function parseBody(body) {
   })
 }
 
-const ART_BOT_URL = 'https://t.me/marirrodrigaIA_bot'
+const ART_BOT_URL = 'https://t.me/Marirrodrigabot'
 
 export function ArticleDetail({ article, onBack, wrapperClass = 'blog-detail', backLabel = '← Volver al blog' }) {
   const words    = (article.body || '').split(/\s+/).filter(Boolean).length

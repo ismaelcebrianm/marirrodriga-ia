@@ -11,7 +11,7 @@ import LeadSimulator     from '../simulators/LeadSimulator'
 
 /* ─── ISMABOT CARD ───────────────────────────────────────────── */
 
-const CHATBOT_URL = 'https://t.me/marirrodrigaIA_bot'
+const CHATBOT_URL = 'https://t.me/Marirrodrigabot'
 
 const ISMABOT_FEATURES = [
   { icon: Brain,         label: 'Memoria de chat',         desc: 'Recuerda lo que le has contado, sesión a sesión.' },
@@ -341,7 +341,7 @@ const EXPANSIONS = [
   {
     core: 'Atiende consultas y agenda citas 24/7',
     steps: [
-      { icon: '🔔', label: 'Recuerda la cita al cliente 1 hora antes por WhatsApp o SMS' },
+      { icon: '🔔', label: 'Recuerda la cita al cliente con la antelación que configures, por WhatsApp o email' },
       { icon: '⭐', label: 'Solicita reseña en Google Business tras el servicio' },
       { icon: '🧾', label: 'Genera la factura del servicio automáticamente' },
       { icon: '📊', label: 'Actualiza historial del cliente en tu CRM' },
@@ -356,7 +356,7 @@ const EXPANSIONS = [
     steps: [
       { icon: '✅', label: 'Validación y envío por Verifactu (obligatorio desde 2026)' },
       { icon: '📧', label: 'Envío automático al cliente por email' },
-      { icon: '⏰', label: 'Recordatorio de pago si no abona en 15 días' },
+      { icon: '⏰', label: 'Recordatorio de pago en el plazo que configures' },
       { icon: '📑', label: 'Registro contable automático en Google Sheets' },
       { icon: '📂', label: 'Carpeta Drive organizada con tus facturas y justificantes' },
       { icon: '📆', label: 'Informe mensual listo para la gestoría en un clic' },
@@ -383,7 +383,7 @@ const EXPANSIONS = [
     steps: [
       { icon: '🔍', label: 'Cruza LinkedIn, Google Maps, noticias y registros mercantiles' },
       { icon: '📧', label: 'Email de bienvenida personalizado en segundos' },
-      { icon: '🔁', label: 'Seguimiento automático si no responde en 24h' },
+      { icon: '🔁', label: 'Seguimiento automático si no hay respuesta, en el plazo que definas' },
       { icon: '👤', label: 'Asignación automática al comercial correcto en CRM' },
       { icon: '📈', label: 'Reporte semanal de conversión y pipeline' },
     ],
@@ -393,7 +393,7 @@ const EXPANSIONS = [
   },
   // 4 — Recordatorios de cita
   {
-    core: 'Aviso automático 48h y 24h antes de cada cita',
+    core: 'Aviso automático antes de cada cita, en los plazos que configures',
     steps: [
       { icon: '✅', label: 'El cliente confirma o cancela con un toque — sin llamar' },
       { icon: '🔄', label: 'Si cancela, el hueco se libera y se ofrece a la lista de espera' },
@@ -417,7 +417,7 @@ const EXPANSIONS = [
   },
   // 6 — Resumen diario
   {
-    core: 'Informe diario a las 18:00 en Telegram o email',
+    core: 'Informe del día en Telegram o email, a la hora que elijas',
     steps: [
       { icon: '📅', label: 'Citas del día: completadas, canceladas y pendientes' },
       { icon: '💬', label: 'Mensajes y consultas recibidos — con los urgentes marcados' },
@@ -429,7 +429,7 @@ const EXPANSIONS = [
   },
   // 7 — Seguimiento de presupuestos
   {
-    core: 'Seguimiento automático a los 3, 7 y 14 días',
+    core: 'Seguimiento automático en los plazos que definas',
     steps: [
       { icon: '📧', label: 'Primer recordatorio útil: "¿tienes alguna duda sobre el presupuesto?"' },
       { icon: '💬', label: 'Segundo aviso con respuestas a las objeciones más frecuentes' },
@@ -506,6 +506,23 @@ function ServiceCard({ id, open, onToggle, badge, title, desc, illustration, exp
             <span>{open ? 'Cerrar' : (hasDemo ? '¡Pruébalo aquí mismo!' : 'Ver más detalles')}</span>
             <ChevronDown size={14} className={`btn-icon${open ? ' rotated' : ''}`} />
           </button>
+          <div className="svc-contact-bar">
+            <a
+              href={`mailto:ismaelcebrian14@gmail.com?subject=${encodeURIComponent('Me interesa: ' + title)}&body=${encodeURIComponent('Hola, me gustaría recibir información y presupuesto para este servicio.')}`}
+              className="svc-contact-link"
+            >
+              <Mail size={12} /> Email
+            </a>
+            <span className="svc-contact-sep">·</span>
+            <a
+              href="https://t.me/Marirrodrigabot"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="svc-contact-link"
+            >
+              <Bot size={12} /> Chat IA
+            </a>
+          </div>
         </div>
       </div>
 
@@ -800,7 +817,7 @@ export default function ServicesPage({ onNavigate }) {
       id: 5,
       badge: 'Anti no-show',
       title: '5. Recordatorios Automáticos de Cita',
-      desc: 'Avisa a tus clientes 48h y 24h antes de su cita. Ellos confirman o cancelan con un toque — sin llamar. Si cancelan, el hueco se reasigna a la lista de espera automáticamente.',
+      desc: 'Avisa a tus clientes antes de su cita, en los plazos que configures. Ellos confirman o cancelan con un toque — sin llamar. Si cancelan, el hueco se reasigna a la lista de espera automáticamente.',
       illustration: <AgentIllus emoji="🔔" accent="#F59E0B" />,
       expansionIndex: 4,
       demoContent: null,
@@ -818,7 +835,7 @@ export default function ServicesPage({ onNavigate }) {
       id: 7,
       badge: 'Control total',
       title: '7. Resumen Diario del Negocio',
-      desc: 'Cada tarde a las 18:00 recibes en Telegram o email un informe completo: citas, consultas, facturación estimada y alertas urgentes. Los viernes también el resumen semanal.',
+      desc: 'Recibes en Telegram o email un informe completo a la hora que configures: citas, consultas, facturación estimada y alertas urgentes. Y un resumen semanal automático.',
       illustration: <AgentIllus emoji="📊" accent="#6366F1" />,
       expansionIndex: 6,
       demoContent: null,
@@ -827,7 +844,7 @@ export default function ServicesPage({ onNavigate }) {
       id: 8,
       badge: 'Ventas',
       title: '8. Seguimiento Automático de Presupuestos',
-      desc: 'El agente contacta a los 3, 7 y 14 días de enviar un presupuesto con mensajes útiles — no spam. Se detiene solo cuando el cliente acepta o rechaza.',
+      desc: 'El agente hace seguimiento tras enviar un presupuesto, en los plazos que definas, con mensajes útiles — no spam. Se detiene solo cuando el cliente acepta o rechaza.',
       illustration: <AgentIllus emoji="📋" accent="#10B981" />,
       expansionIndex: 7,
       demoContent: null,
@@ -873,7 +890,7 @@ export default function ServicesPage({ onNavigate }) {
   return (
     <>
       <div className="svcs-hero">
-        <div className="svc-note"><div className="bdot" />Agentes individuales · A la carta · Sin permanencia</div>
+        <div className="svc-note"><div className="bdot" />IA a la carta · Sin permanencia</div>
         <h1>Automatización <em>a la carta.</em></h1>
         <p>¿Contento con tu software pero buscas una funcionalidad concreta? Elige el agente que necesitas, pruébalo en tiempo real y actívalo sin cambiar nada de lo que ya tienes.</p>
       </div>

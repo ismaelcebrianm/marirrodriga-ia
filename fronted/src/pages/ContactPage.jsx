@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Bot, Mail, ArrowRight, Star, Brain, Mic, FileText, MessageSquare } from 'lucide-react'
 
-const BOT_URL        = 'https://t.me/marirrodrigaIA_bot'
+const BOT_URL        = 'https://t.me/Marirrodrigabot'
 const WEBHOOK_URL    = import.meta.env.VITE_N8N_WEBHOOK_URL
 const PERSONAL_EMAIL = 'ismaelcebrian14@gmail.com'
 

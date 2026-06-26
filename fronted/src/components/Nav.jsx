@@ -3,8 +3,8 @@ import LogoIcon from './LogoIcon'
 
 const SCROLL_LINKS = [
   { id: 'inicio',      label: 'Inicio' },
-  { id: 'negocio',     label: 'Para tu negocio' },
-  { id: 'agentes',     label: 'Agentes individuales' },
+  { id: 'negocio',     label: 'Para tu negocio', cls: 'nav-negocio' },
+  { id: 'agentes',     label: 'IA a la carta' },
   { id: 'reto-diario', label: 'Actualidad IA', badge: 'Nuevo', badgeCls: 'nav-reto__badge' },
   { id: 'contacto',    label: 'Contacto' },
 ]
@@ -36,7 +36,7 @@ export default function Nav({ onScrollTo, onNavigate, currentPage }) {
             <a
               key={l.id}
               href={`#${l.id}`}
-              className={l.id === 'negocio' && currentPage === 'dental' ? 'on' : ''}
+              className={[l.id === 'negocio' && currentPage === 'dental' ? 'on' : '', l.cls || ''].filter(Boolean).join(' ')}
               onClick={(e) => { e.preventDefault(); go(l.id) }}
             >
               <span className="nav-label-wrap">
@@ -64,7 +64,7 @@ export default function Nav({ onScrollTo, onNavigate, currentPage }) {
       <div className={`mob-menu${open ? ' mob-menu--open' : ''}`} aria-hidden={!open}>
         <nav className="mob-menu__nav">
           {SCROLL_LINKS.map(l => (
-            <a key={l.id} className="mob-menu__link" href={`#${l.id}`} onClick={(e) => { e.preventDefault(); go(l.id) }}>
+            <a key={l.id} className={`mob-menu__link${l.cls ? ' ' + l.cls : ''}`} href={`#${l.id}`} onClick={(e) => { e.preventDefault(); go(l.id) }}>
               <span className="nav-label-wrap">
                 {l.label}
                 {l.badge && <span className={l.badgeCls}>{l.badge}</span>}
