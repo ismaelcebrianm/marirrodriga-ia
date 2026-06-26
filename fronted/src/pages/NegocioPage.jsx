@@ -25,7 +25,7 @@ const SECTORS = [
     price: null,
     coverBg: 'linear-gradient(135deg, #FFF5F7 0%, #FED7E2 100%)',
     coverPhoto: '/cover-estetica.png',
-    available: false,
+    available: true,
   },
   {
     id: 'deporte',
@@ -36,7 +36,7 @@ const SECTORS = [
     price: null,
     coverBg: 'linear-gradient(135deg, #F0FFF4 0%, #C6F6D2 100%)',
     coverPhoto: '/cover-deporte.png',
-    available: false,
+    available: true,
   },
   {
     id: 'autoescuela',
@@ -47,7 +47,7 @@ const SECTORS = [
     price: null,
     coverBg: 'linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%)',
     coverPhoto: '/cover-autoescuela.png',
-    available: false,
+    available: true,
   },
   {
     id: 'web',
@@ -58,7 +58,7 @@ const SECTORS = [
     price: null,
     coverBg: 'linear-gradient(135deg, #EFF6FF 0%, #BFDBFE 100%)',
     coverPhoto: '/og-image.png',
-    available: false,
+    available: true,
   },
   {
     id: 'rrss',
@@ -69,7 +69,7 @@ const SECTORS = [
     price: null,
     coverBg: 'linear-gradient(135deg, #F0FDF4 0%, #BBF7D0 100%)',
     coverPhoto: '/noticias-preview.png',
-    available: false,
+    available: true,
   },
 ]
 

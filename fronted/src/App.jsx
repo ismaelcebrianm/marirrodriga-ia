@@ -9,10 +9,15 @@ import RetoSection   from './pages/RetoSection'
 import ContactPage  from './pages/ContactPage'
 import BlogPage     from './pages/BlogPage'
 import NegocioPage  from './pages/NegocioPage'
-import DentalPage    from './pages/DentalPage'
-import ReservasPage  from './pages/ReservasPage'
+import DentalPage      from './pages/DentalPage'
+import EsteticaPage    from './pages/EsteticaPage'
+import GimnasioPage    from './pages/GimnasioPage'
+import AutoescuelaPage from './pages/AutoescuelaPage'
+import WebPage         from './pages/WebPage'
+import RrssPage        from './pages/RrssPage'
+import ReservasPage    from './pages/ReservasPage'
 
-const HASH_PAGES = ['dental', 'blog', 'reservas']
+const HASH_PAGES = ['dental', 'blog', 'reservas', 'estetica', 'deporte', 'autoescuela', 'web', 'rrss']
 
 const POPUP_CONFIG = {
   chatbot: { icon: '🤖', gift: '🎁 Demo configurada gratis',   title: '¿Quieres este chatbot para tu empresa?', desc: 'Lo configuramos con tu información real. Listo en 48h.',                          cta: 'Quiero el chatbot →' },
@@ -66,12 +71,19 @@ export default function App() {
       {page === 'blog' ? (
         <BlogPage onNavigateHome={() => navigate('home')} />
       ) : page === 'reservas' ? (
-        <ReservasPage
-          onBack={() => { window.location.hash = ''; setPage('home'); setTimeout(() => document.getElementById('negocio')?.scrollIntoView({ behavior: 'smooth' }), 100) }}
-          onScrollTo={scrollTo}
-        />
+        <ReservasPage onBack={() => { window.location.hash = ''; setPage('home'); setTimeout(() => document.getElementById('negocio')?.scrollIntoView({ behavior: 'smooth' }), 100) }} onScrollTo={scrollTo} />
       ) : page === 'dental' ? (
         <DentalPage onBack={() => { window.location.hash = ''; setPage('home'); setTimeout(() => document.getElementById('negocio')?.scrollIntoView({ behavior: 'smooth' }), 100) }} />
+      ) : page === 'estetica' ? (
+        <EsteticaPage onBack={() => { window.location.hash = ''; setPage('home'); setTimeout(() => document.getElementById('negocio')?.scrollIntoView({ behavior: 'smooth' }), 100) }} />
+      ) : page === 'deporte' ? (
+        <GimnasioPage onBack={() => { window.location.hash = ''; setPage('home'); setTimeout(() => document.getElementById('negocio')?.scrollIntoView({ behavior: 'smooth' }), 100) }} />
+      ) : page === 'autoescuela' ? (
+        <AutoescuelaPage onBack={() => { window.location.hash = ''; setPage('home'); setTimeout(() => document.getElementById('negocio')?.scrollIntoView({ behavior: 'smooth' }), 100) }} />
+      ) : page === 'web' ? (
+        <WebPage onBack={() => { window.location.hash = ''; setPage('home'); setTimeout(() => document.getElementById('negocio')?.scrollIntoView({ behavior: 'smooth' }), 100) }} />
+      ) : page === 'rrss' ? (
+        <RrssPage onBack={() => { window.location.hash = ''; setPage('home'); setTimeout(() => document.getElementById('negocio')?.scrollIntoView({ behavior: 'smooth' }), 100) }} />
       ) : (
         <>
           {/* ── INICIO ─────────────────────────────────────── */}
