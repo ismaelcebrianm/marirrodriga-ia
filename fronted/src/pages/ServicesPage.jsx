@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import {
   ChevronDown, Mic, MessageSquare, Send, Rocket,
   Check, ArrowRight, Mail, FileText, FolderKey, Database,
@@ -487,6 +487,18 @@ const EXPANSIONS = [
     ],
     savings: { label: 'El 67% de los clientes prefiere WhatsApp antes de llamar. Si tardas más de 5 minutos en responder, el 50% busca otra opción. Este agente responde en segundos, sin que tú estés pendiente.' }
   },
+  // 12 — Conversor de audio a apuntes
+  {
+    core: 'Transcribe y resume cualquier audio en segundos',
+    steps: [
+      { icon: '📝', label: 'Transcripción completa con marcas de tiempo' },
+      { icon: '🎯', label: 'Resumen ejecutivo con los puntos clave detectados' },
+      { icon: '✅', label: 'Lista de tareas y acuerdos extraídos automáticamente' },
+      { icon: '📁', label: 'Entregable guardado en Drive o Notion al instante' },
+      { icon: '🔍', label: 'Búsqueda semántica dentro del contenido transcrito' },
+    ],
+    savings: { label: 'Una reunión de 1 hora genera 2-3 horas de trabajo post-reunión: resumir, repartir tareas, redactar actas. Este agente lo hace en minutos y entrega el resultado organizado a tu equipo.' }
+  },
 ]
 
 /* ─── SERVICE CARD ───────────────────────────────────────────── */
@@ -734,23 +746,41 @@ const NAV_ITEMS = [
   { id: 10, label: 'Agente de voz' },
   { id: 11, label: 'Outbound' },
   { id: 12, label: 'WhatsApp' },
+  { id: 13, label: 'Audio → Apuntes' },
 ]
 
 function TallerNav({ onGo }) {
+  const [open, setOpen] = useState(false)
+  const ref = useRef(null)
+
+  useEffect(() => {
+    if (!open) return
+    function handler(e) { if (ref.current && !ref.current.contains(e.target)) setOpen(false) }
+    document.addEventListener('mousedown', handler)
+    return () => document.removeEventListener('mousedown', handler)
+  }, [open])
+
   return (
-    <nav className="taller-nav">
-      <span className="taller-nav__label">Ir a:</span>
-      {NAV_ITEMS.map(({ id, label }) => (
-        <button key={id} className="taller-nav-btn" onClick={() => onGo(id)}>
-          <span className="taller-nav-num">{id}</span>
-          {label}
-        </button>
-      ))}
-      <button className="taller-nav-btn taller-nav-btn--ismabot" onClick={() => onGo('ismabot')}>
-        <span className="taller-nav-num taller-nav-num--ismabot">★</span>
-        ISMABOT
+    <div className="taller-nav-wrap" ref={ref}>
+      <button className="taller-nav-toggle" onClick={() => setOpen(v => !v)}>
+        <span>Ir a un agente específico</span>
+        <ChevronDown size={14} className={`btn-icon${open ? ' rotated' : ''}`} />
       </button>
-    </nav>
+      {open && (
+        <div className="taller-nav-dropdown">
+          {NAV_ITEMS.map(({ id, label }) => (
+            <button key={id} className="taller-nav-btn" onClick={() => { onGo(id); setOpen(false) }}>
+              <span className="taller-nav-num">{id}</span>
+              {label}
+            </button>
+          ))}
+          <button className="taller-nav-btn taller-nav-btn--ismabot" onClick={() => { onGo('ismabot'); setOpen(false) }}>
+            <span className="taller-nav-num taller-nav-num--ismabot">★</span>
+            ISMABOT
+          </button>
+        </div>
+      )}
+    </div>
   )
 }
 
@@ -977,6 +1007,15 @@ export default function ServicesPage({ onNavigate }) {
       desc: 'Tu WhatsApp responde solo: preguntas frecuentes, precios, disponibilidad y reservas — al instante, a cualquier hora. Te avisa si hay algo que no sabe gestionar.',
       illustration: <AgentIllus emoji="💬" accent="#22C55E" />,
       expansionIndex: 11,
+      demoContent: null,
+    },
+    {
+      id: 13,
+      badge: 'Productividad',
+      title: '13. Conversor de Audios a Apuntes',
+      desc: 'Sube cualquier audio — una clase, una reunión, una llamada de ventas — y recibe la transcripción completa, el resumen ejecutivo y las tareas detectadas. En segundos, listo para compartir.',
+      illustration: <AgentIllus emoji="🎙️" accent="#0EA5E9" />,
+      expansionIndex: 12,
       demoContent: null,
     },
   ]

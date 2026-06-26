@@ -1227,8 +1227,11 @@ footer               { background: var(--bg-secondary); border-top: 1px solid va
 /* ─── CART MODAL ─────────────────────────────────────────────── */
 .cart-modal-overlay {
   position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,.55);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0,0,0,.6);
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -1402,43 +1405,64 @@ footer               { background: var(--bg-secondary); border-top: 1px solid va
 .panel-demo-area .panel-subtitle { color: #a78bfa; }
 .panel-demo-area .panel-subtitle svg { color: #a78bfa; }
 
-/* ─── TALLER QUICK-NAV ───────────────────────────────────────── */
-.taller-nav {
+/* ─── TALLER QUICK-NAV (dropdown) ───────────────────────────── */
+.taller-nav-wrap {
+  position: relative;
+  margin-bottom: 28px;
+}
+.taller-nav-toggle {
   display: flex;
   align-items: center;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  scrollbar-width: none;
-  gap: 8px;
-  margin-bottom: 28px;
-  padding: 14px 18px;
+  justify-content: space-between;
+  width: 100%;
+  padding: 12px 18px;
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: 12px;
-}
-.taller-nav::-webkit-scrollbar { display: none; }
-.taller-nav__label {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
-  color: var(--text-3);
-  text-transform: uppercase;
-  letter-spacing: .06em;
-  margin-right: 4px;
-  flex-shrink: 0;
+  color: var(--text-2);
+  cursor: pointer;
+  transition: border-color .18s, color .18s;
+}
+.taller-nav-toggle:hover {
+  border-color: var(--brand);
+  color: var(--brand);
+}
+.taller-nav-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(148px, 1fr));
+  gap: 6px;
+  z-index: 200;
+  box-shadow: 0 8px 32px rgba(0,0,0,.15);
+  animation: fade-in .15s ease;
+}
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 .taller-nav-btn {
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 6px 14px;
+  padding: 7px 12px;
   background: transparent;
   border: 1px solid var(--border);
-  border-radius: 100px;
-  font-size: 13px;
+  border-radius: 8px;
+  font-size: 12px;
   font-weight: 500;
   color: var(--text-2);
   cursor: pointer;
   transition: background .18s, border-color .18s, color .18s;
+  white-space: nowrap;
 }
 .taller-nav-btn:hover {
   background: #EDE9FE;
