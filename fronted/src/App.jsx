@@ -9,9 +9,10 @@ import RetoSection   from './pages/RetoSection'
 import ContactPage  from './pages/ContactPage'
 import BlogPage     from './pages/BlogPage'
 import NegocioPage  from './pages/NegocioPage'
-import DentalPage   from './pages/DentalPage'
+import DentalPage    from './pages/DentalPage'
+import ReservasPage  from './pages/ReservasPage'
 
-const HASH_PAGES = ['dental', 'blog']
+const HASH_PAGES = ['dental', 'blog', 'reservas']
 
 const POPUP_CONFIG = {
   chatbot: { icon: '🤖', gift: '🎁 Demo configurada gratis',   title: '¿Quieres este chatbot para tu empresa?', desc: 'Lo configuramos con tu información real. Listo en 48h.',                          cta: 'Quiero el chatbot →' },
@@ -64,6 +65,11 @@ export default function App() {
 
       {page === 'blog' ? (
         <BlogPage onNavigateHome={() => navigate('home')} />
+      ) : page === 'reservas' ? (
+        <ReservasPage
+          onBack={() => { window.location.hash = ''; setPage('home'); setTimeout(() => document.getElementById('negocio')?.scrollIntoView({ behavior: 'smooth' }), 100) }}
+          onScrollTo={scrollTo}
+        />
       ) : page === 'dental' ? (
         <DentalPage onBack={() => { window.location.hash = ''; setPage('home'); setTimeout(() => document.getElementById('negocio')?.scrollIntoView({ behavior: 'smooth' }), 100) }} />
       ) : (

@@ -169,6 +169,57 @@ function SectorRequestForm() {
   )
 }
 
+function CitasOfferBanner({ onNavigate }) {
+  const [hov, setHov] = useState(false)
+  return (
+    <div style={{ maxWidth: 1100, margin: '40px auto 0', padding: '0 24px' }}>
+      <div
+        role="button"
+        tabIndex={0}
+        onClick={() => onNavigate('reservas')}
+        onKeyDown={e => e.key === 'Enter' && onNavigate('reservas')}
+        onMouseEnter={() => setHov(true)}
+        onMouseLeave={() => setHov(false)}
+        style={{
+          background: '#1A1A2E',
+          borderRadius: 18,
+          border: `1.5px solid ${hov ? '#C8A052' : 'rgba(200,160,82,.4)'}`,
+          padding: '32px 40px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+          gap: 28,
+          cursor: 'pointer',
+          transition: 'border-color .2s, box-shadow .2s',
+          boxShadow: hov ? '0 8px 40px rgba(200,160,82,.18)' : '0 4px 20px rgba(26,26,46,.18)',
+        }}
+      >
+        <div style={{ flex: 1, minWidth: 280 }}>
+          <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#C8A052', marginBottom: 10 }}>
+            Para negocios con citas
+          </div>
+          <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(18px, 2.2vw, 23px)', fontWeight: 900, color: '#fff', margin: '0 0 10px', lineHeight: 1.2, letterSpacing: '-0.5px' }}>
+            ¿Pagas cada mes a Booksy, Fresha o Treatwell?
+          </h3>
+          <p style={{ fontSize: 14, color: 'rgba(255,255,255,.55)', lineHeight: 1.7, margin: 0, maxWidth: 480 }}>
+            Te montamos tu propio sistema de reservas por WhatsApp — sin comisiones, sin que tus clientes estén registrados en casa de otro y sin pagar por funciones que no usas.
+          </p>
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 12, flexShrink: 0 }}>
+          <div style={{ background: 'rgba(200,160,82,.15)', border: '1px solid rgba(200,160,82,.4)', borderRadius: 10, padding: '8px 18px', fontSize: 13, fontWeight: 700, color: '#C8A052', letterSpacing: '.02em' }}>
+            Desde 150€/mes
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 14, fontWeight: 700, color: '#fff' }}>
+            Ver la oferta completa
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C8A052" strokeWidth="2.5" strokeLinecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export default function NegocioPage({ onNavigate, onScrollTo }) {
   return (
     <div>
@@ -228,6 +279,9 @@ export default function NegocioPage({ onNavigate, onScrollTo }) {
           ))}
         </div>
       </div>
+
+      {/* ── BANNER RESERVAS ──────────────────────────────── */}
+      <CitasOfferBanner onNavigate={onNavigate} />
 
       {/* ── SECTOR REQUEST FORM ──────────────────────────── */}
       <SectorRequestForm />
