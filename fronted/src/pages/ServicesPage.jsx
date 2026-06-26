@@ -880,6 +880,192 @@ function RrssPreviewDemo() {
   )
 }
 
+/* ─── DEMO ANIMATIONS ───────────────────────────────────────── */
+
+function useAutoStep(n, delay = 1700) {
+  const [step, setStep] = useState(0)
+  useEffect(() => {
+    const id = setInterval(() => setStep(s => (s + 1) % n), delay)
+    return () => clearInterval(id)
+  }, [n, delay])
+  return step
+}
+
+function DemoNotif({ icon, text, sub }) {
+  return (
+    <div className="demo-notif">
+      <span className="demo-notif__icon">{icon}</span>
+      <div>
+        <div className="demo-notif__text">{text}</div>
+        {sub && <div className="demo-notif__sub">{sub}</div>}
+      </div>
+    </div>
+  )
+}
+
+function DemoReply({ text }) {
+  return <div className="demo-reply">{text}</div>
+}
+
+function RecordatorioDemo() {
+  const step = useAutoStep(4, 1600)
+  return (
+    <div className="demo-anim">
+      <DemoNotif icon="🔔" text="Cita mañana a las 10:00" sub="¿Confirmas tu asistencia?" />
+      {step >= 1 && (
+        <div className="demo-anim__btns">
+          <span className="demo-anim__btn demo-anim__btn--yes">✓ Confirmar</span>
+          <span className="demo-anim__btn demo-anim__btn--no">✗ Cancelar</span>
+        </div>
+      )}
+      {step >= 2 && <DemoNotif icon="✅" text="¡Cita confirmada!" sub="Hasta mañana, María" />}
+      {step >= 3 && <DemoNotif icon="📋" text="Agenda actualizada" sub="Sin llamadas · sin no-shows" />}
+    </div>
+  )
+}
+
+function ResenasDemo() {
+  const step = useAutoStep(4, 1800)
+  return (
+    <div className="demo-anim">
+      <DemoNotif icon="💬" text="¿Cómo fue tu visita, María?" sub="Valora tu experiencia en Google" />
+      {step >= 1 && (
+        <div className="demo-anim__stars">
+          {[1,2,3,4,5].map(i => (
+            <span key={i} className={`demo-star${step >= 2 ? ' demo-star--on' : ''}`} style={{ animationDelay: `${i * 0.08}s` }}>★</span>
+          ))}
+        </div>
+      )}
+      {step >= 3 && <DemoNotif icon="🎉" text="Nueva reseña de 5 ⭐ recibida" sub="Google Business · hace un momento" />}
+    </div>
+  )
+}
+
+function ResumenDiarioDemo() {
+  const step = useAutoStep(2, 2200)
+  const stats = [
+    { label: 'Citas completadas', val: '12', icon: '📅' },
+    { label: 'Facturación estimada', val: '840 €', icon: '💶' },
+    { label: 'Nuevos leads hoy', val: '4', icon: '🔔' },
+    { label: 'Presupuestos sin respuesta', val: '2', icon: '⚠️' },
+  ]
+  return (
+    <div className="demo-anim">
+      <div className="demo-anim__report">
+        <div className="demo-anim__report-head">📊 Resumen del día — Telegram</div>
+        {stats.map((s, i) => (
+          <div key={i} className={`demo-anim__stat${step >= 1 ? ' demo-anim__stat--in' : ''}`} style={{ animationDelay: `${i * 0.12}s` }}>
+            <span>{s.icon} {s.label}</span><strong>{s.val}</strong>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function PresupuestosDemo() {
+  const step = useAutoStep(5, 1500)
+  return (
+    <div className="demo-anim">
+      <DemoNotif icon="📋" text="Presupuesto enviado: 1.200 €" sub="Instalación completa · 23 jun" />
+      {step >= 1 && <DemoNotif icon="💬" text="Hola Juan, ¿tienes alguna duda?" sub="Seguimiento automático — día 3" />}
+      {step >= 2 && <DemoNotif icon="💬" text="¿Has podido revisarlo?" sub="Seguimiento automático — día 7" />}
+      {step >= 3 && <DemoReply text="Cliente: «Adelante, lo aceptamos»" />}
+      {step >= 4 && <DemoNotif icon="✅" text="Presupuesto cerrado" sub="Seguimiento detenido automáticamente" />}
+    </div>
+  )
+}
+
+function ReactivacionDemo() {
+  const step = useAutoStep(4, 1900)
+  return (
+    <div className="demo-anim">
+      <div className="demo-anim__alert">⚠️ Cliente inactivo detectado<br /><small>Ana García · sin actividad 62 días</small></div>
+      {step >= 1 && <DemoNotif icon="💬" text="¡Hola Ana, te echamos de menos!" sub="Oferta exclusiva para ti →" />}
+      {step >= 2 && <DemoReply text="Ana: «Me apunto, ¿cuándo hay hueco?»" />}
+      {step >= 3 && <DemoNotif icon="📅" text="Cita agendada automáticamente" sub="Martes 1 jul · 11:00 · sin intervención" />}
+    </div>
+  )
+}
+
+function AgenteVozDemo() {
+  const step = useAutoStep(4, 1700)
+  return (
+    <div className="demo-anim">
+      <div className="demo-anim__call"><span className="demo-anim__call-ring">📞</span> Llamada entrante…</div>
+      {step >= 1 && <DemoNotif icon="🤖" text="¡Hola! Soy el asistente de voz." sub="¿En qué puedo ayudarte hoy?" />}
+      {step >= 2 && <DemoReply text="Cliente: «Quiero cita para el martes»" />}
+      {step >= 3 && <DemoNotif icon="✅" text="Cita reservada: martes 10:30" sub="Confirmación enviada por SMS" />}
+    </div>
+  )
+}
+
+function OutboundDemo() {
+  const step = useAutoStep(4, 1700)
+  return (
+    <div className="demo-anim">
+      <div className="demo-anim__prospect">🔍 Prospecto localizado<br /><small>Clínica Dental Ríos · LinkedIn · Madrid</small></div>
+      {step >= 1 && (
+        <div className="demo-anim__score">
+          Score IA: <strong>8.7 / 10</strong>
+          <span className="demo-anim__badge">Alta intención</span>
+        </div>
+      )}
+      {step >= 2 && <DemoNotif icon="✉️" text="Email personalizado enviado" sub="«He visto que gestionáis la agenda en…»" />}
+      {step >= 3 && <DemoReply text="«¡Cuéntame más, me interesa!»" />}
+    </div>
+  )
+}
+
+function WhatsAppDemo() {
+  const step = useAutoStep(5, 1400)
+  const msgs = [
+    { from: 'user', text: '¿Cuánto vale una limpieza dental?' },
+    { from: 'bot',  text: 'Básica 45 € · Completa 65 €. ¿Cuándo te va bien?' },
+    { from: 'user', text: '¿Hay hueco mañana por la tarde?' },
+    { from: 'bot',  text: 'Tengo 17:00, 18:30 o 19:00. ¿Cuál te va?' },
+    { from: 'user', text: '18:30 perfecto, gracias' },
+  ]
+  return (
+    <div className="demo-anim demo-anim--chat">
+      <div className="demo-anim__chat-head">💬 WhatsApp · respuesta automática · 24 / 7</div>
+      {msgs.slice(0, step + 1).map((m, i) => (
+        <div key={i} className={`demo-msg demo-msg--${m.from}`}>{m.text}</div>
+      ))}
+    </div>
+  )
+}
+
+function AudioApuntesDemo() {
+  const step = useAutoStep(4, 2000)
+  return (
+    <div className="demo-anim">
+      <div className="demo-anim__waveform">
+        <span>🎙️</span>
+        <div className="demo-wave">
+          {[8,14,20,12,18,10,16,8].map((h, i) => (
+            <span key={i} style={{ height: h, animationDelay: `${i * 0.1}s` }} />
+          ))}
+        </div>
+        <span className="demo-anim__waveform-label">Procesando audio…</span>
+      </div>
+      {step >= 1 && (
+        <div className="demo-anim__transcript">
+          📝 <em>«…el objetivo es lanzar en Q3 con un presupuesto de 40k…»</em>
+        </div>
+      )}
+      {step >= 2 && (
+        <div className="demo-anim__bullets">
+          <div>✅ Lanzamiento en Q3</div>
+          <div>✅ Presupuesto: 40.000 €</div>
+          <div>✅ Responsable: equipo de producto</div>
+        </div>
+      )}
+      {step >= 3 && <DemoNotif icon="📁" text="Apuntes guardados en Drive" sub="Reunión 25 jun · resumen + tareas" />}
+    </div>
+  )
+}
+
 /* ─── MAIN PAGE ──────────────────────────────────────────────── */
 
 export default function ServicesPage({ onNavigate }) {
@@ -958,7 +1144,8 @@ export default function ServicesPage({ onNavigate }) {
       desc: 'Avisa a tus clientes antes de su cita, en los plazos que configures. Ellos confirman o cancelan con un toque — sin llamar. Si cancelan, el hueco se reasigna a la lista de espera automáticamente.',
       illustration: <AgentIllus emoji="🔔" accent="#F59E0B" />,
       expansionIndex: 4,
-      demoContent: null,
+      demoLabel: 'Flujo de recordatorio en tiempo real',
+      demoContent: <RecordatorioDemo />,
     },
     {
       id: 6,
@@ -967,7 +1154,8 @@ export default function ServicesPage({ onNavigate }) {
       desc: 'Tras cada servicio, el agente envía un mensaje personalizado con enlace directo a tu perfil de Google. Sin pedir nada — simplemente en el momento en que el cliente está más satisfecho.',
       illustration: <AgentIllus emoji="⭐" accent="#EAB308" />,
       expansionIndex: 5,
-      demoContent: null,
+      demoLabel: 'Del servicio a la reseña, automático',
+      demoContent: <ResenasDemo />,
     },
     {
       id: 7,
@@ -976,7 +1164,8 @@ export default function ServicesPage({ onNavigate }) {
       desc: 'Recibes en Telegram o email un informe completo a la hora que configures: citas, consultas, facturación estimada y alertas urgentes. Y un resumen semanal automático.',
       illustration: <AgentIllus emoji="📊" accent="#6366F1" />,
       expansionIndex: 6,
-      demoContent: null,
+      demoLabel: 'Tu resumen diario, así llega',
+      demoContent: <ResumenDiarioDemo />,
     },
     {
       id: 8,
@@ -985,7 +1174,8 @@ export default function ServicesPage({ onNavigate }) {
       desc: 'El agente hace seguimiento tras enviar un presupuesto, en los plazos que definas, con mensajes útiles — no spam. Se detiene solo cuando el cliente acepta o rechaza.',
       illustration: <AgentIllus emoji="📋" accent="#10B981" />,
       expansionIndex: 7,
-      demoContent: null,
+      demoLabel: 'Seguimiento automático en acción',
+      demoContent: <PresupuestosDemo />,
     },
     {
       id: 9,
@@ -994,7 +1184,8 @@ export default function ServicesPage({ onNavigate }) {
       desc: 'Detecta clientes sin actividad en 30, 60 o 90 días y les envía un mensaje con su historial. Si responden con interés, agenda la cita directamente — sin que tú hagas nada.',
       illustration: <AgentIllus emoji="🔄" accent="#EC4899" />,
       expansionIndex: 8,
-      demoContent: null,
+      demoLabel: 'Cliente inactivo reactivado',
+      demoContent: <ReactivacionDemo />,
     },
     {
       id: 10,
@@ -1003,7 +1194,8 @@ export default function ServicesPage({ onNavigate }) {
       desc: 'Atiende llamadas entrantes, consulta tu agenda en tiempo real y gestiona reservas con lenguaje natural. Ninguna llamada queda sin responder — ni a las 10 de la noche ni en festivos.',
       illustration: <AgentIllus emoji="📞" accent="#8B5CF6" />,
       expansionIndex: 9,
-      demoContent: null,
+      demoLabel: 'Llamada gestionada por el agente',
+      demoContent: <AgenteVozDemo />,
     },
     {
       id: 11,
@@ -1012,7 +1204,8 @@ export default function ServicesPage({ onNavigate }) {
       desc: 'Del prospecto frío al contacto cualificado, solo. El agente localiza, contacta y hace seguimiento. Tu comercial solo actúa cuando hay interés real de compra.',
       illustration: <AgentIllus emoji="🎯" accent="#EF4444" />,
       expansionIndex: 10,
-      demoContent: null,
+      demoLabel: 'Pipeline de captación en marcha',
+      demoContent: <OutboundDemo />,
     },
     {
       id: 12,
@@ -1021,7 +1214,8 @@ export default function ServicesPage({ onNavigate }) {
       desc: 'Tu WhatsApp responde solo: preguntas frecuentes, precios, disponibilidad y reservas — al instante, a cualquier hora. Te avisa si hay algo que no sabe gestionar.',
       illustration: <AgentIllus emoji="💬" accent="#22C55E" />,
       expansionIndex: 11,
-      demoContent: null,
+      demoLabel: 'Conversación gestionada por IA',
+      demoContent: <WhatsAppDemo />,
     },
     {
       id: 13,
@@ -1030,7 +1224,8 @@ export default function ServicesPage({ onNavigate }) {
       desc: 'Sube cualquier audio — una clase, una reunión, una llamada de ventas — y recibe la transcripción completa, el resumen ejecutivo y las tareas detectadas. En segundos, listo para compartir.',
       illustration: <AgentIllus emoji="🎙️" accent="#0EA5E9" />,
       expansionIndex: 12,
-      demoContent: null,
+      demoLabel: 'Del audio a los apuntes organizados',
+      demoContent: <AudioApuntesDemo />,
     },
   ]
 
