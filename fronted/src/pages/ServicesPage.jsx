@@ -532,6 +532,14 @@ function ServiceCard({ id, open, onToggle, badge, title, desc, illustration, exp
           <div className={`panel-grid${!hasDemo ? ' panel-grid--full' : ''}`}>
             <div className="panel-col panel-flow-area">
               <FlowExpansion {...expansion} onNavigate={onNavigate} />
+              {!hasDemo && (
+                <button
+                  className={`btn-cart-add btn-cart-add--panel${inCart ? ' btn-cart-add--active' : ''}`}
+                  onClick={(e) => { e.stopPropagation(); onCartToggle() }}
+                >
+                  {inCart ? <><Check size={13} /> Añadido al presupuesto</> : '+ Añadir al presupuesto'}
+                </button>
+              )}
             </div>
             {hasDemo && (
               <div className="panel-col panel-demo-area">
@@ -540,6 +548,12 @@ function ServiceCard({ id, open, onToggle, badge, title, desc, illustration, exp
                   {demoLabel}
                 </p>
                 {demoContent}
+                <button
+                  className={`btn-cart-add btn-cart-add--panel${inCart ? ' btn-cart-add--active' : ''}`}
+                  onClick={(e) => { e.stopPropagation(); onCartToggle() }}
+                >
+                  {inCart ? <><Check size={13} /> Añadido al presupuesto</> : '+ Añadir al presupuesto'}
+                </button>
               </div>
             )}
           </div>
@@ -1027,7 +1041,7 @@ export default function ServicesPage({ onNavigate }) {
       <div className="svcs-hero">
         <div className="svc-note"><div className="bdot" />IA a la carta · Sin permanencia</div>
         <h1>Automatización <em>a la carta.</em></h1>
-        <p>¿Contento con tu software pero buscas una funcionalidad concreta? Elige el agente que necesitas, pruébalo en tiempo real y actívalo sin cambiar nada de lo que ya tienes.</p>
+        <p>Elige las funciones que necesitas del catálogo y añádelas al carrito. Te diseñamos una solución conjunta con todo lo seleccionado — los agentes funcionan solos o combinados entre sí, sin cambiar tu software y sin permanencia.</p>
       </div>
 
       <main className="catalog-section">
