@@ -88,7 +88,7 @@ export default function ContactPage() {
 
         {/* OTRAS OPCIONES */}
         <div className="contact-options" style={{ marginTop: '16px' }}>
-          <a className="contact-opt contact-opt--secondary" href={`mailto:${PERSONAL_EMAIL}`}>
+          <a className="contact-opt contact-opt--secondary" href={`https://mail.google.com/mail/?view=cm&fs=1&to=${PERSONAL_EMAIL}`} target="_blank" rel="noopener noreferrer">
             <div className="contact-opt__icon"><Mail size={22} /></div>
             <div>
               <div className="contact-opt__title">Email directo</div>

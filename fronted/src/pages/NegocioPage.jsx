@@ -270,7 +270,7 @@ function SectorRequestForm() {
       } else {
         const sub  = encodeURIComponent(`Nuevo sector solicitado: ${payload.negocio}`)
         const body = encodeURIComponent(`Negocio: ${payload.negocio}\n\nProblemas a cubrir:\n${payload.problemas || '(no especificado)'}`)
-        window.open(`mailto:ismaelcebrian14@gmail.com?subject=${sub}&body=${body}`)
+        window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=ismaelcebrian14@gmail.com&su=${sub}&body=${body}`)
       }
       setStatus('done')
     } catch {

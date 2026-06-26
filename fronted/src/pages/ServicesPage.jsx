@@ -684,7 +684,7 @@ function CartModal({ cartServices, onRemove, onClose }) {
     } else {
       const sub  = encodeURIComponent('Solicitud de presupuesto — IA a la carta')
       const body = encodeURIComponent(`Nombre: ${name}\nEmail: ${email}\n\nFunciones seleccionadas:\n${titles.map((t, i) => `${i + 1}. ${t}`).join('\n')}`)
-      window.open(`mailto:ismaelcebrian14@gmail.com?subject=${sub}&body=${body}`)
+      window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=ismaelcebrian14@gmail.com&su=${sub}&body=${body}`)
     }
     setSent(true)
   }

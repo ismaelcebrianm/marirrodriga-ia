@@ -169,7 +169,7 @@ function ContactPopup({ plan, onClose }) {
     } else {
       const sub = encodeURIComponent(`Lead web — ${plan} — ${name}`)
       const body = encodeURIComponent(`Nombre: ${name}\nEmail: ${email}\nNegocio: ${biz || '-'}\nPlan: ${plan}`)
-      window.open(`mailto:ismaelcebrian14@gmail.com?subject=${sub}&body=${body}`)
+      window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=ismaelcebrian14@gmail.com&su=${sub}&body=${body}`)
     }
     setSent(true)
   }
