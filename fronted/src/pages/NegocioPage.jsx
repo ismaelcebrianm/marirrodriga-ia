@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { ArrowRight, Clock, Send, CheckCircle, Star } from 'lucide-react'
+import { useState, useEffect, useRef } from 'react'
+import { ArrowRight, Clock, Send, CheckCircle, Star, ChevronDown } from 'lucide-react'
 
 // Reemplazar por la URL del webhook n8n cuando esté creado el workflow
 const SECTOR_WEBHOOK = ''
@@ -405,7 +405,16 @@ function CitasOfferCard({ onNavigate }) {
 }
 
 export default function NegocioPage({ onNavigate, onScrollTo }) {
-  const [filter, setFilter] = useState(null)
+  const [filter, setFilter]       = useState(null)
+  const [filterOpen, setFilterOpen] = useState(false)
+  const filterRef = useRef(null)
+
+  useEffect(() => {
+    if (!filterOpen) return
+    function handler(e) { if (filterRef.current && !filterRef.current.contains(e.target)) setFilterOpen(false) }
+    document.addEventListener('mousedown', handler)
+    return () => document.removeEventListener('mousedown', handler)
+  }, [filterOpen])
 
   const filteredCards = filter ? [
     SECTORS.find(s => s.id === filter),
@@ -485,29 +494,46 @@ export default function NegocioPage({ onNavigate, onScrollTo }) {
         <p>No todas las empresas tienen los mismos problemas. Aquí encontrarás sistemas pensados para cómo funciona realmente tu sector — con precios claros y resultados medibles.</p>
       </div>
 
-      {/* ── FILTRO ───────────────────────────────────────── */}
-      <div style={{
-        position: 'sticky', top: 62, zIndex: 20,
-        borderTop: '1px solid var(--border-light)',
-        borderBottom: '1px solid var(--border-light)',
-        background: 'rgba(255,255,255,0.9)',
-        backdropFilter: 'blur(14px)',
-        WebkitBackdropFilter: 'blur(14px)',
-        padding: '18px 24px',
-      }}>
+      {/* ── FILTRO DESKTOP (sticky pills) ────────────────── */}
+      <div className="negocio-filter-desktop">
         <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center', maxWidth: 1200, margin: '0 auto' }}>
           <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '.12em', textTransform: 'uppercase', color: 'var(--text-3)', flexShrink: 0, marginRight: 6 }}>
             Tu sector
           </span>
           <div style={{ width: 1, height: 22, background: 'var(--border-light)', marginRight: 4, flexShrink: 0 }} />
-          <button onClick={() => setFilter(null)} style={pill(filter === null)}>
-            Todos
-          </button>
+          <button onClick={() => setFilter(null)} style={pill(filter === null)}>Todos</button>
           {FILTER_SECTORS.map(f => (
             <button key={f.id} onClick={() => setFilter(f.id)} style={pill(filter === f.id)}>
               {f.emoji} {f.label}
             </button>
           ))}
+        </div>
+      </div>
+
+      {/* ── FILTRO MOBILE (dropdown compacto) ────────────── */}
+      <div className="negocio-filter-mobile">
+        <div className="negocio-drop-wrap" ref={filterRef}>
+          <button className="negocio-drop-toggle" onClick={() => setFilterOpen(v => !v)}>
+            <span>
+              {filter
+                ? `${FILTER_SECTORS.find(f => f.id === filter)?.emoji} ${FILTER_SECTORS.find(f => f.id === filter)?.label}`
+                : 'Todos los sectores'}
+            </span>
+            <ChevronDown size={14} style={{ transition: 'transform .25s', transform: filterOpen ? 'rotate(180deg)' : 'none' }} />
+          </button>
+          {filterOpen && (
+            <div className="negocio-drop-list">
+              <button className="negocio-drop-item" onClick={() => { setFilter(null); setFilterOpen(false) }}>
+                Todos los sectores
+              </button>
+              {FILTER_SECTORS.map(f => (
+                <button key={f.id} className={`negocio-drop-item${filter === f.id ? ' negocio-drop-item--active' : ''}`}
+                  onClick={() => { setFilter(f.id); setFilterOpen(false) }}>
+                  {f.emoji} {f.label}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 

@@ -36,6 +36,14 @@ export default function App() {
   const interacted          = useRef({})
 
   useEffect(() => {
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual'
+  }, [])
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [page])
+
+  useEffect(() => {
     const hash = window.location.hash.slice(1)
     if (HASH_PAGES.includes(hash) && hash !== page) setPage(hash)
   }, [])
