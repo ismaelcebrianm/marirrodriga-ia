@@ -3,12 +3,14 @@ import CursorEffect from './components/CursorEffect'
 import Nav          from './components/Nav'
 import Footer       from './components/Footer'
 import Popup        from './components/Popup'
+import OnboardingModal  from './components/OnboardingModal'
 import HomePage     from './pages/HomePage'
 import ServicesPage from './pages/ServicesPage'
 import RetoSection   from './pages/RetoSection'
 import ContactPage  from './pages/ContactPage'
 import BlogPage     from './pages/BlogPage'
 import NegocioPage  from './pages/NegocioPage'
+import PersonalizedHome from './pages/PersonalizedHome'
 import DentalPage      from './pages/DentalPage'
 import EsteticaPage    from './pages/EsteticaPage'
 import GimnasioPage    from './pages/GimnasioPage'
@@ -34,6 +36,12 @@ export default function App() {
     return HASH_PAGES.includes(hash) ? hash : 'home'
   })
   const interacted          = useRef({})
+
+  const [profile, setProfile] = useState(() => {
+    try { return JSON.parse(localStorage.getItem('ob') || 'null') } catch { return null }
+  })
+  const [showOnboarding, setShowOnboarding] = useState(() => !localStorage.getItem('ob'))
+  const [viewFull, setViewFull] = useState(false)
 
   useEffect(() => {
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual'
@@ -67,6 +75,29 @@ export default function App() {
     setTimeout(() => setPopup(service), 700)
   }
 
+  function completeOnboarding(p) {
+    localStorage.setItem('ob', JSON.stringify(p))
+    setProfile(p)
+    setShowOnboarding(false)
+    setViewFull(false)
+  }
+
+  function resetProfile() {
+    localStorage.removeItem('ob')
+    setProfile(null)
+    setShowOnboarding(true)
+    setViewFull(false)
+  }
+
+  function handleViewFull(section) {
+    setViewFull(true)
+    if (section) setTimeout(() => document.getElementById(section)?.scrollIntoView({ behavior: 'smooth' }), 100)
+  }
+
+  const isPersonalized = page === 'home' && profile && !viewFull &&
+    profile.sector !== 'curiosity' &&
+    !(profile.sector === 'otro' && profile.interest === 'todo')
+
   return (
     <>
       <div className="glow-bg glow-bg-1" />
@@ -75,6 +106,13 @@ export default function App() {
       <CursorEffect />
 
       <Nav onScrollTo={scrollTo} onNavigate={navigate} currentPage={page} />
+
+      {showOnboarding && (
+        <OnboardingModal
+          onComplete={completeOnboarding}
+          onSkip={() => completeOnboarding({ sector: 'curiosity', interest: 'todo' })}
+        />
+      )}
 
       {page === 'blog' ? (
         <BlogPage onNavigateHome={() => navigate('home')} />
@@ -92,6 +130,13 @@ export default function App() {
         <WebPage onBack={() => { window.location.hash = ''; setPage('home'); setTimeout(() => document.getElementById('negocio')?.scrollIntoView({ behavior: 'smooth' }), 100) }} />
       ) : page === 'rrss' ? (
         <RrssPage onBack={() => { window.location.hash = ''; setPage('home'); setTimeout(() => document.getElementById('negocio')?.scrollIntoView({ behavior: 'smooth' }), 100) }} />
+      ) : isPersonalized ? (
+        <PersonalizedHome
+          profile={profile}
+          onNavigate={navigate}
+          onViewFull={handleViewFull}
+          onReset={resetProfile}
+        />
       ) : (
         <>
           {/* ── INICIO ─────────────────────────────────────── */}
