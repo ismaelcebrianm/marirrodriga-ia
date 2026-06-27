@@ -462,6 +462,7 @@ nav {
 
 @media (max-width: 900px) {
   .antes-section   { padding: 56px 24px; gap: 48px; }
+  .antes-header    { margin: -56px -24px 0; padding: 72px 24px 56px; }
   .concepts-grid   { grid-template-columns: 1fr; }
   .antes-stats__grid { grid-template-columns: 1fr 1fr; }
   .antes-stat      { padding: 16px 0; border-right: none; border-bottom: 1px solid var(--border-light); }
@@ -3235,6 +3236,10 @@ footer               { background: var(--bg-secondary); border-top: 1px solid va
   .tcard          { flex-direction: column; }
   .sgrid          { grid-template-columns: 1fr; }
   .svcs-hero      { padding: 44px 20px 32px; }
+  .svcs-hero h1   { font-size: clamp(22px, 6vw, 38px); }
+  .negocio-all-wrap { flex-direction: column; }
+  .negocio-citas-outer { width: 100%; }
+  .negocio-citas-outer > div { width: 100% !important; }
   .ctasec         { padding: 56px 20px; }
   .ctasec h2      { font-size: 28px; }
   footer          { padding: 32px 20px; flex-direction: column; align-items: flex-start; }
@@ -3277,7 +3282,12 @@ footer               { background: var(--bg-secondary); border-top: 1px solid va
 .blog-filter-btn:hover  { border-color: var(--brand-border2); color: var(--brand); background: var(--brand-border); }
 .blog-filter-btn.active { border-color: var(--brand); background: var(--brand); color: #fff; }
 
+.negocio-all-wrap   { display: flex; gap: 24px; align-items: flex-start; flex-wrap: wrap; }
+.negocio-all-wrap .blog-grid { flex: 1; min-width: 0; }
+.negocio-citas-outer { flex-shrink: 0; }
+
 .blog-grid          { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.blog-grid--two     { grid-template-columns: repeat(2, 1fr); }
 
 .blog-card          { background: var(--bg-card); border: 1.5px solid var(--border-light); border-radius: 14px; overflow: hidden; cursor: pointer; transition: var(--transition); display: flex; flex-direction: column; }
 .blog-card:hover    { border-color: var(--brand-border2); box-shadow: 0 8px 32px rgba(124,58,237,0.10); transform: translateY(-3px); }
@@ -3327,6 +3337,7 @@ footer               { background: var(--bg-secondary); border-top: 1px solid va
 }
 @media (max-width: 600px) {
   .blog-grid         { grid-template-columns: 1fr; }
+  .blog-grid--two    { grid-template-columns: 1fr; }
   .blog-hero__title  { font-size: 28px; }
   .blog-detail__title { font-size: 24px; }
   .blog-page         { padding: 24px 16px 60px; }

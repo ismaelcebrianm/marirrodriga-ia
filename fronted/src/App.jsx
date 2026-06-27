@@ -50,7 +50,7 @@ export default function App() {
     if (HASH_PAGES.includes(p)) { window.location.hash = p }
     else { window.location.hash = '' }
     setPage(p)
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    window.scrollTo(0, 0)
   }
 
   function triggerPopup(service, force = false) {

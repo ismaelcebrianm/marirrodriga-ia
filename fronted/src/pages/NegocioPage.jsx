@@ -514,19 +514,19 @@ export default function NegocioPage({ onNavigate, onScrollTo }) {
       {/* ── CARDS ────────────────────────────────────────── */}
       {filter ? (
         <div className="section--services" style={{ maxWidth: 860, margin: '0 auto' }}>
-          <div className="blog-grid" style={{ gridTemplateColumns: 'repeat(2, 1fr)' }}>
+          <div className="blog-grid blog-grid--two">
             {filteredCards.map((s, i) => renderCard(s, i === 0))}
           </div>
         </div>
       ) : (
         <div className="section--services" style={{ maxWidth: 1200, margin: '0 auto' }}>
-          <div style={{ display: 'flex', gap: 24, alignItems: 'flex-start', flexWrap: 'wrap' }}>
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <div className="blog-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>
-                {SECTORS.map(s => renderCard(s, false))}
-              </div>
+          <div className="negocio-all-wrap">
+            <div className="blog-grid">
+              {SECTORS.map(s => renderCard(s, false))}
             </div>
-            <CitasOfferCard onNavigate={onNavigate} />
+            <div className="negocio-citas-outer">
+              <CitasOfferCard onNavigate={onNavigate} />
+            </div>
           </div>
         </div>
       )}
