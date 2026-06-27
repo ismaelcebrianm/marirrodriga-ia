@@ -3240,8 +3240,6 @@ footer               { background: var(--bg-secondary); border-top: 1px solid va
   .negocio-all-wrap { flex-direction: column; }
   .negocio-citas-outer { width: 100%; }
   .negocio-citas-outer > div { width: 100% !important; }
-  .negocio-filter-desktop { display: none; }
-  .negocio-filter-mobile  { display: block; }
   .ctasec         { padding: 56px 20px; }
   .ctasec h2      { font-size: 28px; }
   footer          { padding: 32px 20px; flex-direction: column; align-items: flex-start; }
@@ -3288,45 +3286,7 @@ footer               { background: var(--bg-secondary); border-top: 1px solid va
 .negocio-all-wrap .blog-grid { flex: 1; min-width: 0; }
 .negocio-citas-outer { flex-shrink: 0; }
 
-/* ─── NEGOCIO FILTER ─────────────────────────────────────────── */
-.negocio-filter-desktop {
-  position: sticky; top: 62px; z-index: 20;
-  border-top: 1px solid var(--border-light);
-  border-bottom: 1px solid var(--border-light);
-  background: rgba(255,255,255,.9);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  padding: 18px 24px;
-}
-.negocio-filter-mobile { display: none; padding: 12px 20px; }
-
-.negocio-drop-wrap    { position: relative; }
-.negocio-drop-toggle  {
-  display: flex; align-items: center; justify-content: space-between;
-  width: 100%; padding: 12px 18px;
-  background: var(--bg-card); border: 1px solid var(--border);
-  border-radius: 12px; font-size: 13px; font-weight: 600;
-  color: var(--text-2); cursor: pointer; font-family: var(--font-body);
-  transition: border-color .18s, color .18s;
-}
-.negocio-drop-toggle:hover { border-color: var(--brand); color: var(--brand); }
-.negocio-drop-list {
-  position: absolute; top: calc(100% + 6px); left: 0; right: 0; z-index: 30;
-  background: var(--bg-card); border: 1px solid var(--border);
-  border-radius: 12px; padding: 8px;
-  box-shadow: 0 4px 20px rgba(0,0,0,.1);
-  animation: fade-in .15s ease;
-}
-.negocio-drop-item {
-  display: block; width: 100%; text-align: left;
-  padding: 10px 14px; border: none; background: transparent;
-  border-radius: 8px; font-size: 14px; font-weight: 500;
-  color: var(--text-2); cursor: pointer; font-family: var(--font-body);
-  transition: background .15s, color .15s;
-}
-.negocio-drop-item:hover        { background: var(--brand-border); color: var(--brand); }
-.negocio-drop-item--active      { background: #1A1A2E; color: #fff; font-weight: 700; }
-.negocio-drop-item--active:hover { background: #2D2D4E; color: #fff; }
+.taller-nav-btn--active { background: var(--brand-border); border-color: var(--brand); color: var(--brand); font-weight: 700; }
 
 .blog-grid          { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
 .blog-grid--two     { grid-template-columns: repeat(2, 1fr); }

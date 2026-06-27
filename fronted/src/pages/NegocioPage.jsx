@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { ArrowRight, Clock, Send, CheckCircle, Star, ChevronDown } from 'lucide-react'
+import { ArrowRight, Clock, Send, CheckCircle, Star, ChevronDown, SlidersHorizontal } from 'lucide-react'
 
 // Reemplazar por la URL del webhook n8n cuando esté creado el workflow
 const SECTOR_WEBHOOK = ''
@@ -404,17 +404,49 @@ function CitasOfferCard({ onNavigate }) {
   )
 }
 
-export default function NegocioPage({ onNavigate, onScrollTo }) {
-  const [filter, setFilter]       = useState(null)
-  const [filterOpen, setFilterOpen] = useState(false)
-  const filterRef = useRef(null)
+function SectorNav({ filter, setFilter }) {
+  const [open, setOpen] = useState(false)
+  const ref = useRef(null)
 
   useEffect(() => {
-    if (!filterOpen) return
-    function handler(e) { if (filterRef.current && !filterRef.current.contains(e.target)) setFilterOpen(false) }
+    if (!open) return
+    function handler(e) { if (ref.current && !ref.current.contains(e.target)) setOpen(false) }
     document.addEventListener('mousedown', handler)
     return () => document.removeEventListener('mousedown', handler)
-  }, [filterOpen])
+  }, [open])
+
+  const active = filter ? FILTER_SECTORS.find(f => f.id === filter) : null
+
+  return (
+    <div className="taller-nav-wrap" ref={ref}>
+      <button className="taller-nav-toggle" onClick={() => setOpen(v => !v)}>
+        <span style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
+          <SlidersHorizontal size={13} />
+          {active ? `${active.emoji} ${active.label}` : 'Filtrar por sector'}
+        </span>
+        <ChevronDown size={14} style={{ transition: 'transform .25s', transform: open ? 'rotate(180deg)' : 'none', flexShrink: 0 }} />
+      </button>
+      {open && (
+        <div className="taller-nav-dropdown">
+          <button className="taller-nav-btn" onClick={() => { setFilter(null); setOpen(false) }}>
+            <span className="taller-nav-num" style={{ background: '#94a3b8', fontSize: 9 }}>✕</span>
+            Todos los sectores
+          </button>
+          {FILTER_SECTORS.map(f => (
+            <button key={f.id} className={`taller-nav-btn${filter === f.id ? ' taller-nav-btn--active' : ''}`}
+              onClick={() => { setFilter(f.id); setOpen(false) }}>
+              <span className="taller-nav-num" style={{ background: 'transparent', fontSize: 16, lineHeight: 1 }}>{f.emoji}</span>
+              {f.label}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
+export default function NegocioPage({ onNavigate, onScrollTo }) {
+  const [filter, setFilter] = useState(null)
 
   const filteredCards = filter ? [
     SECTORS.find(s => s.id === filter),
@@ -475,16 +507,6 @@ export default function NegocioPage({ onNavigate, onScrollTo }) {
     )
   }
 
-  const pill = active => ({
-    padding: '11px 24px', borderRadius: 100, fontSize: 14, fontWeight: 600,
-    cursor: 'pointer', fontFamily: 'inherit', transition: 'all .18s',
-    border: '1.5px solid',
-    background: active ? '#1A1A2E' : '#fff',
-    color: active ? '#fff' : 'var(--text-1)',
-    borderColor: active ? '#1A1A2E' : 'var(--border)',
-    boxShadow: active ? '0 4px 16px rgba(26,26,46,.22)' : '0 1px 5px rgba(0,0,0,.07)',
-  })
-
   return (
     <div>
       {/* ── HERO ─────────────────────────────────────────── */}
@@ -494,58 +516,17 @@ export default function NegocioPage({ onNavigate, onScrollTo }) {
         <p>No todas las empresas tienen los mismos problemas. Aquí encontrarás sistemas pensados para cómo funciona realmente tu sector — con precios claros y resultados medibles.</p>
       </div>
 
-      {/* ── FILTRO DESKTOP (sticky pills) ────────────────── */}
-      <div className="negocio-filter-desktop">
-        <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center', maxWidth: 1200, margin: '0 auto' }}>
-          <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '.12em', textTransform: 'uppercase', color: 'var(--text-3)', flexShrink: 0, marginRight: 6 }}>
-            Tu sector
-          </span>
-          <div style={{ width: 1, height: 22, background: 'var(--border-light)', marginRight: 4, flexShrink: 0 }} />
-          <button onClick={() => setFilter(null)} style={pill(filter === null)}>Todos</button>
-          {FILTER_SECTORS.map(f => (
-            <button key={f.id} onClick={() => setFilter(f.id)} style={pill(filter === f.id)}>
-              {f.emoji} {f.label}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* ── FILTRO MOBILE (dropdown compacto) ────────────── */}
-      <div className="negocio-filter-mobile">
-        <div className="negocio-drop-wrap" ref={filterRef}>
-          <button className="negocio-drop-toggle" onClick={() => setFilterOpen(v => !v)}>
-            <span>
-              {filter
-                ? `${FILTER_SECTORS.find(f => f.id === filter)?.emoji} ${FILTER_SECTORS.find(f => f.id === filter)?.label}`
-                : 'Todos los sectores'}
-            </span>
-            <ChevronDown size={14} style={{ transition: 'transform .25s', transform: filterOpen ? 'rotate(180deg)' : 'none' }} />
-          </button>
-          {filterOpen && (
-            <div className="negocio-drop-list">
-              <button className="negocio-drop-item" onClick={() => { setFilter(null); setFilterOpen(false) }}>
-                Todos los sectores
-              </button>
-              {FILTER_SECTORS.map(f => (
-                <button key={f.id} className={`negocio-drop-item${filter === f.id ? ' negocio-drop-item--active' : ''}`}
-                  onClick={() => { setFilter(f.id); setFilterOpen(false) }}>
-                  {f.emoji} {f.label}
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
-      </div>
-
       {/* ── CARDS ────────────────────────────────────────── */}
       {filter ? (
         <div className="section--services" style={{ maxWidth: 860, margin: '0 auto' }}>
+          <SectorNav filter={filter} setFilter={setFilter} />
           <div className="blog-grid blog-grid--two">
             {filteredCards.map((s, i) => renderCard(s, i === 0))}
           </div>
         </div>
       ) : (
         <div className="section--services" style={{ maxWidth: 1200, margin: '0 auto' }}>
+          <SectorNav filter={filter} setFilter={setFilter} />
           <div className="negocio-all-wrap">
             <div className="blog-grid">
               {SECTORS.map(s => renderCard(s, false))}
