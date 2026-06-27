@@ -10,18 +10,36 @@ const SECTOR_PAGES = {
 }
 
 const AGENT_SETS = {
-  citas:        [{ emoji: '📅', t: 'Reservas 24/7 por WhatsApp',     d: 'El cliente reserva, cancela o cambia su cita sin llamar. A cualquier hora.' },                           { emoji: '🔔', t: 'Recordatorios automáticos',    d: 'Avisos antes de cada cita con confirmación incluida. Menos no-shows, más ingresos.' }],
-  comunicacion: [{ emoji: '🤖', t: 'Chatbot IA personalizado',        d: 'Responde preguntas frecuentes, cualifica leads y escala solo lo que necesita tu atención.' },           { emoji: '📧', t: 'Emails automáticos',            d: 'Bienvenida, seguimiento y reactivación adaptados a tu negocio.' }],
-  admin:        [{ emoji: '🧾', t: 'Facturación automática',          d: 'Facturas generadas, enviadas y registradas contablemente sin que toques nada.' },                        { emoji: '📄', t: 'Gestión documental IA',         d: 'Extrae datos de documentos y los estructura en tu sistema automáticamente.' }],
-  presencia:    [{ emoji: '🌐', t: 'Web profesional con IA',          d: 'Chatbot, blog automático y formularios inteligentes en una sola web.' },                                { emoji: '📱', t: 'RRSS automatizadas',            d: 'Publicación diaria en Instagram, LinkedIn y TikTok sin que lo tengas que tocar.' }],
-  todo:         [{ emoji: '🤖', t: 'IA a la carta',                   d: 'Más de 10 agentes IA individuales que puedes combinar según lo que necesites.' },                       { emoji: '🏢', t: 'Software por sector',           d: 'Soluciones completas diseñadas para cómo funciona tu tipo de negocio.' }],
+  citas:        [{ emoji: '📅', t: 'Reservas 24/7 por WhatsApp',  d: 'El cliente reserva, cancela o cambia su cita sin llamar. A cualquier hora.' },          { emoji: '🔔', t: 'Recordatorios automáticos',   d: 'Avisos antes de cada cita con confirmación incluida. Menos no-shows, más ingresos.' }],
+  comunicacion: [{ emoji: '🤖', t: 'Chatbot IA personalizado',    d: 'Responde preguntas frecuentes, cualifica leads y escala solo lo que necesita tu atención.' }, { emoji: '📧', t: 'Emails automáticos',         d: 'Bienvenida, seguimiento y reactivación adaptados a tu negocio.' }],
+  admin:        [{ emoji: '🧾', t: 'Facturación automática',      d: 'Facturas generadas, enviadas y registradas contablemente sin que toques nada.' },         { emoji: '📄', t: 'Gestión documental IA',      d: 'Extrae datos de documentos y los estructura en tu sistema automáticamente.' }],
+  presencia:    [{ emoji: '🌐', t: 'Web profesional con IA',      d: 'Chatbot, blog automático y formularios inteligentes en una sola web.' },                  { emoji: '📱', t: 'RRSS automatizadas',         d: 'Publicación diaria en Instagram, LinkedIn y TikTok sin que lo tengas que tocar.' }],
+  software:     [],
+}
+
+function mergeAgents(interestArr) {
+  const seen = new Set()
+  const result = []
+  for (const id of interestArr) {
+    if (id === 'software') continue
+    for (const a of (AGENT_SETS[id] || [])) {
+      if (!seen.has(a.t)) { seen.add(a.t); result.push(a) }
+    }
+  }
+  return result
 }
 
 function getConfig({ sector, interest }) {
   if (sector === 'curiosity') return null
-  if (sector === 'otro' && interest === 'todo') return null
 
-  const agents = AGENT_SETS[interest] || AGENT_SETS.todo
+  const interestArr = Array.isArray(interest) ? interest : (interest ? [interest] : [])
+  if (interestArr.length === 0) return null
+
+  const hasSoftware = interestArr.includes('software')
+  const agents      = mergeAgents(interestArr)
+  const sectorLabel = hasSoftware && interestArr.length === 1
+    ? 'Tu software todo en uno'
+    : 'Tu solución principal'
 
   if (sector !== 'otro') {
     const headlines = {
@@ -31,18 +49,25 @@ function getConfig({ sector, interest }) {
       autoescuela: { h: 'Para autoescuelas',        s: 'Matrículas más fáciles, seguimiento automático del alumno y menos gestión manual.' },
     }
     const hl = headlines[sector] || { h: 'Para tu negocio', s: 'Automatización IA adaptada a lo que realmente necesitas.' }
-    return { headline: hl.h, subtext: hl.s, sectorPage: SECTOR_PAGES[sector], agents }
+    return { headline: hl.h, subtext: hl.s, sectorPage: SECTOR_PAGES[sector], sectorLabel, agents }
   }
 
-  const otroMap = {
-    citas:        { h: 'Tu sistema de citas propio',       s: 'Sin Booksy, sin comisiones. Tu propia agenda por WhatsApp.',     page: SECTOR_PAGES.reservas },
-    comunicacion: { h: 'Automatiza la comunicación',       s: 'Chatbot IA, emails y seguimientos que nunca se olvidan.',        page: null },
-    admin:        { h: 'Reduce el trabajo administrativo', s: 'Facturación, documentos y gestión sin intervención manual.',     page: null },
-    presencia:    { h: 'Refuerza tu presencia online',     s: 'Web con IA integrada y redes sociales automatizadas.',           page: SECTOR_PAGES.web },
-  }
-  const oc = otroMap[interest]
-  if (!oc) return null
-  return { headline: oc.h, subtext: oc.s, sectorPage: oc.page, agents }
+  // sector === 'otro': pick the best featured page based on selected interests
+  let otroPage = null
+  if (hasSoftware || interestArr.includes('citas'))     otroPage = SECTOR_PAGES.reservas
+  else if (interestArr.includes('presencia'))           otroPage = SECTOR_PAGES.web
+
+  const otroHL = hasSoftware
+    ? { h: 'Un software que lo gestione todo', s: 'Diseñamos el sistema completo adaptado a las necesidades específicas de tu negocio.' }
+    : interestArr.includes('citas')
+    ? { h: 'Tu sistema de citas propio',        s: 'Sin Booksy, sin comisiones. Tu propia agenda por WhatsApp.' }
+    : interestArr.includes('presencia')
+    ? { h: 'Refuerza tu presencia online',      s: 'Web con IA integrada y redes sociales automatizadas.' }
+    : interestArr.includes('comunicacion')
+    ? { h: 'Automatiza la comunicación',        s: 'Chatbot IA, emails y seguimientos que nunca se olvidan.' }
+    : { h: 'Reduce el trabajo administrativo',  s: 'Facturación, documentos y gestión sin intervención manual.' }
+
+  return { headline: otroHL.h, subtext: otroHL.s, sectorPage: otroPage, sectorLabel, agents }
 }
 
 export default function PersonalizedHome({ profile, onNavigate, onViewFull, onReset }) {
@@ -53,7 +78,7 @@ export default function PersonalizedHome({ profile, onNavigate, onViewFull, onRe
     return null
   }
 
-  const { headline, subtext, sectorPage, agents } = config
+  const { headline, subtext, sectorPage, sectorLabel, agents } = config
 
   return (
     <div className="ph-page">
@@ -72,7 +97,7 @@ export default function PersonalizedHome({ profile, onNavigate, onViewFull, onRe
         {/* ── Featured sector card ─────────────────────────────── */}
         {sectorPage && (
           <div className="ph-section">
-            <div className="ph-lbl">Tu solución principal</div>
+            <div className="ph-lbl">{sectorLabel}</div>
             <div className="ph-card" onClick={() => onNavigate(sectorPage.id)}>
               <div className="ph-card-inner">
                 <div className="ph-card-tag">{sectorPage.emoji} {sectorPage.name}</div>

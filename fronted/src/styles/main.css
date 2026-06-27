@@ -3560,7 +3560,8 @@ footer               { background: var(--bg-secondary); border-top: 1px solid va
 }
 .ob-btn:hover { border-color: var(--brand-border2); color: var(--brand); background: var(--brand-border); }
 .ob-btn--sel  { border-color: var(--brand); background: #EDE9FE; color: var(--brand); font-weight: 700; }
-.ob-ico { font-size: 20px; line-height: 1; flex-shrink: 0; }
+.ob-ico   { font-size: 20px; line-height: 1; flex-shrink: 0; }
+.ob-check { font-size: 12px; font-weight: 800; color: var(--brand); flex-shrink: 0; opacity: .85; }
 .ob-row { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
 .ob-back {
   background: none; border: none; color: var(--text-4); font-size: 13px; font-weight: 600;

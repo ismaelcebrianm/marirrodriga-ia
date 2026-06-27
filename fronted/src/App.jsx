@@ -94,9 +94,7 @@ export default function App() {
     if (section) setTimeout(() => document.getElementById(section)?.scrollIntoView({ behavior: 'smooth' }), 100)
   }
 
-  const isPersonalized = page === 'home' && profile && !viewFull &&
-    profile.sector !== 'curiosity' &&
-    !(profile.sector === 'otro' && profile.interest === 'todo')
+  const isPersonalized = page === 'home' && profile && !viewFull && profile.sector !== 'curiosity'
 
   return (
     <>

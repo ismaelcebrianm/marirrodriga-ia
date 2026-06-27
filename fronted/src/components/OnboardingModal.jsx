@@ -15,18 +15,24 @@ const INTERESTS = [
   { id: 'comunicacion', emoji: '💬', label: 'Comunicarme mejor con clientes' },
   { id: 'admin',        emoji: '📊', label: 'Reducir trabajo administrativo' },
   { id: 'presencia',    emoji: '📱', label: 'Mejorar mi presencia online' },
-  { id: 'todo',         emoji: '🎯', label: 'Ver todo el catálogo' },
+  { id: 'software',     emoji: '🚀', label: 'Un software que lo gestione todo' },
 ]
 
 export default function OnboardingModal({ onComplete, onSkip }) {
-  const [step, setStep] = useState(1)
-  const [sector, setSector] = useState(null)
-  const [interest, setInterest] = useState(null)
+  const [step, setStep]       = useState(1)
+  const [sector, setSector]   = useState(null)
+  const [interests, setInterests] = useState([])
 
   function pickSector(id) {
     setSector(id)
-    if (id === 'curiosity') { onComplete({ sector: id, interest: 'todo' }); return }
+    if (id === 'curiosity') { onComplete({ sector: id, interest: [] }); return }
     setStep(2)
+  }
+
+  function toggleInterest(id) {
+    setInterests(prev =>
+      prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]
+    )
   }
 
   return (
@@ -57,26 +63,30 @@ export default function OnboardingModal({ onComplete, onSkip }) {
           </>
         ) : (
           <>
-            <h2 className="ob-q">¿Qué buscas principalmente?</h2>
-            <p className="ob-hint">Elige lo que más se ajusta a lo que necesitas ahora</p>
+            <h2 className="ob-q">¿Qué buscas?</h2>
+            <p className="ob-hint">Puedes elegir varias opciones</p>
             <div className="ob-opts ob-opts--col1">
-              {INTERESTS.map(i => (
-                <button
-                  key={i.id}
-                  className={`ob-btn${interest === i.id ? ' ob-btn--sel' : ''}`}
-                  onClick={() => setInterest(i.id)}
-                >
-                  <span className="ob-ico">{i.emoji}</span>
-                  {i.label}
-                </button>
-              ))}
+              {INTERESTS.map(i => {
+                const sel = interests.includes(i.id)
+                return (
+                  <button
+                    key={i.id}
+                    className={`ob-btn${sel ? ' ob-btn--sel' : ''}`}
+                    onClick={() => toggleInterest(i.id)}
+                  >
+                    <span className="ob-ico">{i.emoji}</span>
+                    <span style={{ flex: 1, textAlign: 'left' }}>{i.label}</span>
+                    {sel && <span className="ob-check">✓</span>}
+                  </button>
+                )
+              })}
             </div>
             <div className="ob-row">
-              <button className="ob-back" onClick={() => { setStep(1); setInterest(null) }}>← Atrás</button>
+              <button className="ob-back" onClick={() => { setStep(1); setInterests([]) }}>← Atrás</button>
               <button
                 className="ob-primary"
-                disabled={!interest}
-                onClick={() => onComplete({ sector, interest })}
+                disabled={interests.length === 0}
+                onClick={() => onComplete({ sector, interest: interests })}
               >
                 Ver mis recomendaciones →
               </button>
