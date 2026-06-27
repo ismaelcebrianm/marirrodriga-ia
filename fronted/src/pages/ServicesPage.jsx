@@ -567,6 +567,7 @@ function ServiceCard({ id, open, onToggle, badge, title, desc, illustration, exp
 /* ─── CONTACT GIANT CARD ─────────────────────────────────────── */
 
 const N8N_CUSTOM  = import.meta.env.VITE_N8N_WEBHOOK_URL || ''
+const CARRITO_WEBHOOK = 'https://isman8nproyect.cloud/webhook/solicitud-carrito'
 
 function GiantContactCard() {
   const [idea,    setIdea]    = useState('')
@@ -671,19 +672,18 @@ function CartBar({ count, cartServices, onOpen }) {
 }
 
 function CartModal({ cartServices, onRemove, onClose }) {
-  const [name,  setName]  = useState('')
-  const [email, setEmail] = useState('')
-  const [sent,  setSent]  = useState(false)
+  const [name,      setName]      = useState('')
+  const [apellidos, setApellidos] = useState('')
+  const [email,     setEmail]     = useState('')
+  const [sent,      setSent]      = useState(false)
 
   async function handleSubmit() {
-    if (!name.trim() || !email.trim()) return
+    if (!name.trim() || !apellidos.trim() || !email.trim()) return
     const titles = cartServices.map(s => s.title)
-    const payload = { nombre: name, email, servicios: titles, source: 'carrito-ia-carta' }
-    if (N8N_CUSTOM) {
-      try { await fetch(N8N_CUSTOM, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }) } catch {}
-    } else {
-      const sub  = encodeURIComponent('Solicitud de presupuesto — IA a la carta')
-      const body = encodeURIComponent(`Nombre: ${name}\nEmail: ${email}\n\nFunciones seleccionadas:\n${titles.map((t, i) => `${i + 1}. ${t}`).join('\n')}`)
+    const payload = { nombre: name, apellidos, email, productos: titles, source: 'carrito-ia-carta' }
+    try { await fetch(CARRITO_WEBHOOK, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }) } catch {
+      const sub  = encodeURIComponent(`Solicitud de presupuesto IA a la carta — ${name} ${apellidos}`)
+      const body = encodeURIComponent(`Nombre: ${name} ${apellidos}\nEmail: ${email}\n\nFunciones seleccionadas:\n${titles.map((t, i) => `${i + 1}. ${t}`).join('\n')}`)
       window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=ismaelcebrian14@gmail.com&su=${sub}&body=${body}`)
     }
     setSent(true)
@@ -724,6 +724,13 @@ function CartModal({ cartServices, onRemove, onClose }) {
                 className="cart-modal__input"
               />
               <input
+                type="text"
+                placeholder="Tus apellidos"
+                value={apellidos}
+                onChange={e => setApellidos(e.target.value)}
+                className="cart-modal__input"
+              />
+              <input
                 type="email"
                 placeholder="Tu email"
                 value={email}
@@ -733,7 +740,7 @@ function CartModal({ cartServices, onRemove, onClose }) {
               <button
                 className="cart-modal__submit"
                 onClick={handleSubmit}
-                disabled={!name.trim() || !email.trim()}
+                disabled={!name.trim() || !apellidos.trim() || !email.trim()}
               >
                 Solicitar presupuesto <ArrowRight size={14} />
               </button>

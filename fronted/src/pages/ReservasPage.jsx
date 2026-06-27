@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { ArrowLeft, Check, Shield, Clock, Star, RefreshCw } from 'lucide-react'
 
-const WEBHOOK = import.meta.env.VITE_N8N_WEBHOOK_URL || ''
+const WEBHOOK = 'https://isman8nproyect.cloud/webhook/solicitud-negocio'
 
 const C = {
   cream:  '#F5F0E8',
@@ -155,20 +155,19 @@ function PlanCard({ plan, onContact }) {
 }
 
 function ContactPopup({ plan, onClose }) {
-  const [name, setName]   = useState('')
-  const [email, setEmail] = useState('')
-  const [biz, setBiz]     = useState('')
-  const [sent, setSent]   = useState(false)
+  const [name, setName]           = useState('')
+  const [apellidos, setApellidos] = useState('')
+  const [email, setEmail]         = useState('')
+  const [biz, setBiz]             = useState('')
+  const [sent, setSent]           = useState(false)
   const cfg = POPUP_CFG[plan] || POPUP_CFG.general
 
   async function handleSubmit() {
-    if (!name.trim() || !email.trim()) return
-    const payload = { nombre: name, email, negocio: biz, plan, source: 'web-sector-reservas' }
-    if (WEBHOOK) {
-      try { await fetch(WEBHOOK, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }) } catch {}
-    } else {
-      const sub = encodeURIComponent(`Lead web — ${plan} — ${name}`)
-      const body = encodeURIComponent(`Nombre: ${name}\nEmail: ${email}\nNegocio: ${biz || '-'}\nPlan: ${plan}`)
+    if (!name.trim() || !apellidos.trim() || !email.trim()) return
+    const payload = { nombre: name, apellidos, email, negocio: biz, sector: 'Sistema de reservas', plan, source: 'web-sector-reservas' }
+    try { await fetch(WEBHOOK, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }) } catch {
+      const sub = encodeURIComponent(`Lead web — Reservas — ${name} ${apellidos}`)
+      const body = encodeURIComponent(`Nombre: ${name} ${apellidos}\nEmail: ${email}\nNegocio: ${biz || '-'}\nPlan: ${plan}`)
       window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=ismaelcebrian14@gmail.com&su=${sub}&body=${body}`)
     }
     setSent(true)
@@ -192,7 +191,8 @@ function ContactPopup({ plan, onClose }) {
         {!sent ? (
           <div style={{ padding: '20px 24px 24px' }}>
             {[
-              { label: 'Tu nombre', val: name, set: setName, ph: 'Ej: Ana García', type: 'text' },
+              { label: 'Tu nombre', val: name, set: setName, ph: 'Ej: Ana', type: 'text' },
+              { label: 'Tus apellidos', val: apellidos, set: setApellidos, ph: 'Ej: García López', type: 'text' },
               { label: 'Tu email', val: email, set: setEmail, ph: 'tu@negocio.com', type: 'email' },
               { label: 'Tipo de negocio (opcional)', val: biz, set: setBiz, ph: 'Peluquería, estética, fisio…', type: 'text' },
             ].map(fi => (
@@ -207,8 +207,8 @@ function ContactPopup({ plan, onClose }) {
             ))}
             <button
               onClick={handleSubmit}
-              disabled={!name.trim() || !email.trim()}
-              style={{ width: '100%', background: C.navy, color: '#fff', border: 'none', padding: 13, borderRadius: 8, fontSize: 14, fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit', opacity: (!name.trim() || !email.trim()) ? .45 : 1 }}
+              disabled={!name.trim() || !apellidos.trim() || !email.trim()}
+              style={{ width: '100%', background: C.navy, color: '#fff', border: 'none', padding: 13, borderRadius: 8, fontSize: 14, fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit', opacity: (!name.trim() || !apellidos.trim() || !email.trim()) ? .45 : 1 }}
             >
               Quiero más información →
             </button>
