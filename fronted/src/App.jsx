@@ -57,8 +57,16 @@ export default function App() {
   }, [])
 
   function scrollTo(id) {
-    if (page !== 'home') { navigate('home'); setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }), 100) }
-    else document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+    if (page !== 'home') {
+      navigate('home')
+      setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }), 100)
+    } else if (profile && !viewFull && profile.sector !== 'curiosity') {
+      // En vista personalizada: mostrar web completa y luego scrollear
+      setViewFull(true)
+      setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }), 150)
+    } else {
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+    }
   }
 
   function navigate(p) {
@@ -73,6 +81,10 @@ export default function App() {
     if (interacted.current[service] && !force) return
     interacted.current[service] = true
     setTimeout(() => setPopup(service), 700)
+  }
+
+  function openOnboarding() {
+    setShowOnboarding(true)
   }
 
   function completeOnboarding(p) {
@@ -140,7 +152,7 @@ export default function App() {
         <>
           {/* ── INICIO ─────────────────────────────────────── */}
           <section id="inicio">
-            <HomePage onScrollTo={scrollTo} />
+            <HomePage onScrollTo={scrollTo} onOpenOnboarding={openOnboarding} />
           </section>
 
           {/* ── PARA TU NEGOCIO ────────────────────────────── */}

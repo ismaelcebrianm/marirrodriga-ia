@@ -221,6 +221,26 @@ nav {
 .hb1:hover   { background: #FEF3C7; border-color: #F59E0B; color: #78350F; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(217,119,6,.3); }
 .hb2         { background: var(--bg-card); color: var(--text-2); padding: 13px 26px; border-radius: var(--radius-md); font-size: 15px; border: 1px solid var(--border); cursor: pointer; transition: var(--transition); font-family: var(--font-body); }
 .hb2:hover   { border-color: var(--brand-border2); background: var(--bg-card-hover); }
+.hb-personalize {
+  display: inline-flex; align-items: center; gap: 9px;
+  margin-top: 14px;
+  background: linear-gradient(135deg, rgba(124,58,237,.08), rgba(124,58,237,.04));
+  border: 1.5px solid rgba(124,58,237,.25);
+  color: var(--brand); border-radius: 100px;
+  padding: 10px 22px; font-size: 14px; font-weight: 600;
+  cursor: pointer; transition: var(--transition);
+  font-family: var(--font-body);
+}
+.hb-personalize:hover {
+  background: linear-gradient(135deg, rgba(124,58,237,.14), rgba(124,58,237,.08));
+  border-color: rgba(124,58,237,.5);
+  transform: translateY(-1px);
+}
+.hb-personalize__dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--brand); flex-shrink: 0;
+  animation: pulse 1.8s ease-in-out infinite;
+}
 .hero-prehook {
   font-size: 14px; color: var(--text-2); font-style: italic;
   margin-bottom: 20px; position: relative;

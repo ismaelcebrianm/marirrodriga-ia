@@ -26,7 +26,7 @@ const SECTOR_STATS = [
   { value: '3 de 4', label: 'empresas planean ampliar su inversión en IA', source: 'IDC, 2025' },
 ]
 
-export default function HomePage({ onScrollTo }) {
+export default function HomePage({ onScrollTo, onOpenOnboarding }) {
   const nodes = useMemo(() =>
     Array.from({ length: 14 }, (_, i) => {
       const s = 2 + Math.random() * 5
@@ -67,6 +67,12 @@ export default function HomePage({ onScrollTo }) {
               <button className="hb1" onClick={() => onScrollTo('negocio')}>Ver soluciones por sector →</button>
               <button className="hb2" onClick={() => onScrollTo('contacto')}>Hablar con nosotros</button>
             </div>
+            {onOpenOnboarding && (
+              <button className="hb-personalize" onClick={onOpenOnboarding}>
+                <span className="hb-personalize__dot" />
+                Adapta la web a tus necesidades
+              </button>
+            )}
             <div className="hero-trust">
               <span>Garantía de resultados</span>
               <span className="hero-trust__sep" />
