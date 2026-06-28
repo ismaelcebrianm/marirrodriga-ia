@@ -229,20 +229,20 @@ nav {
 }
 .hb-adapt-hero {
   display: inline-flex; align-items: center; gap: 12px;
-  background: #FBBF24;
+  background: #FCD34D;
   border: 2.5px solid #7C3AED;
-  color: #1A0A00;
+  color: #78350F;
   border-radius: 100px;
   padding: 15px 36px;
   font-size: 17px; font-weight: 800;
   cursor: pointer; font-family: var(--font-body);
-  box-shadow: 0 0 0 4px rgba(124,58,237,.15), 0 8px 32px rgba(251,191,36,.35);
+  box-shadow: 0 0 0 4px rgba(124,58,237,.15), 0 8px 32px rgba(252,211,77,.45);
   transition: var(--transition);
   letter-spacing: -.1px;
 }
 .hb-adapt-hero:hover {
   background: #F59E0B;
-  box-shadow: 0 0 0 6px rgba(124,58,237,.22), 0 12px 40px rgba(251,191,36,.5);
+  box-shadow: 0 0 0 6px rgba(124,58,237,.22), 0 12px 40px rgba(245,158,11,.5);
   transform: translateY(-2px) scale(1.02);
 }
 .hb-adapt-hero__sparkle {
