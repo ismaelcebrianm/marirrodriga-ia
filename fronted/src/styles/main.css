@@ -229,20 +229,21 @@ nav {
 }
 .hb-adapt-hero {
   display: inline-flex; align-items: center; gap: 12px;
-  background: #FCD34D;
-  border: 2.5px solid #7C3AED;
+  background: linear-gradient(135deg, #FFFBEB, #FEF3C7);
+  border: 2.5px solid #FCD34D;
   color: #78350F;
   border-radius: 100px;
   padding: 15px 36px;
   font-size: 17px; font-weight: 800;
   cursor: pointer; font-family: var(--font-body);
-  box-shadow: 0 0 0 4px rgba(124,58,237,.15), 0 8px 32px rgba(252,211,77,.45);
+  box-shadow: 0 0 0 4px rgba(252,211,77,.18), 0 8px 32px rgba(252,211,77,.3);
   transition: var(--transition);
   letter-spacing: -.1px;
 }
 .hb-adapt-hero:hover {
-  background: #F59E0B;
-  box-shadow: 0 0 0 6px rgba(124,58,237,.22), 0 12px 40px rgba(245,158,11,.5);
+  background: linear-gradient(135deg, #FEF3C7, #FDE68A);
+  border-color: #F59E0B;
+  box-shadow: 0 0 0 6px rgba(245,158,11,.2), 0 12px 40px rgba(245,158,11,.35);
   transform: translateY(-2px) scale(1.02);
 }
 .hb-adapt-hero__sparkle {

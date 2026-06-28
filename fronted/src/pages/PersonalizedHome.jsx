@@ -136,6 +136,7 @@ const AGENT_SETS = {
   comunicacion: [{ t: 'Chatbot IA personalizado'           }, { t: 'Emails automáticos'                }],
   admin:        [{ t: 'Facturación automática'             }, { t: 'Gestión documental IA'             }],
   presencia:    [{ t: 'Web profesional con IA'             }, { t: 'RRSS automatizadas'                }],
+  web:          [{ t: 'Web profesional con IA'             }],
   software:     [],
 }
 
@@ -176,12 +177,15 @@ function getConfig({ sector, interest }) {
 
   let otroPage = null
   if (hasSoftware || interestArr.includes('citas'))   otroPage = SECTOR_PAGES.reservas
+  else if (interestArr.includes('web'))               otroPage = SECTOR_PAGES.web
   else if (interestArr.includes('presencia'))         otroPage = SECTOR_PAGES.web
 
   const otroHL = hasSoftware
     ? { h: 'Un software que lo gestione todo',    s: 'Diseñamos el sistema completo adaptado a las necesidades específicas de tu negocio.' }
     : interestArr.includes('citas')
     ? { h: 'Tu sistema de citas propio',          s: 'Sin Booksy, sin comisiones. Tu propia agenda por WhatsApp.' }
+    : interestArr.includes('web')
+    ? { h: 'Tu web profesional con IA integrada', s: 'Una web que trabaja para ti — con chatbot, captación de leads y reservas automáticas.' }
     : interestArr.includes('presencia')
     ? { h: 'Refuerza tu presencia online',        s: 'Web con IA integrada y redes sociales automatizadas.' }
     : interestArr.includes('comunicacion')

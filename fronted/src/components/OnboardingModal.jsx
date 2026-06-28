@@ -15,6 +15,7 @@ const INTERESTS = [
   { id: 'comunicacion', emoji: '💬', label: 'Comunicarme mejor con clientes' },
   { id: 'admin',        emoji: '📊', label: 'Reducir trabajo administrativo' },
   { id: 'presencia',    emoji: '📱', label: 'Mejorar mi presencia online' },
+  { id: 'web',          emoji: '🌐', label: 'Quiero una página web profesional' },
   { id: 'software',     emoji: '🚀', label: 'Un software que lo gestione todo' },
 ]
 
