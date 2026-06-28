@@ -159,7 +159,7 @@ function IsmabotCard() {
 
 /* ─── ILLUSTRATIONS ──────────────────────────────────────────── */
 
-function IllustrationS1() {
+export function IllustrationS1() {
   return (
     <div className="illustration-s1">
       <div className="phone-mockup-wrap">
@@ -184,7 +184,7 @@ function IllustrationS1() {
   )
 }
 
-function IllustrationS2() {
+export function IllustrationS2() {
   return (
     <div className="illustration-s2">
       <div className="invoice-flow-wrap">
@@ -205,7 +205,7 @@ function IllustrationS2() {
   )
 }
 
-function IllustrationS3() {
+export function IllustrationS3() {
   return (
     <div className="illustration-s3">
       <div className="funnel-wrap">
@@ -805,7 +805,7 @@ function TallerNav({ onGo }) {
   )
 }
 
-function AgentIllus({ emoji, accent = '#7C3AED' }) {
+export function AgentIllus({ emoji, accent = '#7C3AED' }) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
       <div style={{
@@ -914,7 +914,7 @@ function DemoReply({ text }) {
   return <div className="demo-reply">{text}</div>
 }
 
-function RecordatorioDemo() {
+export function RecordatorioDemo() {
   const step = useAutoStep(4, 1600)
   return (
     <div className="demo-anim">
@@ -931,7 +931,7 @@ function RecordatorioDemo() {
   )
 }
 
-function ResenasDemo() {
+export function ResenasDemo() {
   const step = useAutoStep(4, 1800)
   return (
     <div className="demo-anim">
@@ -948,7 +948,7 @@ function ResenasDemo() {
   )
 }
 
-function ResumenDiarioDemo() {
+export function ResumenDiarioDemo() {
   const step = useAutoStep(2, 2200)
   const stats = [
     { label: 'Citas completadas', val: '12', icon: '📅' },
@@ -970,7 +970,7 @@ function ResumenDiarioDemo() {
   )
 }
 
-function PresupuestosDemo() {
+export function PresupuestosDemo() {
   const step = useAutoStep(5, 1500)
   return (
     <div className="demo-anim">
@@ -983,7 +983,7 @@ function PresupuestosDemo() {
   )
 }
 
-function ReactivacionDemo() {
+export function ReactivacionDemo() {
   const step = useAutoStep(4, 1900)
   return (
     <div className="demo-anim">

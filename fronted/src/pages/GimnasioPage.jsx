@@ -166,8 +166,19 @@ function ContactPopup({ plan, onClose }) {
   )
 }
 
-export default function GimnasioPage({ onBack }) {
+export default function GimnasioPage({ onBack, embedded = false }) {
   const [contactPlan, setContactPlan] = useState(null)
+
+  if (embedded) {
+    return (
+      <>
+        <div style={{ display: 'flex', gap: 24, justifyContent: 'center', alignItems: 'stretch', flexWrap: 'wrap', fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif" }}>
+          {PLANS.map(p => <PlanCard key={p.id} plan={p} onContact={setContactPlan} />)}
+        </div>
+        {contactPlan && <ContactPopup plan={contactPlan} onClose={() => setContactPlan(null)} />}
+      </>
+    )
+  }
 
   return (
     <>
