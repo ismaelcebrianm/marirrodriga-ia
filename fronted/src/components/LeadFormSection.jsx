@@ -1,7 +1,7 @@
 import { useId, useState } from 'react'
 import { Sparkles, BookOpen, Users } from 'lucide-react'
 
-const WEBHOOK_URL = import.meta.env.VITE_N8N_WEBHOOK_URL
+const WEBHOOK_URL = import.meta.env.VITE_N8N_RECURSO_URL
 
 const INITIAL_FORM = {
   nombre: '', apellido: '', email: '',
