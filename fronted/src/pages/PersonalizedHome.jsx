@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { ArrowRight, ChevronDown, Rocket } from 'lucide-react'
+import MiniContactForm from '../components/MiniContactForm'
 import DentalPage      from './DentalPage'
 import EsteticaPage    from './EsteticaPage'
 import GimnasioPage    from './GimnasioPage'
@@ -344,6 +345,16 @@ export default function PersonalizedHome({ profile, onNavigate, onViewFull, onRe
             </div>
           </div>
         )}
+      </div>
+
+      {/* ── Contacto ─────────────────────────────────────────────── */}
+      <div className="ph-contact">
+        <div className="ph-contact__inner">
+          <div className="slbl">Contacto directo</div>
+          <h2 className="ph-contact__title">¿Lo hablamos?</h2>
+          <p className="ph-contact__sub">Cuéntanos tu caso y te respondemos en menos de 24h. Sin compromiso.</p>
+          <MiniContactForm />
+        </div>
       </div>
 
       {/* ── Footer ───────────────────────────────────────────────── */}

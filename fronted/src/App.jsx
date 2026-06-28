@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState, useEffect, useCallback } from 'react'
 import CursorEffect from './components/CursorEffect'
 import Nav          from './components/Nav'
 import Footer       from './components/Footer'
@@ -10,7 +10,8 @@ import RetoSection   from './pages/RetoSection'
 import ContactPage  from './pages/ContactPage'
 import BlogPage     from './pages/BlogPage'
 import NegocioPage  from './pages/NegocioPage'
-import PersonalizedHome from './pages/PersonalizedHome'
+import PersonalizedHome   from './pages/PersonalizedHome'
+import MobileLandingPage  from './pages/MobileLandingPage'
 import DentalPage      from './pages/DentalPage'
 import EsteticaPage    from './pages/EsteticaPage'
 import GimnasioPage    from './pages/GimnasioPage'
@@ -20,6 +21,16 @@ import RrssPage        from './pages/RrssPage'
 import ReservasPage    from './pages/ReservasPage'
 
 const HASH_PAGES = ['dental', 'blog', 'reservas', 'estetica', 'deporte', 'autoescuela', 'web', 'rrss']
+
+function useIsMobile(bp = 768) {
+  const [m, setM] = useState(() => window.innerWidth < bp)
+  useEffect(() => {
+    const h = () => setM(window.innerWidth < bp)
+    window.addEventListener('resize', h, { passive: true })
+    return () => window.removeEventListener('resize', h)
+  }, [bp])
+  return m
+}
 
 const POPUP_CONFIG = {
   chatbot: { icon: '🤖', gift: '🎁 Demo configurada gratis',   title: '¿Quieres este chatbot para tu empresa?', desc: 'Lo configuramos con tu información real. Listo en 48h.',                          cta: 'Quiero el chatbot →' },
@@ -107,7 +118,9 @@ export default function App() {
     if (section) setTimeout(() => document.getElementById(section)?.scrollIntoView({ behavior: 'smooth' }), 100)
   }
 
+  const isMobile       = useIsMobile()
   const isPersonalized = page === 'home' && profile && !viewFull && profile.sector !== 'curiosity'
+  const isMobileLanding = page === 'home' && isMobile && !viewFull && !isPersonalized
 
   return (
     <>
@@ -147,6 +160,11 @@ export default function App() {
           onNavigate={navigate}
           onViewFull={handleViewFull}
           onReset={resetProfile}
+        />
+      ) : isMobileLanding ? (
+        <MobileLandingPage
+          onOpenOnboarding={openOnboarding}
+          onViewFull={() => setViewFull(true)}
         />
       ) : (
         <>
