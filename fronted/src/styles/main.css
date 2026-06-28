@@ -221,26 +221,35 @@ nav {
 .hb1:hover   { background: #FEF3C7; border-color: #F59E0B; color: #78350F; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(217,119,6,.3); }
 .hb2         { background: var(--bg-card); color: var(--text-2); padding: 13px 26px; border-radius: var(--radius-md); font-size: 15px; border: 1px solid var(--border); cursor: pointer; transition: var(--transition); font-family: var(--font-body); }
 .hb2:hover   { border-color: var(--brand-border2); background: var(--bg-card-hover); }
-.hb-personalize {
-  display: inline-flex; align-items: center; gap: 9px;
-  margin-top: 14px;
-  background: linear-gradient(135deg, rgba(124,58,237,.08), rgba(124,58,237,.04));
-  border: 1.5px solid rgba(124,58,237,.25);
-  color: var(--brand); border-radius: 100px;
-  padding: 10px 22px; font-size: 14px; font-weight: 600;
-  cursor: pointer; transition: var(--transition);
-  font-family: var(--font-body);
+/* ── Adapt button — hero top center ─────────────────── */
+.hero-adapt-wrap {
+  display: flex; justify-content: center;
+  padding: 28px 24px 0;
+  position: relative; z-index: 2;
 }
-.hb-personalize:hover {
-  background: linear-gradient(135deg, rgba(124,58,237,.14), rgba(124,58,237,.08));
-  border-color: rgba(124,58,237,.5);
-  transform: translateY(-1px);
+.hb-adapt-hero {
+  display: inline-flex; align-items: center; gap: 12px;
+  background: #FBBF24;
+  border: 2.5px solid #7C3AED;
+  color: #1A0A00;
+  border-radius: 100px;
+  padding: 15px 36px;
+  font-size: 17px; font-weight: 800;
+  cursor: pointer; font-family: var(--font-body);
+  box-shadow: 0 0 0 4px rgba(124,58,237,.15), 0 8px 32px rgba(251,191,36,.35);
+  transition: var(--transition);
+  letter-spacing: -.1px;
 }
-.hb-personalize__dot {
-  width: 7px; height: 7px; border-radius: 50%;
-  background: var(--brand); flex-shrink: 0;
-  animation: pulse 1.8s ease-in-out infinite;
+.hb-adapt-hero:hover {
+  background: #F59E0B;
+  box-shadow: 0 0 0 6px rgba(124,58,237,.22), 0 12px 40px rgba(251,191,36,.5);
+  transform: translateY(-2px) scale(1.02);
 }
+.hb-adapt-hero__sparkle {
+  font-size: 20px; color: #7C3AED;
+  animation: pulse 2s ease-in-out infinite;
+}
+.hb-adapt-hero__arrow { font-size: 19px; }
 .hero-prehook {
   font-size: 14px; color: var(--text-2); font-style: italic;
   margin-bottom: 20px; position: relative;

@@ -52,6 +52,16 @@ export default function HomePage({ onScrollTo, onOpenOnboarding }) {
           {nodes.map((n) => <div key={n.key} className="node" style={n.style} />)}
         </div>
 
+        {onOpenOnboarding && (
+          <div className="hero-adapt-wrap">
+            <button className="hb-adapt-hero" onClick={onOpenOnboarding}>
+              <span className="hb-adapt-hero__sparkle">✦</span>
+              Adapta esta web a tus necesidades
+              <span className="hb-adapt-hero__arrow">→</span>
+            </button>
+          </div>
+        )}
+
         <div className="hero-inner">
           {/* IZQUIERDA: copy */}
           <div className="hero-copy">
@@ -67,12 +77,6 @@ export default function HomePage({ onScrollTo, onOpenOnboarding }) {
               <button className="hb1" onClick={() => onScrollTo('negocio')}>Ver soluciones por sector →</button>
               <button className="hb2" onClick={() => onScrollTo('contacto')}>Hablar con nosotros</button>
             </div>
-            {onOpenOnboarding && (
-              <button className="hb-personalize" onClick={onOpenOnboarding}>
-                <span className="hb-personalize__dot" />
-                Adapta la web a tus necesidades
-              </button>
-            )}
             <div className="hero-trust">
               <span>Garantía de resultados</span>
               <span className="hero-trust__sep" />
