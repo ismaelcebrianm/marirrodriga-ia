@@ -52,16 +52,6 @@ export default function HomePage({ onScrollTo, onOpenOnboarding }) {
           {nodes.map((n) => <div key={n.key} className="node" style={n.style} />)}
         </div>
 
-        {onOpenOnboarding && (
-          <div className="hero-adapt-wrap">
-            <button className="hb-adapt-hero" onClick={onOpenOnboarding}>
-              <span className="hb-adapt-hero__sparkle">✦</span>
-              Adapta esta web a tus necesidades
-              <span className="hb-adapt-hero__arrow">→</span>
-            </button>
-          </div>
-        )}
-
         <div className="hero-inner">
           {/* IZQUIERDA: copy */}
           <div className="hero-copy">
@@ -86,33 +76,42 @@ export default function HomePage({ onScrollTo, onOpenOnboarding }) {
             </div>
           </div>
 
-          {/* DERECHA: menú de secciones */}
-          <nav className="hero-sidenav" aria-label="Secciones de la página">
-            <button className="hero-sidenav__item hero-sidenav__item--negocio" onClick={() => onScrollTo('negocio')}>
-              <span className="hero-sidenav__num">01</span>
-              <div className="hero-sidenav__text">
-                <span className="hero-sidenav__title">Para tu negocio</span>
-                <span className="hero-sidenav__desc">Más funciones que tu software actual y, en la mayoría de casos, más barato — hecho para tu sector</span>
-              </div>
-              <ArrowRight size={14} className="hero-sidenav__arrow" />
-            </button>
-            <button className="hero-sidenav__item" onClick={() => onScrollTo('agentes')}>
-              <span className="hero-sidenav__num">02</span>
-              <div className="hero-sidenav__text">
-                <span className="hero-sidenav__title">IA a la carta</span>
-                <span className="hero-sidenav__desc">Automatización a la carta — elige la herramienta que necesitas, sin cambiar lo que ya tienes</span>
-              </div>
-              <ArrowRight size={14} className="hero-sidenav__arrow" />
-            </button>
-            <button className="hero-sidenav__item" onClick={() => onScrollTo('reto-diario')}>
-              <span className="hero-sidenav__num">03</span>
-              <div className="hero-sidenav__text">
-                <span className="hero-sidenav__title">Actualidad IA</span>
-                <span className="hero-sidenav__desc">Noticias de IA aplicadas a tu negocio, actualizadas cada día</span>
-              </div>
-              <ArrowRight size={14} className="hero-sidenav__arrow" />
-            </button>
-          </nav>
+          {/* DERECHA: botón adaptar + menú de secciones */}
+          <div className="hero-right-col">
+            {onOpenOnboarding && (
+              <button className="hb-adapt-hero" onClick={onOpenOnboarding}>
+                <span className="hb-adapt-hero__sparkle">✦</span>
+                Adapta esta web a tus necesidades
+                <span className="hb-adapt-hero__arrow">→</span>
+              </button>
+            )}
+            <nav className="hero-sidenav" aria-label="Secciones de la página">
+              <button className="hero-sidenav__item hero-sidenav__item--negocio" onClick={() => onScrollTo('negocio')}>
+                <span className="hero-sidenav__num">01</span>
+                <div className="hero-sidenav__text">
+                  <span className="hero-sidenav__title">Para tu negocio</span>
+                  <span className="hero-sidenav__desc">Más funciones que tu software actual y, en la mayoría de casos, más barato — hecho para tu sector</span>
+                </div>
+                <ArrowRight size={14} className="hero-sidenav__arrow" />
+              </button>
+              <button className="hero-sidenav__item" onClick={() => onScrollTo('agentes')}>
+                <span className="hero-sidenav__num">02</span>
+                <div className="hero-sidenav__text">
+                  <span className="hero-sidenav__title">IA a la carta</span>
+                  <span className="hero-sidenav__desc">Automatización a la carta — elige la herramienta que necesitas, sin cambiar lo que ya tienes</span>
+                </div>
+                <ArrowRight size={14} className="hero-sidenav__arrow" />
+              </button>
+              <button className="hero-sidenav__item" onClick={() => onScrollTo('reto-diario')}>
+                <span className="hero-sidenav__num">03</span>
+                <div className="hero-sidenav__text">
+                  <span className="hero-sidenav__title">Actualidad IA</span>
+                  <span className="hero-sidenav__desc">Noticias de IA aplicadas a tu negocio, actualizadas cada día</span>
+                </div>
+                <ArrowRight size={14} className="hero-sidenav__arrow" />
+              </button>
+            </nav>
+          </div>
         </div>
       </div>
 
