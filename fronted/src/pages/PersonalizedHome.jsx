@@ -330,8 +330,14 @@ export default function PersonalizedHome({ profile, onNavigate, onViewFull, onRe
         {agents.length > 0 && (
           <div className="ph-section">
             <div className="ph-lbl">
-              {hasSoftware ? 'Funciones adicionales que te pueden interesar' : 'Tus herramientas recomendadas'}
+              {hasSoftware ? '¿O prefieres contratar solo una función?' : 'Tus herramientas recomendadas'}
             </div>
+            {hasSoftware && (
+              <p className="ph-agents-intro">
+                Si no necesitas el software completo, también puedes contratar cada herramienta por separado —
+                sin permanencia y sin el resto del sistema.
+              </p>
+            )}
             <div className="ph-agents-list">
               {agents.map(agentTitle => (
                 <AgentCard

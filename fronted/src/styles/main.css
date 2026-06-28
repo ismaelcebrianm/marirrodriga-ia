@@ -3652,6 +3652,10 @@ footer               { background: var(--bg-secondary); border-top: 1px solid va
 .ph-plans-foot { text-align: center; margin-top: 28px; }
 
 /* ── Agents list (service-card style) ───────────────── */
+.ph-agents-intro {
+  font-size: 14px; color: var(--text-3); line-height: 1.7;
+  margin: -8px 0 20px; max-width: 560px;
+}
 .ph-agents-list { display: flex; flex-direction: column; }
 .ph-agents-cta { text-align: center; margin-top: 16px; margin-bottom: 8px; }
 .ph-end {

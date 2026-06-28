@@ -80,6 +80,7 @@ export default function App() {
     setProfile(p)
     setShowOnboarding(false)
     setViewFull(false)
+    window.scrollTo(0, 0)
   }
 
   function resetProfile() {
