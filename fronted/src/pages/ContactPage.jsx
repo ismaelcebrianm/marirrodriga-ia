@@ -1,9 +1,8 @@
 import { useState } from 'react'
-import { Bot, Mail, ArrowRight, Star, Brain, Mic, FileText, MessageSquare } from 'lucide-react'
+import { Bot, ArrowRight, Star, Brain, Mic, FileText, MessageSquare } from 'lucide-react'
 
-const BOT_URL        = 'https://t.me/Marirrodrigabot'
-const WEBHOOK_URL    = import.meta.env.VITE_N8N_WEBHOOK_URL
-const PERSONAL_EMAIL = 'ismaelcebrian14@gmail.com'
+const BOT_URL     = 'https://t.me/Marirrodrigabot'
+const WEBHOOK_URL = import.meta.env.VITE_N8N_WEBHOOK_URL
 
 const ISMABOT_FEATURES = [
   { icon: Brain,         label: 'Memoria de chat' },
@@ -83,18 +82,6 @@ export default function ContactPage() {
             rel="noopener noreferrer"
           >
             Hablar con ISMABOT en Telegram <ArrowRight size={14} />
-          </a>
-        </div>
-
-        {/* OTRAS OPCIONES */}
-        <div className="contact-options" style={{ marginTop: '16px' }}>
-          <a className="contact-opt contact-opt--secondary" href={`https://mail.google.com/mail/?view=cm&fs=1&to=${PERSONAL_EMAIL}`} target="_blank" rel="noopener noreferrer">
-            <div className="contact-opt__icon"><Mail size={22} /></div>
-            <div>
-              <div className="contact-opt__title">Email directo</div>
-              <div className="contact-opt__sub">{PERSONAL_EMAIL} — te respondemos en menos de 24h.</div>
-            </div>
-            <span className="contact-opt__arrow">→</span>
           </a>
         </div>
 
