@@ -823,7 +823,7 @@ export function AgentIllus({ emoji, accent = '#7C3AED' }) {
 
 /* ─── DEMO GRÁFICOS: WEB & RRSS ──────────────────────────────── */
 
-function WebPreviewDemo({ onNavigate }) {
+export function WebPreviewDemo({ onNavigate }) {
   return (
     <div className="demo-preview demo-preview--web">
       <p className="demo-preview__tag">Portfolio · Ejemplo real en producción</p>
@@ -851,7 +851,7 @@ function WebPreviewDemo({ onNavigate }) {
   )
 }
 
-function RrssPreviewDemo() {
+export function RrssPreviewDemo() {
   function goToNoticias() {
     const el = document.getElementById('reto-diario')
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
@@ -1024,7 +1024,7 @@ function OutboundDemo() {
   )
 }
 
-function WhatsAppDemo() {
+export function WhatsAppDemo() {
   const step = useAutoStep(5, 1400)
   const msgs = [
     { from: 'user', text: '¿Cuánto vale una limpieza dental?' },

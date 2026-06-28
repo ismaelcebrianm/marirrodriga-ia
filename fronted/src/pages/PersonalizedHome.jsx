@@ -5,11 +5,15 @@ import EsteticaPage    from './EsteticaPage'
 import GimnasioPage    from './GimnasioPage'
 import AutoescuelaPage from './AutoescuelaPage'
 import ReservasPage    from './ReservasPage'
+import TelegramSimulator from '../simulators/TelegramSimulator'
+import InvoiceSimulator  from '../simulators/InvoiceSimulator'
+import DocumentSimulator from '../simulators/DocumentSimulator'
 import {
   AgentIllus,
   IllustrationS1, IllustrationS2, IllustrationS3,
   RecordatorioDemo, ResenasDemo, ResumenDiarioDemo,
   PresupuestosDemo, ReactivacionDemo,
+  WhatsAppDemo, WebPreviewDemo, RrssPreviewDemo,
 } from './ServicesPage'
 
 /* ── Sector pages map ────────────────────────────────────────── */
@@ -39,8 +43,9 @@ const AGENT_DEFS = {
     fullTitle: 'Reservas y citas 24/7',
     desc: 'El cliente reserva, cancela o cambia su cita sin llamar. A cualquier hora, en WhatsApp o en tu web.',
     illustration: <IllustrationS1 />,
-    demoType: 'link',
-    serviceId: 1,
+    demoType: 'inline',
+    Demo: WhatsAppDemo,
+    demoLabel: 'Reserva por WhatsApp, en tiempo real',
   },
   'Recordatorios automáticos': {
     badge: 'Anti no-show',
@@ -56,8 +61,9 @@ const AGENT_DEFS = {
     fullTitle: 'Chatbot IA personalizado',
     desc: 'Responde preguntas frecuentes, cualifica leads y escala solo lo que necesita tu atención.',
     illustration: <IllustrationS1 />,
-    demoType: 'link',
-    serviceId: 1,
+    demoType: 'inline',
+    Demo: TelegramSimulator,
+    demoLabel: 'Habla con Mari Robot ahora mismo',
   },
   'Emails automáticos': {
     badge: 'Seguimiento',
@@ -73,32 +79,36 @@ const AGENT_DEFS = {
     fullTitle: 'Generación automática de facturas',
     desc: 'Facturas generadas, enviadas y registradas contablemente sin que toques nada. Cumple con Verifactu.',
     illustration: <IllustrationS2 />,
-    demoType: 'link',
-    serviceId: 2,
+    demoType: 'inline',
+    Demo: InvoiceSimulator,
+    demoLabel: 'Genera una factura ahora mismo',
   },
   'Gestión documental IA': {
     badge: 'Orden inteligente',
     fullTitle: 'Gestión documental y clasificación de correos',
     desc: 'Extrae datos de PDFs y clasifica tu correo automáticamente. Tu oficina sin papeles ni bandeja de entrada colapsada.',
     illustration: <IllustrationS3 />,
-    demoType: 'link',
-    serviceId: 3,
+    demoType: 'inline',
+    Demo: DocumentSimulator,
+    demoLabel: 'Pon a prueba la IA lectora',
   },
   'Web profesional con IA': {
     badge: 'Presencia digital',
     fullTitle: 'Web profesional con IA integrada',
     desc: 'Chatbot integrado, blog con publicación automática y formularios inteligentes conectados a tu sistema.',
     illustration: <AgentIllus emoji="🌐" accent="#3B82F6" />,
-    demoType: 'page',
-    pageTo: 'web',
+    demoType: 'inline',
+    Demo: WebPreviewDemo,
+    demoLabel: 'Portfolio · Ejemplo real en producción',
   },
   'RRSS automatizadas': {
     badge: 'Contenido',
     fullTitle: 'Redes sociales automatizadas',
     desc: 'Publicación diaria en Instagram, LinkedIn y TikTok sin que lo tengas que tocar.',
     illustration: <AgentIllus emoji="📱" accent="#EC4899" />,
-    demoType: 'page',
-    pageTo: 'rrss',
+    demoType: 'inline',
+    Demo: RrssPreviewDemo,
+    demoLabel: 'Contenido generado y publicado solo',
   },
   'Reseñas automáticas en Google': {
     badge: 'Reputación',
@@ -202,21 +212,7 @@ function AgentCard({ agentTitle, onNavigate, onViewFull }) {
   const def = AGENT_DEFS[agentTitle]
   if (!def) return null
 
-  const { badge, fullTitle, desc, illustration, demoType, Demo, demoLabel, serviceId, pageTo } = def
-  const hasInlineDemo = demoType === 'inline' && Demo
-
-  function handleCta() {
-    if (demoType === 'link') {
-      onViewFull && onViewFull()
-      setTimeout(() => {
-        document.getElementById(`service-${serviceId}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-      }, 200)
-    } else if (demoType === 'page') {
-      onNavigate && onNavigate(pageTo)
-    } else {
-      setOpen(v => !v)
-    }
-  }
+  const { badge, fullTitle, desc, illustration, Demo, demoLabel } = def
 
   return (
     <div className={`service-card${open ? ' expanded' : ''}`}>
@@ -226,28 +222,19 @@ function AgentCard({ agentTitle, onNavigate, onViewFull }) {
           <div className="service-badge">{badge}</div>
           <h3 className="service-title">{fullTitle}</h3>
           <p className="service-copy">{desc}</p>
-          <button className="btn-expand" onClick={handleCta}>
-            <span>
-              {demoType === 'inline'
-                ? (open ? 'Cerrar' : '¡Pruébalo aquí mismo!')
-                : demoType === 'link'
-                ? 'Ver demo interactiva en El Taller'
-                : 'Ver más detalles'}
-            </span>
-            {demoType === 'inline' && (
-              <ChevronDown size={14} className={`btn-icon${open ? ' rotated' : ''}`} />
-            )}
-            {demoType !== 'inline' && <ArrowRight size={14} className="btn-icon" />}
+          <button className="btn-expand" onClick={() => setOpen(v => !v)}>
+            <span>{open ? 'Cerrar' : '¡Pruébalo aquí mismo!'}</span>
+            <ChevronDown size={14} className={`btn-icon${open ? ' rotated' : ''}`} />
           </button>
         </div>
       </div>
 
-      {open && hasInlineDemo && (
+      {open && Demo && (
         <div className="service-details-panel">
           <div className="panel-grid panel-grid--full">
             <div className="panel-col panel-demo-area">
               <p className="panel-subtitle"><Rocket size={15} />{demoLabel}</p>
-              <Demo />
+              <Demo onNavigate={onNavigate} onViewFull={onViewFull} />
             </div>
           </div>
         </div>
