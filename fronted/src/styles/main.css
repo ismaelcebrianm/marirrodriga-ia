@@ -3756,35 +3756,39 @@ footer               { background: var(--bg-secondary); border-top: 1px solid va
 .ml-page { display: flex; flex-direction: column; min-height: calc(100vh - 60px); }
 .ml-hero {
   position: relative; overflow: hidden;
-  padding: 64px 24px 56px;
+  display: flex; align-items: center;
+  padding: 72px 24px 64px;
   background: linear-gradient(160deg, #0f0c1a 0%, #1a0533 55%, #1a0e2e 100%);
-  flex: 1;
+  flex: 1; min-height: calc(100vh - 60px);
 }
 .ml-hero__inner {
   position: relative; z-index: 2; max-width: 480px; margin: 0 auto; text-align: center;
+  width: 100%;
 }
-.ml-hero__prehook {
-  font-size: 13px; color: rgba(255,255,255,.55); font-style: italic;
-  border-left: 3px solid var(--brand); background: rgba(124,58,237,.08);
-  padding: 6px 12px; border-radius: 0 6px 6px 0; text-align: left;
-  margin-bottom: 24px; line-height: 1.5;
+.ml-badge {
+  display: inline-block;
+  font-size: 11px; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; color: #a78bfa;
+  background: rgba(124,58,237,.12); border: 1px solid rgba(124,58,237,.3);
+  border-radius: 100px; padding: 5px 14px;
+  margin-bottom: 28px;
 }
 .ml-hero__title {
-  font-family: var(--font-heading); font-size: clamp(34px, 9vw, 48px);
-  font-weight: 900; letter-spacing: -1.5px; color: #fff; line-height: 1.1;
-  margin: 0 0 16px;
+  font-family: var(--font-heading); font-size: clamp(36px, 10vw, 52px);
+  font-weight: 900; letter-spacing: -1.5px; color: #fff; line-height: 1.08;
+  margin: 0 0 20px;
 }
 .ml-hero__title em { color: #a78bfa; font-style: normal; }
 .ml-hero__sub {
-  font-size: 15px; color: rgba(255,255,255,.65); line-height: 1.75;
-  margin: 0 0 36px; max-width: 380px; margin-left: auto; margin-right: auto;
+  font-size: 15px; color: rgba(255,255,255,.6); line-height: 1.8;
+  margin: 0 0 40px; max-width: 360px; margin-left: auto; margin-right: auto;
 }
-.ml-ctas { display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
+.ml-ctas { display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
 .ml-cta-primary {
   display: flex; align-items: center; justify-content: center; gap: 10px;
   background: linear-gradient(135deg, #FFFBEB, #FEF3C7);
   border: 2.5px solid #FCD34D; color: #78350F;
-  border-radius: 100px; padding: 16px 28px;
+  border-radius: 100px; padding: 17px 28px;
   font-size: 17px; font-weight: 800; cursor: pointer;
   font-family: var(--font-body); letter-spacing: -.1px;
   box-shadow: 0 0 0 4px rgba(252,211,77,.18), 0 8px 32px rgba(252,211,77,.3);
@@ -3793,32 +3797,24 @@ footer               { background: var(--bg-secondary); border-top: 1px solid va
 .ml-cta-primary:hover {
   background: linear-gradient(135deg, #FEF3C7, #FDE68A);
   border-color: #F59E0B;
+  box-shadow: 0 0 0 6px rgba(245,158,11,.2), 0 12px 40px rgba(245,158,11,.35);
   transform: translateY(-2px);
 }
 .ml-cta-primary__sparkle { font-size: 18px; color: #7C3AED; }
 .ml-cta-primary__arrow   { font-size: 18px; }
 .ml-cta-secondary {
   display: flex; flex-direction: column; align-items: center; gap: 3px;
-  background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.15);
-  color: rgba(255,255,255,.75); border-radius: 12px; padding: 13px 24px;
+  background: transparent; border: 1px solid rgba(255,255,255,.18);
+  color: rgba(255,255,255,.65); border-radius: 12px; padding: 13px 24px;
   font-size: 15px; font-weight: 600; cursor: pointer;
   font-family: var(--font-body); transition: var(--transition);
 }
-.ml-cta-secondary:hover { background: rgba(255,255,255,.1); color: #fff; }
+.ml-cta-secondary:hover { background: rgba(255,255,255,.06); color: #fff; border-color: rgba(255,255,255,.3); }
 .ml-cta-secondary__note {
-  font-size: 11px; color: rgba(255,255,255,.4); font-weight: 400;
+  font-size: 11px; color: rgba(255,255,255,.35); font-weight: 400;
 }
 .ml-trust {
   display: flex; align-items: center; justify-content: center; flex-wrap: wrap;
-  gap: 8px; font-size: 11px; color: rgba(255,255,255,.4);
+  gap: 8px; font-size: 11px; color: rgba(255,255,255,.38); letter-spacing: .3px;
 }
-.ml-trust__dot { color: rgba(255,255,255,.25); }
-.ml-contact { background: var(--bg-secondary); padding: 56px 24px 72px; }
-.ml-contact__inner { max-width: 480px; margin: 0 auto; text-align: center; }
-.ml-contact__title {
-  font-family: var(--font-heading); font-size: 26px; font-weight: 900;
-  color: var(--text-1); margin: 8px 0 8px; letter-spacing: -.4px;
-}
-.ml-contact__sub {
-  font-size: 14px; color: var(--text-3); margin: 0 0 24px; line-height: 1.7;
-}
+.ml-trust__dot { color: rgba(255,255,255,.2); }
